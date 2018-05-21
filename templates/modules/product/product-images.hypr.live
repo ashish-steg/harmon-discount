@@ -1,0 +1,61 @@
+{% if model.properties|findwhere('attributeFQN', "tenant~Video_Id") %}
+ <script type="text/javascript" src="https://e.invodo.com/4.0/s/christmastreeshops.com.js"></script>
+ {% require_script "modules/video/initVideo" %}
+{% endif %}
+ 
+{% if model.content.productImages %}
+<figure class="mz-productimages-main text-center {% if model.content.productImages.length > 1 %}hidden-xs{% endif %}">
+{% if model.properties|findwhere('attributeFQN', "tenant~Video_Id") %}
+<div id="videoOverlay" class=""><div id="playButton" class=""></div></div>
+{% endif %}
+    {% include "modules/product/product-image" with productImage=model.mainImage productAltText=model.mainImage.altText productMaxWidth=themeSettings.productImagePdpMaxWidth isMainImage="true" as_parameter %}
+</figure>
+<div class="row hidden-xs">
+    <div class="col-sm-12">
+        <div class="rollover"><i class="fa fa-search-plus" aria-hidden="true"></i> {{ labels.rolloverToZoom}}</div>  
+    </div>
+</div>
+<div class="clearfix"></div>
+{% if model.content.productImages.length > 1 %}
+<figure class="mz-productimages-thumbs" data-length="{{model.content.productImages.length}}">
+    <div class="visible-xs mobile-carousal">
+        <ul id="productmobile-Carousel" class="products_list_mobile">
+        {% for image in model.content.productImages %}
+            <li data-label="{{image.imageLabel}}">
+                <img id="zoom_{{forloop.index}}" prop="image" src="{% make_url "image" image with maxWidth=themeSettings.productImagePdpMaxWidth as_parameters %}" {% if image.altText %} alt="{{ image.altText }}"{% endif %} data-zoom-image="{% make_url "image" image with maxWidth=themeSettings.productZoomImageMaxWidth %}" {% if forloop.index==1 %} class="active"{% endif %} data-mz-productimage-mobile="{{ forloop.index }}"/>
+            </li>
+        {% endfor %}
+        </ul>
+    </div>
+    <div class="hidden-xs">
+        <ul{% if model.content.productImages.length > 4 %} id="productpager-Carousel"{% endif %} class="products_list">
+        {% for image in model.content.productImages %}
+            {% with model|get_product_attribute_value("tenant~Video_Id") as videoImage %}
+                {% if forloop.last and  videoImage %}
+                    <li{% if forloop.index==1 %} class="active"{% endif %} data-mz-productimage-thumb="{{ forloop.index }}" data-label="{{image.imageLabel}}">
+                        <a class="mz-productimages-thumb video-image-position" data-slide-index="{{ forloop.index0 }}" href="javascript:void(0);" data-pagename="{{image.altText}}">
+                         <div class="video-image"></div>
+                            {% include "modules/product/product-image" with productImage=image productAltText=image.altText productMaxWidth=themeSettings.maxProductImageThumbnailSize productImageClass="mz-productimages-thumbimage" isThumb="true" as_parameter %}
+                        </a><br>
+                    </li>
+                {% else %}
+                    <li{% if forloop.index==1 %} class="active"{% endif %} data-mz-productimage-thumb="{{ forloop.index }}" data-label="{{image.imageLabel}}">
+                        <a class="mz-productimages-thumb" data-slide-index="{{ forloop.index0 }}" href="javascript:void(0);">
+                            {% include "modules/product/product-image" with productImage=image productAltText=image.altText productMaxWidth=themeSettings.maxProductImageThumbnailSize productImageClass="mz-productimages-thumbimage" isThumb="true" as_parameter %}
+                        </a><br>
+                    </li>
+                {% endif %}
+            {% endwith %}
+        {% endfor %}
+        </ul>
+    </div>
+</figure>
+<figure class="mz-productimages-pager col-xs-12 visible-xs"></figure>
+{% endif %}
+{% else %}
+<figure class="mz-productimages-main text-center">
+    <span class="mz-productlisting-imageplaceholder img-responsive">
+        <span class="mz-productlisting-imageplaceholdertext">{{ labels.productImagePlaceholder }}</span>
+    </span>
+</figure>
+{% endif %}

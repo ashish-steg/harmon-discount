@@ -1,0 +1,52 @@
+﻿  {% extends "email/email" %}
+
+  {% block body-content %}
+   <table cellpadding="0" cellspacing="0" border="0" id="backgroundTable" width="100%" bgcolor="#ffffff" style="font-family:arial,helvetica,sans-serif;font-weight: 500;font-size: 14px;line-height: 24px;color: #333;max-width: 600px; border:none;" align="center">
+        <tbody>
+            <tr>
+                <td style="padding:20px;">
+									{% if user and user.firstName %}
+										{{ labels.emailOpening|string_format(user.firstName)|safe }}
+									{% else %}
+										{{ labels.emailOpeningAlternative|safe }}
+									{% endif %}
+
+									{{ labels.inStockBlob1|string_format(siteContext.generalSettings.websiteName)|safe }}
+
+									<table class="mz-ordersummary">
+										<thead>
+												<tr>
+														<th class="mz-ordersummary-header-product">{{ labels.item }}</th>
+														<th class="mz-ordersummary-header-price">{{ labels.price }}</th>
+												</tr>
+										</thead>
+									<tbody>
+										<tr>
+											<td>
+												{% if model.content.productShortDescription and themeSettings.showProductDetailShortDesc %}
+												<div class="mz-productdetail-shortdesc mz-l-stack-section">
+													<span itemscope="description">{{ model.content.productShortDescription|safe }}</span>
+												</div>
+												{% endif %}
+												{% if model.options %}
+												<div class="mz-productdetail-options mz-l-stack-section">
+													{% include "modules/product/product-options" %}
+												</div>
+												{% endif %}
+												{{model.productCode}}
+											</td>
+											<td>
+												<div itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="mz-productdetail-price mz-l-stack-section">
+												{% include "modules/product/price-stack" %}
+												</div>
+											</td>
+										</tr>
+									</tbody>
+									</table>
+
+									{{ labels.inStockBlob2|string_format(domainName, model.productCode)|safe }}
+							</td>
+            </tr>
+        </tbody>
+    </table>
+{% endblock body-content %}

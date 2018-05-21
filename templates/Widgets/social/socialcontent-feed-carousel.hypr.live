@@ -1,0 +1,7 @@
+﻿<div id="socialCarousel" class="social-carousel social-feed-items">
+    {% for item in Model %}
+    <div class="social-image slide">
+        <img data-cid="{{ item.id }}" src="{{ item.properties.images.standard_resolution.url }}"/>
+    </div>
+    {% endfor %}
+</div>

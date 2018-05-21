@@ -1,0 +1,51 @@
+
+<div class="mz-shipping-method-items">
+    <h4>{{labels.shippingTo}}:</h4>
+</div>
+<div class="mz-l-formfieldgroup-row mz-shipping-method-address">
+        {% include "modules/common/address-summary" with model=model.groupingDestinationInfo.destinationContact %}
+    </div>
+
+    <br />
+    <div class="row">
+        <div class="col-xs-12 col-sm-6">
+            <div class="mz-shipping-method-items">
+                {% for group in model.groupingItemInfo %}
+                <div>
+                    <span class="shipping-method-items-name">{{ group.product.name|safe }}</span><br>
+                    <span class="shipping-method-items-qty"><span class="text-weight-bold">{{ labels.qty }}</span>: {{ group.quantity }}</span>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6">
+            <div class="mz-shipping-method-section">
+                <div class="mz-l-formfieldgroup-row">
+                <div class="mz-formstep-fields mz-l-formfieldgroup mz-checkoutform mz-checkoutform-active">
+                    <div class="mz-l-formfieldgroup-cell">
+                    {% if isLoading %}
+                        <span class="loading"> Loading...</span>
+                    {% else %}
+                        {% if model.groupingShippingMethods.length %}
+                            <select aria-label="{{labels.shippingMethodSelector}}" name="shippingMethodSelector" class="mz-shipping-method-selector-dd" data-mz-shipping-method data-mz-grouping-id="{{ model.id }}">
+                                {% for method in model.groupingShippingMethods %}
+                                    <option class="mz-shipping-method-selector-option" value="{{ method.shippingMethodCode }}" {% if method.shippingMethodCode == model.shippingMethodCode %} selected="selected" {% endif %}>{{ method.shippingMethodName }} - {{ method.price|currency }}</option>
+                                {% endfor %}
+                            </select>
+                            <span class="mz-validationmessage" data-mz-validationmessage-for="shippingMethodSelector"></span>
+                        {% else %}
+                            <p>{{ labels.noShippingMethods }}</p>
+                        {% endif %}
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="mz-formstep-summary mz-checkoutform-active">
+                    <div class="mz-l-formfieldgroup-cell">
+                        <span class="text-weight-bold">{{labels.shippingMethod}}:</span> {{ model.shippingMethodName }}
+                    </div>
+                </div>
+
+                </div>
+            </div>
+        </div>
+    </div>

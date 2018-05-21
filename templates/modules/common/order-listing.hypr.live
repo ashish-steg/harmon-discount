@@ -1,0 +1,55 @@
+﻿<div class="mz-orderlisting" data-mz-id="{{ model.id }}">
+    <div class="mz-orderlisting-detail">
+      <h3 class="mz-orderlisting-date">
+        {% if model.submittedDate %}
+          {{ model.submittedDate|date("F j, Y") }}
+        {% else %}
+          {{ model.auditInfo.createDate|date("F j, Y") }}
+        {% endif %}
+      </h3>
+        {% block order-details %}
+        <dl class="mz-propertylist">
+            <dt>{{ labels.orderNumber }}</dt>
+            <dd>{{ model.orderNumber }}</dd>
+            <dt>{{ labels.orderStatus }}</dt>
+            <dd>{{ model.status }}</dd>
+            <dt>{{ labels.total }}</dt>
+            <dd>{{ model.total|currency }}</dd>
+            {% if model.amountRefunded > 0 %}
+              <dt>{{ labels.refund }}</dt>
+              <dd>{{ model.amountRefunded|currency }}</dd>
+            {% endif %}
+            {% block order-shipped-to %}
+            {% if model.fulfillmentInfo.fulfillmentContact %}
+            <dt>{{ labels.shippedTo }}</dt>
+            <dd>{{ model.fulfillmentInfo.fulfillmentContact.firstName }} {{ model.fulfillmentInfo.fulfillmentContact.lastNameOrSurname }}</dd>
+            {% endif %}
+            {% endblock order-shipped-to %}
+        </dl>
+        <a href="javascript:void(0);" onclick="window.open('/print-order#{{ model.id }}','{{ model.id }}','height=640,width=960');return false;">Print Order</a>
+
+        {% if model.packages %}
+            {% for pkg in model.packages %}
+                {% if pkg.trackingNumber %}
+                    {% if pkg.code|first == 'C' %}
+                            <a class="pull-right" href="{{ themeSettings.cevaLink|string_format(pkg.trackingNumber)}}" target="_blank">{{ labels.trackPackage }}</a> 
+                    {% endif %}
+                    {% if pkg.code|first == 'U' %}
+                            <a class="pull-right" href="{{ themeSettings.uspsLink|string_format(pkg.trackingNumber)}}" target="_blank">{{ labels.trackPackage }}</a>
+                    {% endif %}
+                    {% if pkg.code|first == 'F'%}
+                            <a class="pull-right" href="{{ themeSettings.fedxLink|string_format(pkg.trackingNumber)}}" target="_blank">{{ labels.trackPackage }}</a>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+        {% endblock order-details %}
+    </div>
+    <div class="mz-orderlisting-items">
+    {% block order-items %}
+        {% for item in model.items %}
+        {% include "modules/common/item-listing" with model=item %}
+        {% endfor %}
+    {% endblock order-items %}
+    </div>
+</div>

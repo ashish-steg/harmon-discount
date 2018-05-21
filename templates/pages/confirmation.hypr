@@ -1,0 +1,172 @@
+﻿{% extends "page" %}
+{% block title-tag-content %}{% firstof pageContext.metaTitle|safe labels.orderConfirmation %} - {% parent %}{% endblock title-tag-content %}
+{% block body-tag-classes %}mz-confirmation{% endblock body-tag-classes %}
+{% block body-content %}
+{% preload_json model "order" %}
+<div class="mz-l-container" id="mz-confirmation-container">
+    <div class="col-xs-12 hide ml-print-logo">
+        <img src='/resources/images/cts-logo-sm.png' alt="CTS_logo">
+    </div>
+    <div class="col-xs-12">
+        <h1 class="mz-pagetitle">{{ labels.orderConfirmation }} </h1>
+        <div class="clearfix"></div>
+        <p class="text-left">{{ labels.confirmationText }}</p>
+        <p class="col-md-5 col-sm-12 mz-reset-padding">{{ labels.yourOrderNumber|string_format(model.orderNumber)|safe }}</p>
+        <i id="mz-print-content-confirmation" class="mz-reset-padding-left fa fa-print col-md-5 col-sm-12 pull-right text-right hidden-print" title="print"  aria-hidden="true"></i>
+        <div class="clearfix"></div>
+        <p>Order Status is <strong>{{ model.status }}</strong></p>
+        <div class="clearfix"></div>
+        {% if model.customerAccountId %}
+            <p class="order-date">Customer #<strong>{{ model.customerAccountId }}
+            </strong></p>
+        {% endif %}
+        <div class="mz-created-date-order">
+            <span class="">Date: </span><span>{{ model.submittedDate|date("m/d/Y H:i:s") }}</span>
+        </div>
+    </div>
+    <div class="mz-l-stack">
+        <div class="mz-l-stack-section col-sm-6 col-xs-12">
+            <h2 class="mz-l-stack-sectiontitle">{{ labels.payments }}</h2>
+			{% if model.total == 0 %}
+				{% with model.total|currency as total %}
+					<h4 class="mz-confirmation-nopaymentrequired">{{ labels.noPaymentWasRequired|string_format(total) }}</h4>
+				{% endwith %}
+			{% else %}
+				{% for payment in model.payments %}
+				{% if payment.status != "Voided" and payment.status != "Declined" %}
+				{% include "modules/checkout/checkout-payment" with model=payment %}
+				{% endif %}
+				{% endfor %}
+			{% endif %}
+        </div>
+        {% if model.hasDirectShip %}
+        <div class="mz-l-stack-section col-sm-6 col-xs-12 mz-shipping-info-confirmation">
+            <h2 class="mz-l-stack-sectiontitle">{{ labels.shippingInformation }}</h2>
+            <dl class="mz-propertylist">
+                <dt>{{ labels.shipTo }}</dt>
+                <dd class="mz-addresssummary">
+                 {% include "modules/common/address-summary" with model=model.fulfillmentInfo.fulfillmentContact %}
+                <div>{{ model.fulfillmentInfo.fulfillmentContact.email }}</div>
+                </dd>
+                <dt>{{ labels.shippingMethod }}</dt>
+                <dd>{{ model.fulfillmentInfo.shippingMethodName }}</dd>
+            </dl>
+        </div>
+        {% endif %}
+        {% for item in model.items %}
+        {% if item.fulfillmentMethod == "Pickup" %}
+        <div class="mz-l-stack-section col-xs-12">
+            <h4 class="mz-l-stack-sectiontitle">{{ labels.storePickupFor|string_format(item.product.name)|safe }}</h4>
+            <dl class="mz-propertylist">
+                <dt>{{ labels.storeName }}</dt>
+                <dd>{{ item.fulfillmentLocationName }}</dd>
+            </dl>
+        </div>
+        {% endif %}
+        {% endfor %}
+
+
+        <div class="mz-l-stack-section col-xs-12">
+            <h3 class="mz-l-stack-sectiontitle">{{ labels.orderSummary }} </h3>
+            {% include "modules/common/order-summary" %}
+            {% if model.shopperNotes.comments %}
+            <div class="mz-ordercomments">
+                <h5 class="mz-ordercomments-header">{{ labels.comments }}</h5>
+                <p class="mz-ordercomments-body">{{ model.shopperNotes.comments }}</p>
+            </div>
+            {% endif %}
+            {% if model.shopperNotes.giftMessage %}
+            <div class="mz-ordercomments">
+                <h5 class="mz-ordercomments-header">{{ labels.giftMessage }}</h5>
+                <p class="mz-ordercomments-body">{{ model.shopperNotes.giftMessage }}</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div><!-- #order-confirmation -->
+ <div class="section section-payment col-xs-12">
+        <h3 class="mz-l-stack-sectiontitle">Payment Details</h3>
+        {% if not(model.payments) %}
+            <p class="message">No payment details were provided.</p>
+        {% endif %}
+        {% if model.payments.length > 0 %}
+            <div class="mz-propertylist">
+                
+                {% for payment in model.payments %}
+                    {% if payment.status != "Voided" %}
+                    <div>
+                        {% if payment.paymentType == "CreditCard" %}
+                        <!--Type Column-->
+                         <div>
+                            <dt>Type</dt>
+                            <dd>{{ payment.billingInfo.card.paymentOrCardType }}</dd>
+                         </div>
+                        <!--End Type Column-->
+                        <!--Info-->
+                        <div>
+                            <dt>Card Number</dt>
+                            <dd>{{ payment.billingInfo.card.cardNumberPartOrMask }}</dd>
+                        </div>
+                        <!--End Info Column-->                         
+                        {% else %}
+                        <!--Type Column-->
+                            {% if payment.paymentType == "Check" %}
+                            <div>
+                                <dt>Check</dt>
+                        <!--End Type Column-->
+                        <!--Info Column-->
+                                {% if payment.interactions %}
+                                <dd>
+                                {% for interaction in payment.interactions %}
+                                    {% if interaction.interactionType == "Captured" %}{% endif %}
+                                {% endfor %}
+                                </dd>
+                                {%endif%}
+                        <!--End Info Column-->
+                        <!--Exp Date Column-->
+                                <dd>N/A</dd>
+                                </div>
+                        <!--End Exp Date Column-->
+                            {% endif %}
+                            {% if payment.paymentType == "StoreCredit" %}
+                        <!--Type Column-->
+                             <div>
+                                <dt>Gift Card/Store Credit</dt>
+                        <!--End Type Column-->
+                        <!--Info Column-->
+                                <dd>{{ payment.billingInfo.storeCreditCode }}</dd>
+                        <!--End Info Column-->
+                        <!--Exp Date Column-->
+                                <dd>N/A</dd>
+                            </div>
+                        <!--End Exp Date Column-->
+                            {% endif %}
+                        {% endif %}
+                        <!--Amount Column-->
+                        <div>
+                            <dt>Amount</dt>
+                            <dd>
+                                {% if payment.amountCollected > 0 %}{{ payment.amountCollected | currency }}
+                                {% else %}{{ payment.amountRequested | currency }}
+                                {% endif %}
+                            </dd>
+                        </div>
+                        <!--End Amount Column-->
+                    </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% endif %}
+</div>
+<style>
+    {% inline_style "print-order.less" %}
+</style>
+{% endblock body-content %}
+
+{% block trailing-scripts %}
+	{% parent %}
+	{% if siteContext.generalSettings.isGoogleAnalyticsEnabled and siteContext.generalSettings.isGoogleAnalyticsEcommerceEnabled %}
+	{% include "modules/analytics/google-analytics-ecommerce-tracking-code" %}
+	{% endif %}
+
+{% endblock trailing-scripts %}

@@ -1,0 +1,111 @@
+﻿.mz-facetingform {
+    .faceting-header {
+        border-bottom: 1px solid @colorLightGray;
+        margin: @gutter/2 0;
+        font-size: @fontSize;
+        text-transform: uppercase;
+        padding-bottom: @gutter - 5;
+        line-height: 17.6px;
+        .fontsBold();
+    }
+    .mz-facetingform-facet {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        li {
+            margin: 8px 0;
+            input[type=checkbox] {
+                display: none;
+            }
+            &.color-options {
+                float: left;
+                width: @facetColorBox;
+                height: @facetColorBox;
+                margin: 3px 10px 7px 0;
+                position: relative;
+                &:after, &:before {
+                    content: "";
+                    display: block;
+                    position: absolute;
+                }
+                &:after {
+                    border: 1px solid @colorLightGray;
+                    width: @facetColorBox+4;
+                    height: @facetColorBox+4;
+                    left: -2px;
+                    top: -2px;
+                }
+                &:before {
+                    border: 2px solid @colorWhite;
+                    width: @facetColorBox+2;
+                    height: @facetColorBox+2;
+                    left: -1px;
+                    top: -1px;
+                }
+
+              &.active {
+                  display: block;
+                    &:after {
+                        border: 1px solid @colorGray;
+                    }
+                }
+                label {
+                    display: none;
+                }
+                input[type=checkbox] {
+                    opacity: 0;
+                    margin: 0;
+                    padding: 0;
+                    border: 0;
+                    width: 50px;
+                    height: 50px;
+                    float: left;
+                    display: block;
+                    z-index: 2;
+                    position: absolute;
+                }
+            }
+            &.show-more-li {
+                float: left;
+                width: 100%;
+                .clearfix();
+            }
+        }
+        a {
+            text-decoration: none;
+            &.show-more {
+                text-transform: uppercase;
+                .permalink(@colorGreen);
+            }
+        }
+    }
+    .mz-facetingform-valuelabel {
+        display: block;
+        .fontsMedium();
+        font-size: 16px;
+        text-transform: capitalize;
+    }
+    .mz-facetingform-facet-hierarchy {
+        .mz-facetingform-facet-hierarchy {
+            li {
+                margin: 0 0 4px 0.5em;
+                line-height: 1em;
+                &::before {
+                    display: inline-block;
+                    content: "\221F";
+                    font-size: @fontSizeLarger;
+                }
+            }
+        }
+        &.stars {
+            span.fa-star {
+                color: @colorLightGray;
+                font-size: @fontSizeLarger;
+                margin-right: @gutter/2;
+                &.active {
+                    color: @colorGreen;
+                }
+            }
+        }
+    }
+}

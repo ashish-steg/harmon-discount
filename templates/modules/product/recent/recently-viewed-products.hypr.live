@@ -1,0 +1,11 @@
+<div class="clearfix"></div> 
+<div id="rvi-container" class="mz-related-products hide">
+	{% if themeSettings.rviHeading!="" %}
+		<div id="recent-viewed-prdt">
+			<h2 class="heading-2">
+				<span>{{themeSettings.rviHeading}}</span>
+			</h2>
+		</div>
+	{% endif %}
+	<div class="rvi-loading"></div>
+</div>

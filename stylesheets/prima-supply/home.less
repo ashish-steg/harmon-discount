@@ -1,0 +1,286 @@
+//Home Page(home-page.less)
+.mz-homepage{
+    .mz-l-pagecontent{
+        padding: 0;
+        &.container{
+            width: 100%;
+        }
+    }
+    .mz-breadcrumbs{
+        display: none;
+    }
+    .mz-cms-row{
+        max-width: 100%; 
+    }
+    .home-heading1{
+        text-align: center;
+        margin: @gutter 0 @gutter*2;
+    }
+
+} 
+.dropzone-trending-products{
+    margin-bottom: @gutter*2;
+    display: none;
+    .mz-drop-zone{
+        border: 2px solid #ddd;
+        border-radius: 5px;
+    }
+}
+.mz-promo-banner{
+    margin-bottom: @dropzoneMargin;
+}
+
+
+//Shop by category
+.mz-shop-by-category{
+    float: left;
+    width: 100%;
+    
+    .mz-shop-by-categorylist{
+        float: left;
+        width: 100%;
+        padding: 0;
+        list-style: none;
+        @grayBoxHeight: 200px;
+        .mz-shop-by-categorylist-item{
+            float: left;
+            width: 15%; 
+            margin: 0 1% @gutter+5;
+            border: 8px solid #f3f3f3;
+            min-height: @grayBoxHeight;
+            text-align: center;
+            padding: 5px;
+            &:first-child{
+                width: 31%;
+                margin-left: 0;
+                min-height: @grayBoxHeight*2;
+                .mz-category-image{
+                    min-height: 358px;
+                    img{
+                        max-width: 100%; 
+                        width: auto;
+                    }
+                }
+                
+            }
+            a{
+                display: block; 
+            }
+            img{
+                width: 100%;
+                height: auto;
+                max-width: 125px;
+                display: inline-block;
+                position: absolute;
+                left: 50%; 
+                top: 50%;
+                transform: translate(-50%, -50%); 
+            }
+            .mz-category-image{
+                min-height: 125px;
+                position: relative;
+                
+            }
+            .mz-categorylisting-info{ 
+                h3{
+                    font-size: @fontSize;
+                    color: @baseBlueColor;
+                    line-height: @fontSize+2;
+                    margin: 10px 0 0;
+                    width: 115px;
+                    display: inline-block; 
+                }
+            }
+        }   
+    }       
+}
+
+//Shop By Brand
+.mz-shop-by-brand {
+    float: left;
+    width: 100%;
+    .mz-shop-by-brand-list {
+        float: left;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        .mz-brand-logo {
+            width: 100%;
+            display: table;
+            text-align: center;
+            min-height: 90px;
+            a {
+                display: table-cell;
+                vertical-align: middle;
+                img {
+                    max-width: 100%;
+                }
+            }
+        }
+        .brand-name {
+            font-size: 20px;
+            color: #f63;
+            text-align: center;
+            margin: 10px 0;
+        }
+    }
+    .mz-shop-all-brands {
+        float: left;
+        width: 100%;
+        margin: 15px 0;
+        text-align: right;
+        a {
+            color: #9a9fa9;
+            margin: 20px 0;
+            text-decoration: underline; 
+        }
+        
+    }
+}
+
+//Hotdeals Banner
+.mz-hotdeals-banner {
+    background-color: #d15f2a;
+    color: #fff;
+    font-family: 'Lato', sans-serif;
+    text-align: center;
+    margin-bottom: @dropzoneMargin;
+    h2 {
+        font-size: 60px;
+        font-weight: 900;
+        line-height: 54px;
+        color: #fff;
+        margin: 0;
+        padding: 26px 0 6px; 
+    }
+    ul {
+        &.mz-hot-deals-banner-text {
+            font-size: 24px;
+            margin: 0;
+            padding: 0 0 6px;
+            li {
+                display: inline-block;
+                line-height: 54px;
+                position: relative; 
+            }
+        }
+    }
+}
+
+//Hospitality
+.mz-hospitality { 
+    margin-bottom: 50px;
+    ul {
+        display: flex;
+        list-style-type: none;
+        li {
+            margin-right:26px;
+        }
+    }
+}
+
+//Shop now widgets
+#mz-drop-zone-shop-now-widget {
+    .mz-shop-now-widget {  
+        border: 9px solid #e0e0e0;
+        font-family: 'Lato', sans-serif;
+        float: left;
+        .col-md-7,
+        .col-md-5 {
+            padding: 0;
+        }
+        .col-md-7 {
+            .mz-image-container {
+                img {
+                    max-width: 100%;
+                }
+            }
+        }
+        .mz-details-container {
+            color: #415265;
+            //font-size: 24px;
+            font-size: 1.562vw;
+            padding: 32px 15px 49px 15px;
+            text-align: center;
+            p {
+                margin: 0;
+                font-weight: 600;
+            }
+            .mz-hot-deal-title-one {
+                //font-size: 24px;
+                font-size: 1.562vw;
+                line-height: 60px;
+                text-transform: uppercase;
+            }
+            .mz-hot-deal-title-two {
+                //font-size: 44px;
+                font-size: 2.869vw;
+                line-height: 56px;
+                text-transform: uppercase;
+            }
+            .mz-hot-deal-title-three {
+                //font-size: 20px;
+                font-size: 1.3vw;
+                line-height: 35px;
+                color: #495363;
+            }
+            .mz-btn {
+                background-color: #d15f2a;
+                color: #fff;
+                //font-size: 18px;
+                font-size: 1.175vw;
+                display: inline-block;
+                line-height: 36px;
+                margin-top: 15px;
+                padding: 2px 32px;
+                text-transform: capitalize;
+            }
+        }
+    }
+    .mz-cms-col-6-12 {
+        &:nth-child(1) {
+            .mz-shop-now-widget {
+                margin-right: 15px;
+            }
+        }
+        &:nth-child(2) {
+            .mz-shop-now-widget {
+                margin-left: 15px;
+                .col-md-7 {
+                    float: right;
+                }
+                .col-md-5 {
+                    .mz-details-container {
+                        background-image: url("../resources/images/shop-now-widget-bg.jpg");
+                        color: #fff;
+                        .mz-hot-deal-title-one {
+                            //font-size: 24px;
+                            font-size: 1.562vw;
+                            line-height: 32px;
+                            padding-top: 15px;
+                            text-transform: none;
+                        }
+                        .mz-hot-deal-title-two {
+                            //font-size: 20px;
+                            font-size: 1.3vw;
+                            line-height: 35px;
+                            text-transform: lowercase;
+                        }
+                        .mz-hot-deal-title-three {
+                            //font-size: 44px;
+                            font-size: 2.869vw;
+                            line-height: 54px;
+                            color: #fff;
+                            text-transform: uppercase;
+                        }
+                        .mz-btn {
+                            margin-top: 30px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+

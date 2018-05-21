@@ -1,0 +1,4 @@
+<div id="SelectValidOption" style="display:none; cursor: default"> 
+    <span>{{ labels.selectValidOption }}</span>
+    <input type="button" aria-label="{{labels.close}}" class="btn button_promotional" id="mz-close-button" value="Close" /> 
+</div>

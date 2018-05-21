@@ -1,0 +1,49 @@
+<div class="row">
+    <div class="col-xs-24 col-sm-24 col-md-24 col-lg-24 text-center">
+        <div class="trendBlock">
+            <a class="trendLink" href={{Model.config.linkTrend1}}>
+                <div class="trend-image">
+                    <img class="lazyload"
+                        data-srcset="{{Model.config.trendingimages1.0.url}}?max={width}"
+                        data-sizes="auto"
+                        data-absurl="false"
+                        data-optimumx="2" 
+                        data-quality="75"
+                        data-widths="[160, 320, 375, 414, 480, 640, 800, 960, 1280, 1349, 1536, 1920, 2560, 5500]"
+                    >
+                </div>
+                <div class="trend-name">
+                    {{ Model.config.trendName1|truncatechars(20)|safe }}
+                </div>
+                <div class="trend-desc">
+                    <span>{{ Model.config.trendDesc1|truncatechars(100)|safe }}</span>
+                    <!--<span data-trim-desc class="hidden">{{Model.config.trendDesc1}}</span>-->
+                </div>
+                <div class="orangeArrow">
+                    <span>
+                        <svg width="12px" height="7px" viewBox="0 0 23 58" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+                            <title>chevron right for subcategory tiles</title>
+                            <desc>Created with Sketch Beta.</desc>
+                            <defs></defs>
+                            <g id="Category" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+                                <g id="Category:-Desktop-HD" stroke-width="10" sketch:type="MSArtboardGroup" transform="translate(-436.000000, -315.000000)" stroke-linecap="square" stroke-width="3" stroke="#FFF">
+                                    <g id="Subs:-Photo-next-to-names" sketch:type="MSLayerGroup" transform="translate(0.000000, 280.000000)">
+                                        <g id="Tents" sketch:type="MSShapeGroup">
+                                            <path d="M438,37 L457.5,63.8300839 L438.133573,91.2595215" id="chevron-right-for-subcategory-tiles"></path>
+                                        </g>
+                                    </g>
+                                </g>
+                            </g>
+                        </svg>
+                    </span>
+                </div>
+                <div class="clear"></div>
+            </a>
+        </div>
+    </div>
+</div>
+{% require_script "widgets/homepage/home-trend-now" %}
+
+
+
+

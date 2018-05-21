@@ -1,0 +1,49 @@
+{
+  "name": "basetheme_ctslatest",
+  "author": {
+    "name": "Happy",
+    "email": "hmasih@stegtechnologies.com"
+  },
+  "description": "BaseTheme_CTSLatestTheme",
+  "version": "0.1.0",
+  "scripts": {
+    "clean": "rm -rf compiled",
+    "ci": "grunt",
+    "prod": "grunt build-production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mozu/core-theme.git"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-compress": "^0.14.0",
+    "grunt-contrib-copy": "^0.8.2",
+    "grunt-contrib-jshint": "^0.11.3",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-mozu-appdev-sync": "^2.4.1",
+    "grunt-newer": "^1.3.0",
+    "mozu-theme-helpers": "^1.3.2",
+    "time-grunt": "^1.4.0"
+  },
+  "engines": {
+    "node": ">=0.10"
+  },
+  "dependencies": {
+    "backbone": "1.1.2",
+    "bootstrap": "3.2.0",
+    "jquery-colorbox": "1.5.15",
+    "jquery.cookie": "1.4.1",
+    "typeahead.js": "0.10.5",
+    "underscore": "1.6.0"
+  },
+  "exportsOverride": {
+    "bootstrap": [
+      "js/affix.js",
+      "js/popover.js",
+      "js/tooltip.js",
+      "js/scrollspy.js"
+    ]
+  },
+  "license": "UNLICENSED"
+}

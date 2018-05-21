@@ -1,0 +1,9 @@
+<div class="new-arrival-product-container">
+    <p class="slider-title">{{ model.config.title }}</p>
+    <div class="ig-new-arrivals carousel-parent">
+        <div data-ig-new-arrivals="{% json_attribute Model.config %}">
+            {% include_products "modules/product/related-product-tiles" with productCodes=Model.config.productCodes as_parameter %}
+        </div>
+    </div>
+</div>
+{% require_script "pages/parent-category" %}

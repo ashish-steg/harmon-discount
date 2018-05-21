@@ -1,0 +1,25 @@
+ {% if model.items %}
+  {% for prod in model.items %}
+    <div class="mz-cc-item" data-mz-product="{{ prod.productCode }}">
+      <a href='{% make_url "product" prod %}'>
+        {% if prod.content.productImages %}
+          {% with prod.content.productImages|first as productImage %}
+            {% if productImage %}
+              <img src="{% make_url "image" productImage with maxWidth=themeSettings.productImageDirectoryMaxWidth %}" alt="{{prod.content.productName}}" class="mz-cc-image">
+            {% else %}
+                {% include "modules/product/product-no-image" %}
+            {% endif %}
+          {% endwith %}
+        {% else %}
+            {% include "modules/product/product-no-image" %}
+        {% endif %}
+      </a>
+      <p>
+        <a href='{% make_url "product" prod %}'>{{prod.content.productName|safe}}</a>
+      </p>
+      <div class="mz-productlisting-title mz-productlisting-price">
+        {% include "modules/product/price-stack" with model=prod %}
+      </div>
+    </div>
+  {% endfor %}
+ {% endif %}

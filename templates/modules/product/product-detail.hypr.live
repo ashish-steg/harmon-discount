@@ -1,0 +1,255 @@
+{% include "modules/product/product-promo-message" %}
+
+
+{% if model.stockInfo %}
+    <div class="stock-info">{{ labels.upcInStock }}
+        <span class="stock-price">{{ model.stockInfo }}</span>
+    </div>
+{% endif %}
+
+<div class="col-xs-12 mz-reset-padding-left">
+    <div class="col-xs-12 email-popup">
+        {% dropzone "email-notification" scope="template" %}
+    </div>
+</div>
+
+<!-- PS -->
+<div class="mz-price-rating-section clearfix">
+    <div class="col-md-6">
+        <div class="row">
+            <div itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="mz-productdetail-price mz-l-stack-section">
+                {% include "modules/product/price-stack" %}
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="row">
+            <!-- Yotpo Rating -->
+            <script type="text/javascript">
+                (function e(){var e=document.createElement("script");e.type="text/javascript",e.async=true,e.src="//staticw2.yotpo.com/4X91rXasdFWFBX4Rnh5WEr4NnvMwpFpjxzNFLubD/widget.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)})();
+            </script>
+            <div class="yotpo bottomLine" data-product-id="7364" data-url="https://primasupply.com/equipment/sharp/r-21lvf"></div>
+
+            {% block star-rating %}
+                <div class="yotpo bottomLine" data-product-id="{{model.productCode}}"></div>
+                <div id="product-star-rating"></div>
+            {% endblock star-rating %}
+
+            {% block question-answer %}
+                <div class='yotpo QABottomLine' data-appkey='4X91rXasdFWFBX4Rnh5WEr4NnvMwpFpjxzNFLubD' data-product-id='{{ model.productCode }}'></div>
+            {% endblock question-answer %}
+            <!-- Yotpo Rating -->
+        </div>
+    </div>
+</div>
+<!--/ PS -->
+
+<!-- PS -->
+<div class="mz-stock-availability">
+    <div class="mz-stock">
+        {% if model.inventoryInfo.onlineStockAvailable > 0 %}
+            <p>{{model.inventoryInfo.onlineStockAvailable}} =={{model.inventoryInfo.onlineStockAvailable}}=={{ labels.inStock }}</p>
+        {% else %}
+            <p>{{ labels.outOfStock }}</p>
+        {% endif %}
+    </div>
+    <div class="mz-availability">
+        {% for availability in model|get_product_attribute_values("tenant~availability") %}
+            <p>({{ availability }})</p>
+        {% endfor %}
+    </div>
+</div>
+<!--/ PS -->
+
+<!-- PS -->
+<section class="mz-l-stack-section mz-productdetail-conversion">
+    <div class="col-md-2">
+        {% if model.productType != themeSettings.familyProductType %}
+            <div class="mz-productdetail-conversion-controls col-xs-4 col-sm-4">
+                <div class="qty-block">
+                    <input id="mz_pdp_qty" class="mz-productdetail-qty text-center" type="text" value="{{model.quantity}}" min="1" readonly onfocus="this.blur()" data-mz-value="{{model.quantity}}" title="Quantity" />
+                    <div class="qty-counter" id="minus" data-mz-qty-minus role="button"><i class="fa fa-minus"  aria-hidden="true"></i></div>
+                    <div class="qty-counter" id="plus" data-mz-qty-plus role="button"><i class="fa fa-plus" aria-hidden="true"></i></div>
+                </div>     
+            </div>
+            <div class="mz-validationmessage mz-msg-max-allowed" data-mz-validationmessage-for="quantity" style="visibility: hidden;">quantity error</div>
+        {% endif %}
+    </div>
+    <div class="col-md-6">
+        <div class="mz-productdetail-conversion-buttons col-xs-12 hide">
+            <div class="col-xs-12 add-to-cart-container">
+                <button id="add-to-cart" class="mz-productdetail-addtocart font-large button_primary pull-right{% if not model.purchasableState.isPurchasable %} button_disabled{% endif %}" data-mz-action="addToCart">{{ labels.addToCart }}</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4"> 
+        <div class="mz-productdetail-conversion-buttons text-center">
+            {% if siteContext.generalSettings.isWishlistCreationEnabled and not user.isAnonymous %}
+                <button id="add-to-wishlist" {% if model.notDoneConfiguring or not model.purchasableState.isPurchasable %} disabled="disabled" {% else %} {% if model.inventoryInfo.outOfStockBehavior == 'HideProduct' and not model.inventoryInfo.onlineStockAvailable %} disabled="disabled" {% endif %} {% endif %} class="mz-productdetail-addtowishlist {% if not model.purchasableState.isPurchasable %}is-disabled{% endif %}" data-mz-action="addToWishlist">{{ labels.addToWishlist }}</button>
+            {% endif %}
+        </div>
+    </div>
+    <div class="mz-product-delivery-surcharge">
+        {% include "modules/product/product-delivery-surcharge" %}
+    </div>
+</section>
+<!--/ PS -->
+
+<!-- PS -->
+<div class="mz-options-section clearfix">
+    {% if model.options and model.options.length > 0 and model.productType != themeSettings.familyProductType %}
+        <h4 class="mz-l-stack-sectiontitle">{{ labels.options }}</h4>
+        <div class="col-md-8">
+            <div class="mz-productdetail-options mz-l-stack-section">
+                {% include "modules/product/product-options" %}
+            </div>
+        </div>
+    {% endif %}
+    <div class="{% if model.options.length == 0 %}col-md-12{% else %}col-md-4{% endif %} mz-warranty">
+        <p>Warranty: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        <p>Warranty: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+    </div>
+</div>
+<!--/ PS -->
+
+
+{% include "modules/product/product-validation" %}
+
+<!-- div to display message in case inventory < minimumQuantityForInStockQuantityMessage and > 0 -->
+{% if model.inventoryInfo.onlineStockAvailable > 0 and model.inventoryInfo.onlineStockAvailable <= model.minimumQuantityForInStockQuantityMessage %}
+    <div class="col-xs-12 col-sm-12">
+        <div class="mz-validationmessage out-of-stock-message" data-mz-validationmessage-for="quantity-only">
+            *Only {{model.inventoryInfo.onlineStockAvailable}} left in stock.
+        </div>
+    </div>
+{% endif %}
+
+    
+<!-- Delivery surcharge modal -->
+<div class="del-surcharge-popup modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">{{themeSettings.deliverySurchargeHeader}}</h3>
+            </div>
+            <div class="close-modal">
+                <span class="mz-close-icon" aria-hidden="true" data-dismiss="modal"></span>  
+            </div>
+            <div class="modal-body">
+                {{themeSettings.deliverySurchargeContent}}
+            </div>
+        </div>
+    </div>
+</div>
+<!--/ Delivery surcharge modal -->
+
+{% comment %}
+<div class="mz-productdetail-shortdesc mz-l-stack-section">
+    <span itemscope itemprop="description">{{ model.content.productShortDescription|safe }}</span>
+</div>
+{% endcomment %}
+
+
+{% if model.productUsage == 'Bundle' %}
+    <div class="mz-productdetail-bundleitems mz-l-stack-section">
+        <h4 class="mz-l-stack-sectiontitle">{{ labels.bundleContents }}</h4>
+        <dl class="mz-propertylist mz-propertylist-justified">
+            {% for prod in model.bundledProducts %}
+               <dt>
+                   {% if prod.quantity != 1 %}{{ prod.quantity }} x {% endif %}
+                   {{ prod.content.productName }}
+               </dt>
+                <dd>
+                   {{ prod.content.productShortDescription|safe }}
+                </dd>
+            {% endfor %}
+        </dl>
+    </div>
+{% endif %}
+
+{% comment %}
+{% if model.properties and themeSettings.showProductDetailProperties %}
+    <div class="mz-productdetail-properties mz-l-stack-section">
+        <h4 class="mz-l-stack-sectiontitle">{{ labels.properties }}</h4>
+        <dl class="mz-propertylist mz-propertylist-justified">
+            {% for property in model.properties %}
+                {% if property.values and not property.isHidden %}
+                    <dt>{{property.attributeDetail.name}}</dt>
+                    {% for v in property.values %}
+                        <dd>
+                            {% if v.stringValue %}{% if v.stringValue == 'CHR(38)' %}
+                                &amp;
+                            {% else %}
+                                {% if v.stringValue == 'CHR(64)' %}
+                                    @
+                                {% else %}
+                                    {{ v.stringValue }}
+                                {% endif %}
+                            {% endif %}
+                                {% else %}
+                                {{v.value}}
+                            {% endif %}
+                        </dd>
+                    {% endfor %}
+                {% endif %}
+            {% endfor %}
+        </dl>
+    </div>
+{% endif %}
+{% endcomment %}
+
+{% if model.measurements and themeSettings.showProductDetailMeasurements and not model.bundledProducts %}
+    <div class="mz-productdetail-measurements mz-l-stack-section">
+        <h4 class="mz-l-stack-sectiontitle">{{ labels.measurements }}</h4>
+        <dl class="mz-propertylist mz-propertylist-justified">
+            <dt>{{ labels.weight }}</dt>
+            <dd itemprop="weight" itemscope itemtype="http://schema.org/QuantitativeValue">
+                <span itemprop="value">{{ model.measurements.packageWeight.value }}</span> <span itemprop="unitCode">{{ model.measurements.packageWeight.unit }}</span>
+            </dd>
+            <dt>{{ labels.length }}</dt>
+                <dd itemprop="length" itemscope itemtype="http://schema.org/QuantitativeValue">
+                <span itemprop="value">{{ model.measurements.packageLength.value }}</span> <span itemprop="unitCode">{{ model.measurements.packageLength.unit }}</span>
+            </dd>
+            <dt>{{ labels.width }}</dt>
+            <dd itemprop="width" itemscope itemtype="http://schema.org/QuantitativeValue">
+                <span itemprop="value">{{ model.measurements.packageWidth.value }}</span> <span itemprop="unitCode">{{ model.measurements.packageWidth.unit }}</span>
+            </dd>
+            <dt>{{ labels.height }}</dt>
+            <dd itemprop="height" itemscope itemtype="http://schema.org/QuantitativeValue">
+                <span itemprop="value">{{ model.measurements.packageHeight.value }}</span> <span itemprop="unitCode">{{ model.measurements.packageHeight.unit }}</span>
+            </dd>
+        </dl>
+    </div>
+{% endif %}
+
+{% if themeSettings.showProductDetailMeasurements and model.bundledProducts %}
+    <div class="mz-productdetail-measurements mz-l-stack-section">
+        <h4 class="mz-l-stack-sectiontitle">{{ labels.measurements }}</h4>  
+        {% for product in model.bundledProducts %}
+            {% if product.measurements %}
+                <div class="mz-productbundle-measurements-product">
+                    <span class="mz-productbundle-measurements-productname">{{ product.content.productName }}</span>
+                    <span> x {{ product.quantity }}</span>
+                </div>
+                <dl class="mz-propertylist mz-propertylist-justified mz-propertylist-inline">
+                    <dt>{{ labels.weight }}</dt>
+                    <dd itemprop="weight" itemscope itemtype="http://schema.org/QuantitativeValue">
+                        <span itemprop="value">{{ product.measurements.packageWeight.value }}</span> <span itemprop="unitCode">{{ product.measurements.packageWeight.unit }}</span>
+                    </dd>
+                    <dt>{{ labels.length }}</dt>
+                    <dd itemprop="length" itemscope itemtype="http://schema.org/QuantitativeValue">
+                        <span itemprop="value">{{ product.measurements.packageLength.value }}</span> <span itemprop="unitCode">{{ product.measurements.packageLength.unit }}</span>
+                    </dd>
+                    <dt>{{ labels.width }}</dt>
+                    <dd itemprop="width" itemscope itemtype="http://schema.org/QuantitativeValue">
+                        <span itemprop="value">{{ product.measurements.packageWidth.value }}</span> <span itemprop="unitCode">{{ product.measurements.packageWidth.unit }}</span>
+                    </dd>
+                    <dt>{{ labels.height }}</dt>
+                    <dd itemprop="height" itemscope itemtype="http://schema.org/QuantitativeValue">
+                        <span itemprop="value">{{ product.measurements.packageHeight.value }}</span> <span itemprop="unitCode">{{ product.measurements.packageHeight.unit }}</span>
+                    </dd>
+                </dl>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endif %}

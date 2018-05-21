@@ -1,0 +1,84 @@
+<div class="mz-l-container">
+	<div class="mz-contactus-title">
+		<h1 class="mz-pagetitle">{{ labels.contactus }}</h1>
+	</div>
+    <div class="col-md-8 col-md-offset-2">
+	<p class="mz-contactus-subtitle">
+		<span class="mz-contactus-subtitle-text">{{ labels.contactusByEmail }}:</span>
+		<span class="mz-indicates-required-text pull-right text-right">*{{ labels.requiredField }}</span>
+	</p>
+	<div class="mz-l-formfieldgroup-row">
+        <div class="mz-l-formfieldgroup-cell">
+            <label for="firstname">{{ labels.firstName }}</label>
+        </div>
+        <div class="mz-l-formfieldgroup-cell">
+            <input type="text" name="firstname" data-mz-value="firstname" placeholder="{{ labels.firstName }}" maxlength="{{themeSettings.firstNameLength}}" class="form-control">
+        </div>
+    </div>
+    <div class="mz-l-formfieldgroup-row">
+        <div class="mz-l-formfieldgroup-cell">
+            <label for="lastname">{{ labels.lastName }}</label>
+        </div>
+        <div class="mz-l-formfieldgroup-cell">
+            <input type="text" name="lastname" data-mz-value="lastname" placeholder="{{ labels.lastName }}" maxlength="{{themeSettings.lastNameLength}}" class="form-control">
+        </div>
+    </div>
+    <div class="mz-l-formfieldgroup-row">
+        <div class="mz-l-formfieldgroup-cell">
+            <label for="email">*{{ labels.email }}</label>
+        </div>
+        <div class="mz-l-formfieldgroup-cell">
+            <input type="email" id="emailAddress" name="email" data-mz-value="email" placeholder="{{ labels.emailAddress }}" maxlength="{{themeSettings.emailLength}}" class="form-control">
+            <span class="mz-validationmessage" data-mz-validationmessage-for="email"></span> 
+        </div>
+    </div>
+    <div class="mz-l-formfieldgroup-row">
+        <div class="mz-l-formfieldgroup-cell">
+            <label for="myCommentQuestion">*{{ labels.myCommentQuestion }}:</label>
+        </div>
+        <div class="mz-l-formfieldgroup-cell">
+            <select id="selectedTopic" name="selectedTopic" data-mz-value="selectedTopic" class="select form-control">
+                <option value="" selected>{{labels.selectTopic}}</option>
+                {% if model.selectTopic and model.selectTopic.length>0 %}
+                    {% for val in model.selectTopic %} 
+                        <option value="{{ val.id }}">{{ val.displayName }}</option>
+                    {% endfor %}
+                {% endif %}
+            </select>
+            <span class="mz-validationmessage" data-mz-validationmessage-for="selectedTopic"></span>
+        </div>
+	</div>
+	<div class="mz-l-formfieldgroup-row">
+        <div class="mz-l-formfieldgroup-cell">
+            <label for="message">*{{ labels.contactUsMessage }}</label>
+        </div>
+        <div class="mz-l-formfieldgroup-cell">
+            <textarea rows="5" cols="50" id="message" name="message" data-mz-value="message" maxlength="{{ themeSettings.contactUsMessageLength }}" class="form-control"></textarea>
+            <span class="mz-validationmessage" data-mz-validationmessage-for="message"></span>
+        </div>
+    </div>
+    {% if themeSettings.enableCaptcha && themeSettings.captchaSiteKey!="" %}
+    <div class="mz-captcha-image mz-l-formfieldgroup-row margin-bottom-15">
+        <p><span class="is-required">* </span>{{ labels.captchaTitle }}</p>
+        <div id="recaptcha_widget_div"></div>
+        <span class="mz-validationmessage" data-mz-validationmessage-for="recaptcha_widget_div"></span>
+        <script type="text/javascript">
+            var onloadCallback = function() {
+                grecaptcha.render('recaptcha_widget_div', {
+                    'sitekey' : '{{themeSettings.captchaSiteKey}}',
+                    'callback' : function(response) {
+                        window.recaptchaResponse = response;
+                    }
+                });
+            };
+        </script>
+        <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async></script>
+    </div>
+    {% endif %}
+    <div class="mz-l-formfieldgroup-row margin-bottom-30">
+        <div class="mz-l-formfieldgroup-cell text-center">
+            <button class="mz-button button_primary mz-button-large" type="button" data-mz-action="contactUsSubmit">{{ labels.send }}</button>
+        </div>
+    </div>
+    </div>
+</div>

@@ -1,0 +1,22 @@
+{% if facetValues and facetValues.length > 0 %}
+<div class="mz-l-sidebaritem new-hierarchy">
+        {% for fval in facetValues %}
+        {% if fval.isDisplayed %}
+            {% for child in fval.childrenFacetValues %}
+                {% if child.isDisplayed and not child.isEmpty %}
+                    <div class="sub-category"><a href="{% make_url "facet" child %}" class="mz-facetingform-link" data-mz-action="drillDown" data-mz-hierarchy-id="{{ child.value }}" data-mz-facet-value="{{ child.filterValue }}" data-mz-facet="{{ facet.field }}">{{ child.label|replace(themeSettings.columnBreaker,"")|replace("_"," ")|safe }}</a></div>
+                    {% if themeSettings.showChildCategoriesInFaceting and child.childrenFacetValues.length > 0 %}
+                        <ul>
+                        {% for subchild in child.childrenFacetValues%}
+                            {% if subchild.isDisplayed and not subchild.isEmpty %}
+                                <li><a href="{% make_url "facet" subchild %}" class="mz-facetingform-link" data-mz-action="drillDown" data-mz-hierarchy-id="{{ subchild.value }}" data-mz-facet-value="{{ subchild.filterValue }}" data-mz-facet="{{ facet.field }}">{{ subchild.label|replace(themeSettings.columnBreaker,"")|replace("_"," ")|safe }}</a></li>
+                            {% endif %}
+                        {% endfor %}
+                        </ul>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+        {% endfor %}
+</div>
+{% endif %}

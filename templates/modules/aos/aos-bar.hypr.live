@@ -1,0 +1,4 @@
+<span id="aos-text">
+    {{ labels.aosBarText|string_format(model.storeNum, model.assID) }}
+</span>
+<a href="javascript:void(0);" id="log-out" class="visible-xs-block visible-sm-inline visible-md-inline visible-lg-inline">{{labels.logOut}}</a>

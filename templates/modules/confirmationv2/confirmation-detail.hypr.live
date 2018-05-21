@@ -1,0 +1,187 @@
+<div class="mz-l-container">
+    <div class="col-xs-12">
+        <h1 class="mz-pagetitle">{{ labels.orderConfirmation }} </h1>
+        <div class="clearfix"></div>
+        <p>{{ labels.confirmationText }}</p>
+        {% with model.orderNumber|default(model.number) as orderNumber %}
+        <p>{{ labels.yourOrderNumber|string_format(orderNumber)|safe }}</p>
+        {% endwith %}
+        <i id="mz-print-content-confirmation" class="mz-reset-padding-left fa fa-print col-md-5 col-sm-12 pull-right text-right hidden-print" title="print" aria-hidden="true"></i>
+        {% if model.status %}<p>{{ labels.yourOrderStatus|string_format(model.status)|safe }}</p>{% endif %}
+        <div class="order-date"><span>{{labels.customerId}}</span><strong>{{ model.customerAccountId }}</strong></div>
+        <div class="mz-created-date-order"><span>Date: </span><span>{{ model.submittedDate|date("m/d/Y H:i:s") }}</span></div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="mz-l-stack">
+        <div class="mz-l-stack-section col-sm-6 col-xs-12 mz-payment-info-confirmation">            
+            <h2 class="mz-l-stack-sectiontitle">{{ labels.payments }}</h2>
+            {% if model.total == 0 %}
+                {% with model.total|currency as total %}
+                    <h4 class="mz-confirmation-nopaymentrequired">{{ labels.noPaymentWasRequired|string_format(total) }}</h4>
+                {% endwith %}
+            {% else %}
+                {% for payment in model.payments %}
+                    {% if payment.status != "Voided" and payment.status != "Declined" %}
+                        {% include "modules/checkout/checkout-payment" with model=payment %}
+                    {% endif %}
+                {% endfor %}
+            {% endif %}            
+            {% if model.hasDirectShip %}
+            <div class="mz-l-stack-section col-sm-6 col-xs-12 mz-shipping-info-confirmation">
+                <h2 class="mz-l-stack-sectiontitle">{{ labels.shippingInformation }}</h2>
+                <dl class="mz-propertylist">
+                    <dt>{{ labels.shippedTo }}</dt>
+                    <dd class="mz-addresssummary">
+                        {% include "modules/common/address-summary" with model=model.fulfillmentInfo.fulfillmentContact %}
+                        <div>{{ model.fulfillmentInfo.fulfillmentContact.email }}</div>
+                    </dd>
+                    <dt>{{ labels.shippingMethod }}</dt>
+                    <dd>{{ model.fulfillmentInfo.shippingMethodName }}</dd>
+                </dl>
+            </div>
+            {% endif %}
+            {% for item in model.items %}
+                {% if item.fulfillmentMethod == "Pickup" %}
+                    <div class="mz-l-stack-section col-xs-12">
+                        <h4 class="mz-l-stack-sectiontitle">{{ labels.storePickupFor|string_format(item.product.name)|safe }}</h4>
+                        <dl class="mz-propertylist">
+                            <dt>{{ labels.storeName }}</dt>
+                            <dd>{{ item.fulfillmentLocationName }}</dd>
+                        </dl>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+        <div class="mz-l-stack-section col-sm-6 col-xs-12 mz-shipping-block-confirmation">
+            <h2 class="mz-l-stack-sectiontitle">{{ labels.shippingInformation }}</h2>
+            <dl class="mz-propertylist"> 
+            {% for item in model.items %}        
+            {% with forloop.counter0 as OuterMostLoopCount %}    
+                {% for destination in model.destinations %}
+                    {%if item.destinationId == destination.id %}
+                        <dt>{{ labels.shipTo }}</dt>
+                        <div>
+                        <dd class="mz-addresssummary">
+                            {% include "modules/common/address-summary" with model=destination.destinationContact %}
+                            <div>{{ model.destinations.0.destinationContact.email }}</div>
+                        </dd>
+                        </div>
+                        {% for group in model.groupings %}
+                            {%if forloop.counter0 == OuterMostLoopCount%}
+                                <div>
+                                    <dt>{{ labels.shippingMethod }}</dt>
+                                    <dd>
+                                    {{group.shippingMethodName }}               
+                                    </dd>
+                                </div>
+                            {%endif%}
+                        {% endfor %}
+                        <div>
+                            <dt>{{ labels.product }}</dt>
+                            <dd>
+                            {{item.product.name|safe }}               
+                            </dd>
+                        </div>
+                        <div>
+                            <dt>{{ labels.qty }}</dt>
+                            <dd>
+                                {{item.quantity }}               
+                            </dd>
+                        </div>
+                        <hr class="mz-shipto-productname">
+                    {% endif %}                
+                {% endfor %} 
+            {% endwith %}
+            {% endfor %}
+            </dl> 
+        </div>  
+        <div class="mz-l-stack-section col-xs-12">
+            <h3 class="mz-l-stack-sectiontitle">{{ labels.orderSummary }} </h3>
+            {% include "modules/common/order-summary" %} {% if model.shopperNotes.comments %}
+            <div class="mz-ordercomments">
+                <h5 class="mz-ordercomments-header">{{ labels.comments }}</h5>
+                <p class="mz-ordercomments-body">{{ model.shopperNotes.comments }}</p>
+            </div>
+            {% endif %} {% if model.shopperNotes.giftMessage %}
+            <div class="mz-ordercomments">
+                <h5 class="mz-ordercomments-header">{{ labels.giftMessage }}</h5>
+                <p class="mz-ordercomments-body">{{ model.shopperNotes.giftMessage }}</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    <div class="section section-payment col-xs-12">
+            <h3 class="mz-l-stack-sectiontitle">Payment Details</h3>
+            {% if not(model.payments) %}
+                <p class="message">No payment details were provided.</p>
+            {% endif %}
+            {% if model.payments.length > 0 %}
+                <div class="mz-propertylist">
+                    
+                    {% for payment in model.payments %}
+                        {% if payment.status != "Voided" %}
+                        <div>
+                            {% if payment.paymentType == "CreditCard" %}
+                            <!--Type Column-->
+                            <div>
+                                <dt>Type</dt>
+                                <dd>{{ payment.billingInfo.card.paymentOrCardType }}</dd>
+                            </div>
+                            <!--End Type Column-->
+                            <!--Info-->
+                            <div>
+                                <dt>Card Number</dt>
+                                <dd>{{ payment.billingInfo.card.cardNumberPartOrMask }}</dd>
+                            </div>
+                            <!--End Info Column-->                         
+                            {% else %}
+                            <!--Type Column-->
+                                {% if payment.paymentType == "Check" %}
+                                <div>
+                                    <dt>Check</dt>
+                            <!--End Type Column-->
+                            <!--Info Column-->
+                                    {% if payment.interactions %}
+                                    <dd>
+                                    {% for interaction in payment.interactions %}
+                                        {% if interaction.interactionType == "Captured" %}{% endif %}
+                                    {% endfor %}
+                                    </dd>
+                                    {%endif%}
+                            <!--End Info Column-->
+                            <!--Exp Date Column-->
+                                    <dd>N/A</dd>
+                                    </div>
+                            <!--End Exp Date Column-->
+                                {% endif %}
+                                {% if payment.paymentType == "StoreCredit" %}
+                            <!--Type Column-->
+                                <div>
+                                    <dt>Gift Card/Store Credit</dt>
+                            <!--End Type Column-->
+                            <!--Info Column-->
+                                    <dd>{{ payment.billingInfo.storeCreditCode }}</dd>
+                            <!--End Info Column-->
+                            <!--Exp Date Column-->
+                                    <dd>N/A</dd>
+                                </div>
+                            <!--End Exp Date Column-->
+                                {% endif %}
+                            {% endif %}
+                            <!--Amount Column-->
+                            <div>
+                                <dt>Amount</dt>
+                                <dd>
+                                    {% if payment.amountCollected > 0 %}{{ payment.amountCollected | currency }}
+                                    {% else %}{{ payment.amountRequested | currency }}
+                                    {% endif %}
+                                </dd>
+                            </div>
+                            <!--End Amount Column-->
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% endif %}
+    </div>
+</div>

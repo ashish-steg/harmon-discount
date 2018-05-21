@@ -1,0 +1,46 @@
+{% if productImage %}
+    <img  
+        {% if productMaxWidth %}
+            src="{% make_url "image" productImage with maxWidth=productMaxWidth %}"
+        {% else %}
+            src="{% make_url "image" productImage with maxWidth=themeSettings.productCarouselImageWidth %}"
+        {% endif %}
+        {%if isMainImage=="true" %}
+            class="mz-productimages-mainimage" data-mz-productimage-main id="zoom" itemprop="image"
+            {% if productZoomWidth %}
+                data-zoom-image="{% make_url "image" productImage with maxWidth=productZoomWidth %}"
+            {% else %}
+                data-zoom-image="{% make_url "image" productImage with maxWidth=themeSettings.productZoomImageMaxWidth %}"
+            {% endif %}
+        {% endif %}
+        {% if productImageClass %}
+            class="{{productImageClass}}"
+        {% endif %}
+        {% if productImage.altText %}
+            alt="{{ productImage.altText }}"
+        {% else %}
+            {% if productImage.imageAlternateText %}
+                alt="{{productImage.imageAlternateText}}"
+            {% else %}
+                alt="{{productAltText}}"
+            {% endif %}
+        {% endif %}
+        {% if productImageWidth %}
+            width="{{productImageWidth}}"
+        {% endif %}
+        {% if isThumb %}
+            {% if productMaxWidth %}
+            data-orig-src="{% make_url "image" productImage with maxWidth=productMaxWidth as_parameter %}"
+            {% else %}
+                data-orig-src="{% make_url "image" productImage with maxWidth=themeSettings.productImagePdpMaxWidth %}"
+            {% endif %}
+            {% if productZoomWidth %}
+            data-orig-zoom="{% make_url "image" productImage with maxWidth=productZoomWidth %}"
+            {% else %}
+            data-orig-zoom="{% make_url "image" productImage with maxWidth=themeSettings.productZoomImageMaxWidth %}"
+            {% endif %}
+        {% endif %}
+        > 
+{% else %}
+    {% include "modules/product/product-no-image" %}
+{% endif %}

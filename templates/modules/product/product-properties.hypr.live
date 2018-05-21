@@ -1,0 +1,25 @@
+{% if model.properties and themeSettings.showProductDetailProperties %}
+  {% for property in model.properties %}
+    {% if property.values and not property.isHidden %}
+      {% if forloop.first %} 
+        <div class="col-md-6 pull-right mz-productdetail-properties mz-l-stack-section {{property.attributeDetail.name|slugify }}">
+          <div class="mz-propertylist mz-propertylist-justified">
+            <h2 class="heading-2"><span>{{property.attributeDetail.name}}</span></h2>
+            {% for v in property.values %}
+              <div>{% if v.stringValue %}{{v.stringValue|safe}}{% else %}{{v.value|safe}}{% endif %}</div>
+            {% endfor %}
+          </div>
+        </div>
+      {% else %}
+        <div class="col-md-12 mz-productdetail-properties mz-l-stack-section {{property.attributeDetail.name|slugify }}">
+          <div class="mz-propertylist mz-propertylist-justified">
+            <h2 class="heading-2"><span>{{property.attributeDetail.name}}</span></h2>
+            {% for v in property.values %}
+              <div>{% if v.stringValue %}{{v.stringValue|safe}}{% else %}{{v.value|safe}}{% endif %}</div>
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
+    {% endif %}
+  {% endfor %}
+{% endif %}

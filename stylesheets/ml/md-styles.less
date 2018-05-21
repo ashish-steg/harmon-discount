@@ -1,0 +1,308 @@
+@media (min-width: 992px) {
+    .container {
+        width: 992px;
+    }
+    //Header
+    .mz-pageheader {
+        .ml-header-content {
+            .ml-header-search-wrapper {
+                width: 345px;
+            }
+        }
+    }
+    //Navigation
+    .mz-sitenav {
+        display: block;
+        .mz-sitenav-list {
+            > .mz-sitenav-item {
+                .mz-sitenav-item-inner {
+                    > .mz-sitenav-link {
+                        .fontsBold();
+                        font-size: 14px;
+                    }
+                }
+            }
+        }
+        .mz-sitenav-sub-container {
+          top: 41px;
+        }
+        .mz-sitenav-item {
+			.mz-sitenav-sub {
+				width: 210px;
+                min-width: 210px;
+			}
+		}
+    }
+
+    footer{
+		.container-links {
+            .col-xs-4{
+                padding-left:@defaultGutter;
+                padding-right: @defaultGutter;
+            }
+			ul{
+				li{
+					b{ font-size:14px; }
+					a{ font-size:16px; }
+				}
+			}        
+        }
+        .container-menu{
+            min-height: 291px;
+        }
+		.container-signup {
+            label{
+				&.control-label{ font-size: 16px; }
+			}
+            .input-group{
+                .form-control { 
+                    width: 219px; 
+                    padding: @defaultGutter 13px 16px 13px;
+                }
+            } 
+			button{ width: 80px; }
+        }
+        .container-social{
+            .heading{
+                font-size: 16px;
+            }
+        }
+		.container-copyright{
+            margin-top: 76px;
+			a{ line-height: 18px; }
+			.term-text{
+				padding-right: 0px;
+    			padding-left: 0px;
+			}
+        }
+    }
+    // Product Directory
+    .mz-productlist {
+        // Grid View
+        .grid-view {
+            .mz-productlist-item {
+                .mz-productlisting-info {            
+                    padding: 0 @defaultGutter;
+                }
+                .mz-productlisting-image {
+                    .mz-productlisting-imageplaceholder, img {
+                        max-height: 265px;
+                        >.mz-productlisting-imageplaceholdertext {
+                            line-height: 265px;
+                        }
+                    }
+                    a:focus+button{
+                        display: block !important;
+                    }
+                }
+            }
+        }
+        //List View
+        .list-view{
+            .product-image-swatch-wrapper {
+                max-width: 265px;
+                img, 
+                .mz-productlisting-image{
+                    img, 
+                    .mz-productlisting-imageplaceholder {
+                        max-height: 265px;
+                        >.mz-productlisting-imageplaceholdertext {
+                            line-height: 265px;
+                        }
+                    }                    
+                    a:focus+button{
+                        display: block !important;
+                    }
+                }
+            }
+            li.mz-productlist-item{
+                min-height: 320px;
+            }
+            .ml-product-info-wrapper,
+            .ml-product-price-wrapper{
+                display: block;
+                float: left;
+            }            
+        }
+        // Common to both List and Grid View
+        .mz-productlisting-image {
+            position: relative;
+            button.quick-view-btn {
+                left: 0;
+                right: 0;
+                bottom: 0;
+                height: 30px;
+                background: @colorLightGray;
+                position: absolute;
+                opacity: 0.9;
+                text-transform: uppercase;
+                width: 100%;
+		        display: none;
+                border: 0;
+                span {
+                    .fontsBold();
+                    opacity: 1;
+                    font-size: 14px;
+                    text-align: center;
+                    line-height: 30px;
+                    color: @colorGray;
+                }
+            }
+            &:hover {
+                button.quick-view-btn {
+                    display: block;
+                }
+            }
+        }
+
+        //Color Swatches Styling        
+        .mz-productoptions{
+            .product-color-swatches{
+                li.color-options:nth-of-type(1n+4){
+                    display: none;
+                }
+            }
+        }
+    }
+    .mz-productimages {
+        .mz-productimages-thumbs {
+            width: 405px; 
+            margin: 0 0 0 25px;
+        }
+    }
+    .mz-l-carousel {
+        .bx-wrapper {
+			max-width: ({{themeSettings.productCarouselImageWidth}}px+40)*{{themeSettings.productCarouselSize}}!important;
+		}
+        div#product-carousel-list {
+            div {
+                margin: 10px 19px!important;
+            }
+        }
+    }
+    .mz-productdetail{
+        .mz-price{
+            font-size: @fontSizeLarge + 10px;
+        }
+    }
+    .mz-pageheader {
+        .ml-header-links-wrapper {
+            nav.mz-utilitynav {
+                .mz-utilitynav-list {
+                    &.logged-in {
+                        .mz-utilitynav-item{
+                            &.user-link {
+                                max-width: 200px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    //Only for Checkout and Confirmation
+    &.mz-checkout{
+        .mz-carttable-item-info-wrap{
+            max-width: 140px;
+        }
+        .mz-carttable-item-image{
+            width: auto;
+        }
+        .mz-l-column{
+            width: 50%;
+            float: left;
+        }
+        #checkout-rightcol{
+            width: 50%;
+            float: right;
+        }
+        .modal-dialog {
+            margin:30px auto;
+        }
+        .modal-body{
+            margin-bottom: 0px;
+        }
+    }
+    .mz-l-paginatedlist{
+        .mz-pagingcontrols{
+            display: block;
+            margin-right: @defaultGutter;
+        }
+    }
+    .mz-productdetail-wrap {
+        #product-detail{
+            .mz-l-stack-section{
+                &.mz-productdetail-price {
+                    margin-top: 20px;
+                }
+            }
+            .email-popup{
+                #mz-drop-zone-email-notification{
+                    .mz-cms-content{
+                        .mz-instock-request {
+                            .modal-body {
+                                button {
+                                    line-height: 19px;
+                                    margin-top: -3px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    #mz-family-container{
+        .mz-familylist-item {
+            .item-image{
+                width: 210px;
+            }
+        }
+        .mz-pricestack{
+            font-size: 22px;
+        } 
+        .mz-pricestack-price-upper{
+            &::before {
+                top: 14px;
+                left: -16px;
+            }
+        }
+    }
+    .rti-recommended-products{
+        .mz-productlist{
+            .bx-wrapper{
+                .bx-viewport{
+                    .bxslider li{
+                        width: 260px !important;
+                        margin-right: 60px !important;
+                    }
+                }
+                .bx-controls{
+                    .bx-controls-direction{
+                        .bx-prev{
+                            left: -10px;
+                        }
+                        .bx-next{
+                            right: -6px;
+                        }
+                    }
+                }
+            }
+        }       
+    }
+    #global-cart {
+        .rti-recommended-products {
+            .mz-productlist {
+                .bx-wrapper {
+                    .bx-viewport {
+                        .bxslider {
+                            li {
+                                margin-right: 0!important;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,7 @@
+﻿<ul class="mz-locationlist">
+    {% for location in model %}
+     {% if !location.isDisabled %} 
+        <li class="location-item">{% include "modules/location/location-listing" with model=location %}</li>
+      {% endif %} 
+    {% endfor %}
+</ul>

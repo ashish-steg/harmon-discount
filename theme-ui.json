@@ -1,0 +1,838 @@
+{
+    "items": [
+        {
+            "xtype": "panel",
+            "title": "General",
+            "collapsed": false,
+            "items": [
+                {
+                    "xtype": "mz-input-checkbox",
+                    "name": "showAddressTypeDropdown",
+                    "fieldLabel": "Show Address Type dropdown in Address Forms (Residential/Commercial)"
+                },
+                {
+                    "xtype": "mz-input-checkbox",
+                    "name": "enablePartialCaching",
+                    "fieldLabel": "Enable partial caching using the Hypr {% partial_cache %} tag"
+                },
+                {
+                    "xtype": "mz-input-number",
+                    "name": "sessionTimeout",
+                    "fieldLabel": "Session Timeout Interval in Secs."
+                },
+                {
+                    "fieldLabel": "Default Store Image",
+                    "xtype": "mz-input-text",
+                    "name": "defaultStoreImage"
+                },
+                {
+                    "xtype": "mz-input-text",
+                    "name": "categoryEntityName",
+                    "fieldLabel": "Category Entity Name"   
+                }
+            ]
+        },
+        {
+            "xtype": "panel",
+            "title": "Extended Properties",
+            "collapsed": false,
+            "items": [
+                {
+                    "xtype": "mz-input-checkbox",
+                    "name": "extendedPropertiesEnabled",
+                    "fieldLabel": "Enable Extended Properties (Tracking Strings)"
+                },
+                {
+                    "xtype": "mz-input-textarea",
+                    "name": "extendedPropertyParameters",
+                    "fieldLabel": "Query Parameters (comma separated)"
+                }
+            ]
+        },
+        {
+            "xtype": "panel",
+            "title": "Product Lists",
+            "collapsed": false,
+            "items": [
+                {
+                    "xtype": "mz-input-checkbox",
+                    "name": "listProductCode",
+                    "fieldLabel": "Show product code in product lists"
+                },
+                {
+                    "xtype": "mz-input-checkbox",
+                    "name": "listProductShortDesc",
+                    "fieldLabel": "Show product short description in product lists"
+                },
+                {
+                    "xtype": "mz-input-checkbox",
+                    "name": "listVolumePricing",
+                    "fieldLabel": "Show volume pricing bands in product lists"
+                }
+            ]
+        },
+        {
+            "xtype": "panel",
+            "title": "Search",
+            "collapsed": false,
+            "items": [
+                {
+                    "xtype": "mz-input-checkbox",
+                    "name": "showChildCategoriesInFaceting",
+                    "fieldLabel": "Show two levels of the category hierarchy in faceting"
+                },
+                {
+                    "xtype": "mz-input-checkbox",
+                    "name": "useSearchAutocomplete",
+                    "fieldLabel": "Show search suggestions"
+                },
+                {
+                    "xtype": "mz-input-checkbox",
+                    "name": "suggestPriorSearchTerms",
+                    "fieldLabel": "Show search terms others used on this site in search suggestions",
+                    "enableIf": "useSearchAutocomplete"
+                },
+                {
+                    "xtype": "mz-input-number",
+                    "name": "allProductsCategoryId",
+                    "fieldLabel": "Enter CategoryId which is having all products"
+                }                
+            ]
+        },
+        {
+            "xtype": "panel",
+            "title": "Layout",
+            "collapsed": false,
+            "items": [
+                {
+                    "xtype": "mz-input-dropdown",
+                    "name": "gutterWidth",
+                    "fieldLabel": "Base Margin Width",
+                    "allowBlank": false,
+                    "forceSelection": true,
+                    "store": [
+                        "15px",
+                        "20px",
+                        "25px",
+                        "30px",
+                        "35px"
+                    ]
+                }
+            ]
+        },
+        {
+            "xtype": "panel",
+            "title": "Suppress CVV During Express Checkout",
+            "collapsed": false,
+            "items": [
+                {
+                    "xtype": "mz-input-checkbox",
+                    "name": "isCvvSuppressed",
+                    "fieldLabel": "CVV Suppressed"
+                }
+            ]
+        },
+        {
+            "xtype": "panel",
+            "title": "Anonymous Account Verification Options",
+            "collapsed": false,
+            "items": [
+                {
+                    "xtype": "mz-input-checkbox",
+                    "name": "zipCodeEnabled",
+                    "fieldLabel": "Billing Zip Code"
+                },
+                {
+                    "xtype": "mz-input-checkbox",
+                    "name": "phoneNumberEnabled",
+                    "fieldLabel": "Billing Phone Number"
+                },
+                {
+                    "xtype": "mz-input-checkbox",
+                    "name": "billingEmailEnabled",
+                    "fieldLabel": "Billing Email"
+                }
+            ]
+        },
+        {
+            "xtype": "panel",
+            "title": "Footer",
+            "collapsed": false,
+            "items": [
+                {
+                    "fieldLabel": "Enable XS Mini footer",
+                    "xtype": "mz-input-checkbox",
+                    "name": "footerEnableMini"
+                }
+            ]
+        },
+        {
+            "xtype": "panel",
+            "title": "Global Cart",
+            "collapsed": false,
+            "items": [
+                {
+                    "fieldLabel": "Pick an image for Basket",
+                    "xtype": "mz-input-image",
+                    "name": "globalCartEmptyBasketFooter"
+                },
+                {
+                    "fieldLabel": "Basket kicker link",
+                    "xtype": "mz-input-text",
+                    "name": "globalCartEmptyBasketKickerLink"
+                },
+                {
+                    "fieldLabel": "Enable Up sells",
+                    "xtype": "mz-input-checkbox",
+                    "name": "globalCartRelatedProducts"
+                },
+                {
+                    "fieldLabel": "Maximum number of Up sells products",
+                    "xtype": "mz-input-number",
+                    "name": "globalCartRelatedProductsSize"
+                },
+                {
+                    "fieldLabel": "Enable Save Cart",
+                    "xtype": "mz-input-checkbox",
+                    "name": "globalCartEnableSaveCart"
+                },
+                {
+                    "fieldLabel": "Maximum number of items to show in global Cart",
+                    "xtype": "mz-input-number",
+                    "name": "globalCartMaxItemCount"
+                },
+                {
+                    "fieldLabel": "Max width of global Cart item image",
+                    "xtype": "mz-input-number",
+                    "name": "globalCartItemImageMaxWidth"
+                },
+                {
+                    "fieldLabel": "Hide popover for empty global cart",
+                    "xtype": "mz-input-checkbox",
+                    "name": "globalCartHidePopover"
+                },
+                {
+                    "fieldLabel": "Show Subtotal",
+                    "xtype": "mz-input-checkbox",
+                    "name": "globalCartShowSubtotal"
+                }
+            ]
+        },
+        {
+            "xtype": "panel",
+            "title": "Paging",
+            "collapsed": false,
+            "items": [
+                {
+                    "fieldLabel": "Show these page size options",
+                    "xtype": "mz-input-selectmulti",
+                    "name": "pageSizeOptions",
+                    "allowBlank": false,
+                    "forceSelection": true,
+                    "store": [
+                        32,
+                        64
+                    ]
+                },
+                {
+                    "fieldLabel": "Default items per page",
+                    "xtype": "mz-input-dropdown",
+                    "name": "defaultPageSize",
+                    "allowBlank": false,
+                    "forceSelection": true,
+                    "storeFrom": "pageSizeOptions"
+                },
+                {
+                    "fieldLabel": "Default Sort Order",
+                    "xtype": "mz-input-text",
+                    "name": "defaultSort",
+                    "allowBlank": true,
+                    "allowOnlyWhitespace": true
+                },
+                {
+                    "fieldLabel": "Page size options for order history(myaccount)",
+                    "xtype": "mz-input-selectmulti",
+                    "name": "pageSizeOptionsOrderHistory",
+                    "allowBlank": false,
+                    "forceSelection": true,
+                    "store": [
+                        5,
+                        15
+                    ]
+                },
+                {
+                    "fieldLabel": "Default items per page for order history(myaccount)",
+                    "xtype": "mz-input-dropdown",
+                    "name": "defaultPageSizeOrderHistory",
+                    "allowBlank": false,
+                    "forceSelection": true,
+                    "storeFrom": "pageSizeOptionsOrderHistory"
+                },
+                {
+                    "xtype": "mz-input-number",
+                    "name": "viewAllPageSizeOrderHistory",
+                    "fieldLabel": "View All Page Size for order history(myaccount)"
+                }
+            ]
+        },
+        {
+            "xtype": "panel",
+            "title": "Navigation",
+            "collapsed": false,
+            "items": [
+                {
+                    "fieldLabel": "Maximum Items In Main Nav",
+                    "xtype": "mz-input-number",
+                    "name": "maxTopLevelNavItems",
+                    "hideTrigger": false,
+                    "allowDecimal": false,
+                    "minValue": 1
+                },
+                {
+                    "fieldLabel": "Maximum Nav Item Label Length",
+                    "xtype": "mz-input-number",
+                    "name": "maxTopLevelNavLabelLength",
+                    "hideTrigger": false,
+                    "allowDecimal": false,
+                    "minValue": 4,
+                    "allowBlank": false
+                },
+                {
+                    "fieldLabel": "Column Breaking Character",
+                    "xtype": "mz-input-text",
+                    "name": "columnBreaker",
+                    "allowBlank": false,
+                    "maxLength": 1
+                }
+            ]
+        },
+        {
+            "xtype": "panel",
+            "title": "Product Grid",
+            "collapsed": false,
+            "items": [
+                {
+                    "xtype": "mz-input-number",
+                    "name": "productImagePdpMaxWidth",
+                    "fieldLabel": "Product image max width (px) on PDP"
+                },
+                {
+                    "xtype": "mz-input-number",
+                    "name": "pdpRTIMaxWidth",
+                    "fieldLabel": "Product image width (px) under RTI on PDP"
+                },
+                {
+                    "xtype": "mz-input-number",
+                    "name": "productImageDirectoryMaxWidth",
+                    "fieldLabel": "Product image max width (px) on Directory Page"
+                },
+                {
+                    "xtype": "mz-input-number",
+                    "name": "productThumbImageMaxWidth",
+                    "fieldLabel": "Product thumb image max width (px)"
+                },
+                {
+                    "xtype": "mz-input-number",
+                    "name": "productZoomImageMaxWidth",
+                    "fieldLabel": "Product zoom image max width (px)"
+                },
+                {
+                    "xtype": "mz-input-text",
+                    "name": "productLongDescHeader",
+                    "fieldLabel": "Product long description header/title"
+                },
+                {
+                    "xtype": "mz-input-text",
+                    "name": "productInfoTabs",
+                    "fieldLabel": "Product Info Tabs"
+                },
+                {
+                    "xtype": "mz-input-text",
+                    "name": "content_CAWarning",
+                    "fieldLabel": "Content For CA Warning"
+                },
+                {
+                    "xtype": "mz-input-text",
+                    "name": "content_Prop_65",
+                    "fieldLabel": "Content For Prop 65"
+                },
+                {
+                    "xtype": "mz-input-text",
+                    "name": "oneSizeAttributeName",
+                    "fieldLabel": "One Size Attribute Name"
+                },
+                {
+                    "xtype": "mz-input-text",
+                    "name": "oneSizeProductType",
+                    "fieldLabel": "One Size Product Type"
+                }
+            ]
+        },
+        {
+            "xtype": "panel",
+            "title": "Category Filters",
+            "collapsed": false,
+            "items": [
+                {
+                    "xtype": "mz-input-textarea",
+                    "name": "filterConfiguration",
+                    "fieldLabel": "Filter's Configuration of Category Page"
+                },
+                {
+                    "xtype": "mz-input-number",
+                    "name": "facetMoreColorCount",
+                    "fieldLabel": "Show see more after number of colors"
+                },
+                {
+                    "xtype": "mz-input-number",
+                    "name": "viewAllPageSize",
+                    "fieldLabel": "View All Page Size"
+                }
+            ]
+        },
+        {
+            "xtype": "panel",
+            "title": "Product Carousel",
+            "collapsed": false,
+            "items": [
+                {
+                    "xtype": "mz-input-number",
+                    "name": "productCarouselSize",
+                    "fieldLabel": "Number of Product Carousels"
+                },
+                {
+                    "xtype": "mz-input-number",
+                    "name": "productInfinitySize",
+                    "fieldLabel": "Number of Product in Infinity Scroll"
+                },
+                {
+                    "xtype": "mz-input-number",
+                    "name": "productCarouselImageWidth",
+                    "fieldLabel": "Product Carousel Image Width (in px)"
+                }
+            ]
+        },
+        {
+            "xtype": "panel",
+            "title": "Basket",
+            "collapsed": false,
+            "items": [
+                {
+                    "fieldLabel": "Enable Coupon code",
+                    "xtype": "mz-input-checkbox",
+                    "name": "showcouponCodeBasket"
+                },
+                {
+                    "fieldLabel": "Coupon Disclaimer Message",
+                    "xtype": "mz-input-text",
+                    "name": "couponDisclaimer"
+                },
+                {
+                    "fieldLabel": "Enable empty basket cart link",
+                    "xtype": "mz-input-checkbox",
+                    "name": "showemptyBasket"
+                }
+            ]
+        },
+        {
+            "xtype": "panel",
+            "title": "Store Locator",
+            "collapsed": false,
+            "items": [
+                {
+                    "fieldLabel": "Google Map API key",
+                    "xtype": "mz-input-text",
+                    "name": "googleMapAPIKey"
+                },
+                {
+                    "fieldLabel": "Google Map Center Latitude",
+                    "xtype": "mz-input-text",
+                    "name": "googleMapLatitude"
+                },
+                {
+                    "fieldLabel": "Google Map Center Longitude",
+                    "xtype": "mz-input-text",
+                    "name": "googleMapLongitude"
+                },
+                {
+                    "fieldLabel": "Google Map Center Zoom",
+                    "xtype": "mz-input-number",
+                    "name": "googleMapZoom"
+                },
+                {
+                    "fieldLabel": "Google Map Pin Icon URL",
+                    "xtype": "mz-input-text",
+                    "name": "googleMapPinIcon"
+                },
+                {
+                    "fieldLabel": "Google Map Max Nearby Distance",
+                    "xtype": "mz-input-text",
+                    "name": "googleMapMaxNearbyDistance"
+                },
+                {
+                    "fieldLabel": "Store Page Size",
+                    "xtype": "mz-input-text",
+                    "name": "storesPageSize"
+                }
+            ]
+        },
+        {
+            "xtype": "panel",
+            "title": "Recently Viewed Items",
+            "collapsed": false,
+            "items": [
+                {
+                    "fieldLabel": "Enable RVI",
+                    "xtype": "mz-input-checkbox",
+                    "name": "rviEnable"
+                },
+                {
+                    "fieldLabel": "Heading",
+                    "xtype": "mz-input-text",
+                    "name": "rviHeading"
+                },
+                {
+                    "fieldLabel": "Max Number of Products",
+                    "xtype": "mz-input-number",
+                    "name": "rviNumberCookie"
+                },
+                {
+                    "fieldLabel": "Number of Days",
+                    "xtype": "mz-input-number",
+                    "name": "rviExpirationDuration"
+                }
+            ]
+        },
+        {
+            "xtype": "panel",
+            "title": "Form Validations",
+            "collapsed": false,
+            "items": [{
+                    "fieldLabel": "Gift Card Length",
+                    "xtype": "mz-input-number",
+                    "name": "gcLength"
+                },{
+                    "fieldLabel": "Full Name Length",
+                    "xtype": "mz-input-number",
+                    "name": "fullNameLength"
+                },
+                {
+                    "fieldLabel": "First Name Length",
+                    "xtype": "mz-input-number",
+                    "name": "firstNameLength"
+                },
+                {
+                    "fieldLabel": "Last Name Length",
+                    "xtype": "mz-input-number",
+                    "name": "lastNameLength"
+                },
+                {
+                    "fieldLabel": "Email Length",
+                    "xtype": "mz-input-number",
+                    "name": "emailLength"
+                },
+                {
+                    "fieldLabel": "Password Minimum Length",
+                    "xtype": "mz-input-number",
+                    "name": "passwordMinLength"
+                },
+                {
+                    "fieldLabel": "Password Maximum Length",
+                    "xtype": "mz-input-number",
+                    "name": "passwordMaxLength"
+                },
+                {
+                    "fieldLabel": "Phone number Length",
+                    "xtype": "mz-input-number",
+                    "name": "phoneNumberLength"
+                },
+                {
+                    "fieldLabel": "Address Length",
+                    "xtype": "mz-input-number",
+                    "name": "addressLength"
+                },
+                {
+                    "fieldLabel": "City Name Length",
+                    "xtype": "mz-input-number",
+                    "name": "cityNameLength"
+                },
+                {
+                    "fieldLabel": "State Name Length",
+                    "xtype": "mz-input-number",
+                    "name": "stateNameLength"
+                },
+                {
+                    "fieldLabel": "Zipcode Length",
+                    "xtype": "mz-input-number",
+                    "name": "zipcodeLength"
+                },
+                {
+                    "fieldLabel": "Credit Card Number Length",
+                    "xtype": "mz-input-number",
+                    "name": "creditCardNumberLength"
+                },
+                {
+                    "fieldLabel": "Security Code For Payment Length",
+                    "xtype": "mz-input-number",
+                    "name": "paymentSecurityCodeLength"
+                },
+                {
+                    "fieldLabel": "Gift Card Length",
+                    "xtype": "mz-input-number",
+                    "name": "giftCardLength"
+                },
+                {
+                    "fieldLabel": "Coupon Code Length",
+                    "xtype": "mz-input-number",
+                    "name": "couponCodeLength"
+                },
+                {
+                    "fieldLabel": "Gift Message Length",
+                    "xtype": "mz-input-number",
+                    "name": "checkoutGiftMessageLength"
+                },                
+                {
+                    "fieldLabel": "Checkout Comments Length",
+                    "xtype": "mz-input-number",
+                    "name": "checkoutCommentsLength"
+                },
+                {
+                    "fieldLabel": "Order Number Length",
+                    "xtype": "mz-input-number",
+                    "name": "orderNumberLength"
+                },
+                {
+                    "fieldLabel": "Order Verification Code Length",
+                    "xtype": "mz-input-number",
+                    "name": "orderVerificationCodeLength"
+                },
+                {
+                    "fieldLabel": "Product Quantity Field Length",
+                    "xtype": "mz-input-number",
+                    "name": "productQuantityLength"
+                }
+            ]
+        },
+        {
+            "xtype": "panel",
+            "title": "Family Products",
+            "collapsed": false,
+            "items": [
+                {
+                    "xtype": "mz-input-text",
+                    "name": "familyProductType",
+                    "fieldLabel": "Family Product Type"
+                },
+                {
+                    "xtype": "mz-input-text",
+                    "name": "familyProductAttribute",
+                    "fieldLabel": "Family Members Attribute"
+                },
+                {
+                    "xtype": "mz-input-text",
+                    "name": "familyMemberAttribute",
+                    "fieldLabel": "Family Code Attribute"
+                }
+            ]
+        },
+        {
+            "xtype": "panel",
+            "title": "Product Images",
+            "collapsed": false,
+            "items": [
+                {
+                    "xtype": "mz-input-text",
+                    "name": "mainImageFormat",
+                    "fieldLabel": "Main Image File Name"
+                },
+                {
+                    "xtype": "mz-input-number",
+                    "name": "productImagePdpMaxWidth",
+                    "fieldLabel": "Main Image Width (px)"
+                },
+                {
+                    "xtype": "mz-input-text",
+                    "name": "altImageFormat",
+                    "fieldLabel": "Alternate Image File Name"
+                },
+                {
+                    "xtype": "mz-input-number",
+                    "name": "altImageWidth",
+                    "fieldLabel": "Alternate Image Width (px)"
+                },
+                {
+                    "xtype": "mz-input-text",
+                    "name": "swatchImageFormat",
+                    "fieldLabel": "Alternate Image File Name"
+                },
+                {
+                    "xtype": "mz-input-number",
+                    "name": "swatchImageWidth",
+                    "fieldLabel": "Swatch Image Width (px)"
+                },
+                {
+                    "xtype": "mz-input-checkbox",
+                    "name": "enableSwatchHoverMain",
+                    "fieldLabel": "Enable Main Image change on Hover"
+                },
+                {
+                    "xtype": "mz-input-checkbox",
+                    "name": "enableSwatchHoverAlt",
+                    "fieldLabel": "Enable Alternate Image change on swatch"
+                },
+                {
+                    "xtype": "mz-input-number",
+                    "name": "familyProductImageMaxWidth",
+                    "fieldLabel": "Family Product image max width (px)"
+                }
+            ]
+        },
+        {
+            "xtype": "panel",
+            "title": "User Account",
+            "collapsed": false,
+            "items": [
+                {
+                    "xtype": "mz-input-textarea",
+                    "name": "returnsInfo",
+                    "fieldLabel": "Returns Description"
+                },
+                {
+                    "xtype": "mz-input-textarea",
+                    "name": "paymentsMethodInfo",
+                    "fieldLabel": "Payment Methods Description"
+                },
+                {
+                    "xtype": "mz-input-textarea",
+                    "name": "giftCardsInfo",
+                    "fieldLabel": " Gift Card Description"
+                },
+                {
+                    "xtype": "mz-input-checkbox",
+                    "name": "allowCustomerInitiatedReturns",
+                    "fieldLabel": " Allow Order Return"
+                }
+            ]
+        },
+        {
+            "xtype": "panel",
+            "title": "Email Subscription",
+            "collapsed": false,
+            "items": [
+                {
+                    "xtype": "mz-input-checkbox",
+                    "name": "enableEmailSubscription",
+                    "fieldLabel": "Enable Email Subscription"
+                },
+                {
+                    "xtype": "mz-input-textarea",
+                    "name": "emailSubscriptionUrl",
+                    "fieldLabel": "Email Subscription Url"
+                }
+            ]
+        },
+        {
+            "xtype": "panel",
+            "title": "Contact Us",
+            "collapsed": false,
+            "items": [
+                {
+                    "xtype": "mz-input-text",
+                    "name": "brontoAPIToken",
+                    "fieldLabel": "Bronto API Token"
+                },
+                {
+                    "xtype": "mz-input-text",
+                    "name": "brontoUrl",
+                    "fieldLabel": "Bronto Url"
+                },
+                {
+                    "xtype": "mz-input-checkbox",
+                    "name": "enableCaptcha",
+                    "fieldLabel": "Enable Captcha"
+                },
+                {
+                    "xtype": "mz-input-text",
+                    "name": "captchaSiteKey",
+                    "fieldLabel": "Captcha Site Key"
+                }
+            ]
+        },
+        {
+            "xtype": "panel",
+            "title": "Thridparty payments",
+            "collapsed": false,
+            "items": [
+                {
+                    "xtype": "mz-input-checkbox",
+                    "name": "changeShipping",
+                    "fieldLabel": "Allow Customers to change shipping address"
+                }
+            ]
+        },
+        {
+            "xtype": "panel",
+            "title": "Delivery Surcharge",
+            "collapsed": false,
+            "items": [
+                {
+                    "xtype": "mz-input-textarea",
+                    "name": "deliverySurchargeHeader",
+                    "fieldLabel": "Delivery Surcharge Pop-up Header"
+                },
+                {
+                    "xtype": "mz-input-textarea",
+                    "name": "deliverySurchargeContent",
+                    "fieldLabel": "Delivery Surcharge Pop-up Content"
+                }
+            ]
+        },
+        {
+            "xtype": "panel",
+            "title": "Associate Login",
+            "collapsed": false,
+            "items": [
+                {
+                    "xtype": "mz-input-textarea",
+                    "name": "associateLogin",
+                    "fieldLabel": "Associate Login Header"
+                }
+            ]
+        },
+        {
+            "xtype": "panel",
+            "title": "Order Tracking Links",
+            "collapsed": false,
+            "items": [
+                {
+                    "xtype": "mz-input-text",
+                    "name": "uspsLink",
+                    "fieldLabel": "USPS"
+                },
+                {
+                    "xtype": "mz-input-text",
+                    "name": "cevaLink",
+                    "fieldLabel": "CEVA"
+                },
+                {
+                    "xtype": "mz-input-text",
+                    "name": "fedxLink",
+                    "fieldLabel": "FEDX"
+                }
+            ]
+        },
+        {
+            "xtype": "panel",
+            "title": "Checkout coupon message",
+            "collapsed": false,
+            "items": [
+                {
+                    "fieldLabel": " Checkout multiple coupon message",
+                    "xtype": "mz-input-text",
+                    "name": "multipleCouponMsg"
+                }
+            ]    
+        }
+
+    ]
+}

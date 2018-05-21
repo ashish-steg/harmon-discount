@@ -1,0 +1,30 @@
+<div id="gc-balance-form-messages"></div>
+<div class="mz-l-formfieldgroup">
+    <div class="mz-l-formfieldgroup-row">
+        <div class="mz-l-formfieldgroup-cell">
+            <label for="gcNumber">GIFT CARD NUMBER<span class="is-required"> *</span></label>
+        </div>
+        <div class="mz-l-formfieldgroup-cell">
+            <input name="gcNumber" value="{{ model.gcNumber }}" maxlength="{{themeSettings.gcLength}}" data-mz-value="gcNumber" type="text" class="input"  >
+            <span class="mz-validationmessage" data-mz-validationmessage-for="gcNumber"></span>
+        </div>
+    </div>
+    <div class="mz-l-formfieldgroup-row">
+        <div class="mz-l-formfieldgroup-cell"></div>
+        <div class="mz-l-formfieldgroup-cell">
+            <button class="mz-button button button_primary mz-button-large " data-mz-action="checkGCBalance">Submit</button>
+        </div>
+    </div>
+</div>
+
+{% if model.balance >= 0 &&  model.balanceSuccess == true %}
+    <div>
+        {{labels.gcSuccessMsg}} {{model.balance|currency}}
+    </div>
+{% else %}
+    {% if model.balanceError == true  %}
+    <div>
+        <span class="mz-validationmessage">{{labels.gcErrorMsg}}<span>
+    </div>
+    {% endif %}    
+{% endif %}

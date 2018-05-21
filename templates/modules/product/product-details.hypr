@@ -1,0 +1,100 @@
+{# {% require_script "modules/product/product-carousel" %} #}
+{% if themeSettings.rviEnable %}
+    {% require_script "modules/product/recently-viewed-products" %}
+{% endif %}
+{% require_script "pages/product" %}
+{% with model.properties|findwhere('attributeFQN', "tenant~limitPerOrder") as limitPerOrder %}
+    {% preload_json limitPerOrder.values|first "limit" %}
+{% endwith %}
+{% with model.properties|findwhere('attributeFQN', "tenant~Video_Id") as video_Id %}
+    {% preload_json video_Id.values|first "Video_Id" %}
+{% endwith %}
+<div itemscope itemtype="http://schema.org/Product" class="mz-l-container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-6">
+            <div data-mz-productimages class="mz-productimages mz-product-left-container margin-top-15">
+                {% include "modules/product/product-images" %}
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6">
+            <div class="mz-product-top-content">
+                <h1 class="mz-pagetitle" itemprop="name">{{ model.content.productName|replace("'","&rsquo;")|safe }}</h1>
+                <div class="row">
+                    <div class="col-xs-5">
+                        <div class="mz-productcodes-productcode p-3" itemprop="sku">{{ labels.productCode }} # {{ model.productCode }}</div>
+                    </div>
+                    {% if model.productType != themeSettings.familyProductType %}
+                        <div class="col-xs-7">
+                            <div itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="mz-productdetail-price mz-l-stack-section pull-right text-right prize-mobile-view">
+                            {% include "modules/product/price-stack" %}
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+                {% comment %}
+                <div class="mz-all-review-container">
+                    <span class="mz-reviews-pdp-stars">
+                        {% include "modules/product/product-ratings" %}
+                    </span>
+                    <span class="mz-reviews-pdp-text">
+                        <a href="#">4.9(10) Read a review | Write a review</a>
+                    </span>
+                </div>
+                {% endcomment %}
+            </div>
+            <div class="clearfix"></div>
+            <div class="mz-productdetail-wrap">
+                {% if model.productType != themeSettings.familyProductType %}
+                    {% include "modules/common/message-bar" %}
+                {% endif %}
+                <div id="product-detail" class="product-detail mz-productdetail mz-l-stack">
+                    {% include "modules/product/product-detail" %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="social-sharing col-md-9 col-xs-12 mz-reset-padding-left{% if model.content.productImages.length <=1 %} mz-share-with-container-other{% endif %}">
+            {% dropzone "social-sharing" scope="template" %}
+        </div>
+    </div>
+    {% if model.productType == themeSettings.familyProductType %}
+        {% include "modules/common/message-bar" %}
+        <hr/>
+        {% include "modules/product/family/family-list" %}
+        <div class="product-detail family-details">
+            <div class="mz-productdetail-conversion-buttons col-xs-12 hide">
+                <div class="col-xs-12 add-to-cart-container">
+                    <button class="mz-productdetail-addtocart font-large button_primary pull-right{% if not model.purchasableState.isPurchasable %} button_disabled{% endif %}" data-mz-action="addToCart" >
+                    {{ labels.addToCart }}
+                    </button>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    <div class="clearfix"></div>
+    <div class="mz-middle-breakpoint hidden-xs">
+        {% dropzone "product-middle-breakpoint" scope="template" %}  
+    </div>
+
+    
+    <!-- CTS Product Desc -->
+        {# {% include "modules/product/product-tabs" %} #}
+    <!--/ CTS Product Desc -->
+
+    <!-- Product Properties -->
+    <div class="mz-product-properties">
+        {% include "modules/product/product-properties" %} 
+    </div>
+    <!--/ Product Properties -->
+
+    <!-- Yotpo Rewiews -->
+    {% include "modules/product/product-reviews-yotpo" %}
+    <!--/ Yotpo Rewiews -->
+
+    <!-- Recently Viewed -->
+    {% if themeSettings.rviEnable %}
+        {% include "modules/product/recent/recently-viewed-products" %}
+    {% endif %}
+    <!-- Recently Viewed -->
+</div>

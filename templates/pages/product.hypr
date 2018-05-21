@@ -1,0 +1,80 @@
+{% extends "page" %}
+{% block title-tag-content %}{% firstof pageContext.metaTitle|replace("'","&rsquo;")|replace('"',"”")|safe model.content.productName|replace("'","&rsquo;")|replace('"',"”")|safe %}  - {% parent %}{% endblock title-tag-content %}
+{% block body-tag-classes %}mz-product{% endblock body-tag-classes %} 
+{% block ensighten-data %}
+    <script type="text/javascript">
+        var pageData = {
+            "customer": {
+                "status": "{{customerType}}"
+            }
+            ,"page": {                
+                "isMobile": "{{pageContext.isMobile|lower}}",
+                "isProduction": "{{isProduction|lower}}",
+                "page": "",
+                "serverDate": "{{serverDate}}",
+                "siteName": "{{ siteContext.generalSettings.websiteName }}",
+                "type": "{{pageType}}"
+            }
+            ,"products": [
+                {% if productPrices and productPrices.length > 0 %}
+                    {% for productItem in productPrices %}
+                        {
+                            "id": "{{model.productCode}}",
+                            "productCategories": [{% for breacrumb in navigation.breadcrumbs %}"{{breacrumb.name|replace("&amp;","&")|replace('"','')|replace(themeSettings.columnBreaker,"")|replace("_"," ")|safe}}"{% if not forloop.last %},{% endif %}{% endfor %}],
+                            "categoryName": "{% for breacrumb in navigation.breadcrumbs %}{{breacrumb.name|replace("&amp;","&")|replace('"','')|replace(themeSettings.columnBreaker,"")|replace("_"," ")|safe}}{% if not forloop.last %} > {% endif %}{% endfor %}",
+                            "quantity": "1",
+                            "sku": "{{productItem.sku}}",
+                            "price": "{{productItem.listPrice}}"
+                            {% if productItem.salePrice %}, "salePrice": "{{productItem.salePrice}}"
+                            , "priceTotal": "{{productItem.listPrice}}"
+                            , "totalPrice": "{{productItem.listPrice}}"{% endif %}
+                            {% if productItem.saleAmount %}, "markDownAmount": "{{productItem.saleAmount}}"{% endif %}
+                            {% if model.productType == themeSettings.familyProductType %}, "collectionId": "{{model.productCode}}"{% endif %}
+                            {% with model.variations|findwhere("productCode", productItem.sku) as currentInventory %}
+                                , "onlineStockStatus": 
+                                {% if currentInventory.inventoryInfo.onlineStockAvailable > 0 %}
+                                "In stock"
+                                {% else %}
+                                "Out of stock"
+                                {% endif %}
+                            {% endwith %}
+                        }
+                        {% if not forloop.last %},{% endif %}
+                    {% endfor %}
+                {% else %}
+                    {% for mpn in model.mfgPartNumbers %}
+                        {
+                            "id": "{{model.productCode}}",
+                            "productCategories": [{% for breacrumb in navigation.breadcrumbs %}"{{breacrumb.name|replace("&amp;","&")|replace('"','')|replace(themeSettings.columnBreaker,"")|replace("_"," ")|safe}}"{% if not forloop.last %},{% endif %}{% endfor %}],
+                            "markDownAmount": "0",
+                            "quantity": "1",
+                            "categoryName": "{% for breacrumb in navigation.breadcrumbs %}{{breacrumb.name|replace("&amp;","&")|replace('"','')|replace(themeSettings.columnBreaker,"")|replace("_"," ")|safe}}{% if not forloop.last %} > {% endif %}{% endfor %}",
+                            "sku": "{{mpn}}"
+                            {% if model.productType == themeSettings.familyProductType %}, "collectionId": "{{model.productCode}}"{% endif %}
+                            , "onlineStockStatus": 
+                                {% if model.inventoryInfo.inventoryInfo.onlineStockAvailable > 0 %}
+                                "In stock"
+                                {% else %}
+                                "Out of stock"
+                                {% endif %}
+                            {% if model.price and model.price.price %}
+                                , "price": "{{model.price.price}}"
+                                , "priceTotal": "{{model.price.price}}"
+                                , "totalPrice": "{{model.price.price}}"
+                                {% if model.price.salePrice %}, "salePrice": "{{model.price.salePrice}}"{% endif %}
+                            {% endif %}
+                        }
+                        {% if not forloop.last %},{% endif %}
+                    {% endfor %}
+                {% endif %}
+            ]
+        };
+    </script>
+{% endblock ensighten-data %}
+{% block body-content %}
+{% preload_json model "product" %}
+<div class="product-wrapper">
+    <div class="clearfix"></div>
+    {% include "modules/product/product-details" %}
+</div>
+{% endblock body-content %}

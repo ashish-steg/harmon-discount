@@ -1,0 +1,20 @@
+{% if model %}
+<div class="mz-locationlisting">
+	<div class="mz-locationlisting-details">
+		<h4 data-store-url="store-details?code={{model.code}}" class="mz-locationlisting-name text-uppercase">{{model.description}}</h4>
+		<div class="mz-addresssummary">
+			{% include "modules/common/address-summary" with model=model %}
+			<span><a class="mz-store-hours" data-store-url="store-details?code={{model.code}}" href="javascript:void(0);"><u>{{labels.storeHoursInfo}}</u></a></span>
+		</div>
+		<form class="search-address-form" target="_blank" action="//maps.google.com/maps">
+			<div class="search-address-container {{model.storeSearched}}">
+				{{model.saddr|safe}}
+				<input type="hidden" name="daddr" value="{{model.dirQueryString}}">
+			</div>
+			<div class="dir-btn-container">
+				<input type="submit" class="btn button_primary btn-block" value="{{labels.storeDirection}}">
+			</div>
+		</form>
+	</div>
+</div>
+{% endif %}

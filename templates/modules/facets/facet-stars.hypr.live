@@ -1,0 +1,9 @@
+{% for star in stars %}
+    <li data-mz-url="{{star}}">
+        <span class="fa fa-star{% if star > 0 %} active{% endif %}" aria-hidden="true"></span>
+        <span class="fa fa-star{% if star|subtract(1) > 0 %} active{% endif %}" aria-hidden="true"></span>
+        <span class="fa fa-star{% if star|subtract(2) > 0 %} active{% endif %}" aria-hidden="true"></span>
+        <span class="fa fa-star{% if star|subtract(3) > 0 %} active{% endif %}" aria-hidden="true"></span>
+        <span class="fa fa-star{% if star|subtract(4) > 0 %} active{% endif %}" aria-hidden="true"></span>
+    </li>
+{% endfor %}

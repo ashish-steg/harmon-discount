@@ -1,0 +1,7 @@
+﻿<div id="socialGrid" class="social-grid social-feed-items">
+    {% for item in Model %}
+        <div class="social-image">
+            <img data-cid="{{ item.id }}" src="{{ item.properties.images.standard_resolution.url }}"/>
+        </div>
+    {% endfor %}
+</div>

@@ -1,0 +1,96 @@
+<div class="mz-productlisting {% block module-classes %}{% endblock module-classes %} mz-product-in-stock" data-mz-product="{{ model.productCode }}">
+                <div class="product-image-swatch-wrapper">
+                    <div class="mz-productlisting-image">
+                        {% block product-image %}
+                        <a href='{% make_url "product" model %}'>
+                            {% include "modules/product/product-image" with productImage=model.mainImage productMaxWidth=themeSettings.productImageDirectoryMaxWidth productAltText=model.mainImage.altText productImageClass="mz-sold-out-blur" as_parameter %}
+                            {% if hasBadge %}
+                                {%if onSale%}
+                                    <div class="mz-product-badge on-sale"><div>Clearance</div></div>
+                                {%endif%}
+                                {%if multipleSizes%}
+                                    <div class="mz-product-badge multiple-sizes"><div>Multiple Sizes</div></div>
+                                {%endif%}
+                                {%if specialPrice%}
+                                    <div class="mz-product-badge special-price"><div>Special Price</div></div>
+                                {%endif%}
+                            {% endif %}
+                        </a>
+                        {% if model.productType != themeSettings.familyProductType %}
+                            <button class="quick-view-btn primary qvButton quickview-btn" type="button" data-toggle="modal" data-target="{{ model.productCode }}" data-mz-product-data="{% json_attribute model %}">
+                                    <span>{{ labels.quickView }}</span>
+                            </button>
+                        {% endif %}
+                        {% endblock product-image %}
+                    </div>
+                    <a class="mz-productlisting-title visible-xs" href='{% make_url "product" model %}'>{{model.content.productName|safe}}</a>
+                    <!--Color Swatch-->
+                    {% for option in model.options %}
+                        {% if option.attributeFQN=="tenant~COLOR" and option.values.length!=0 %}
+                            <div class="ml-product-swatch mz-sold-out-blur">
+                                <div class="row">
+                                    <ul>
+                                        {% include "modules/facets/facet-color" with allfacets=option.values parent=option isListing="true" as_parameter %}
+                                    </ul>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="mz-productlisting-info mz-sold-out-blur">
+                    <div class="ml-product-info-wrapper">
+                        <a class="mz-productlisting-title hidden-xs" href='{% make_url "product" model %}'>{{model.content.productName|safe}}</a>
+                        {% if model.content.productShortDescription and themeSettings.listProductShortDesc %}
+                        <p class="mz-productlisting-shortdesc">{{ model.content.productShortDescription|truncatewords(themeSettings.maxProductSummaryWords)|safe }}</p>
+                        {% endif %}
+                        {% block product-code %}
+                        {% if themeSettings.listProductCode %}
+                        <div class="mz-productlisting-productcode">#{{model.productCode}}</div>
+                        {% endif %}
+                        {% endblock product-code %}
+                        {% block product-extrainfo %}
+                            {% if dealOfTheDay %}
+                                {% if dealOfTheDay.savings %}
+                                    {% if model.price.discount.impact %}
+                                        <p class="mz-productlisting-savings">You save: {{ model.price.discount.impact|currency }}</p>
+                                    {% endif %}
+                                {% endif %}
+                                {% if dealOfTheDay.expirationDate %}
+                                    {% if model.price.discount.discount.expirationDate %}
+                                    <p class="mz-productlisting-expirationdate">Expires: {{ model.price.discount.discount.expirationDate|date("F j, Y") }}</p>
+                                    {% endif %}
+                                {% endif %}
+                            {% endif %}
+                        {% endblock product-extrainfo %}
+                    </div>
+                    <div class="ml-product-price-wrapper">
+                        {% include "modules/product/price-stack" %}
+                    </div>
+                    {% comment %}
+                    <div class="mz-directory-ratings">
+                        {% include "modules/product/product-ratings" %}
+                    </div>
+                    {% endcomment %}
+                    {% if not pageContext.isDesktop and model|get_product_attribute_value("tenant~Promo_Thumbnail") %}
+                        {% with model|get_product_attribute("tenant~Promo_End_Date") as endDate %}
+                            {% if endDate %}
+                                {% with endDate.values|first|prop("value") as endDateValue %}
+                                    {% if now|is_before(endDateValue) %}
+                                         {% with model|get_product_attribute("tenant~Promo_Start_Date") as startDate %} 
+                                            {% if startDate %}
+                                                {% with startDate.values|first|prop("value") as startDateValue %}
+                                                    {% if now|is_after(startDateValue) %}
+                                                        <div class="promo">
+                                                            {{ model|get_product_attribute_value("tenant~Promo_Thumbnail") }}
+                                                        </div>
+                                                    {% endif %}
+                                                {% endwith %}
+                                            {% endif %} 
+                                        {% endwith %}
+                                    {% endif %}
+                                {% endwith %}
+                            {% endif %} 
+                        {% endwith %}
+                    {% endif %}
+                </div>
+            </div>

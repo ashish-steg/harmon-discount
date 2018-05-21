@@ -1,0 +1,28 @@
+{% extends "page" %}
+{% block main-container-class %}container{% endblock main-container-class %}
+
+{% block title-tag-content %}{% firstof pageContext.metaTitle labels.signUp %} - {% parent %}{% endblock title-tag-content %}
+
+{% block body-tag-classes %} mz-catalog-request {% endblock body-tag-classes %}
+
+
+{% block body-content %}
+    {% block breadcrumbs %}{% endblock breadcrumbs %}
+
+    {% require_script "pages/checkGCBalance" %}
+    <div class="mz-l-container">
+        <h1 class="mz-pagetitle">{{ labels.gcCheckBalanceHeader }}</h1>
+        <p>{{labels.gcCheckBalanceSubHeader}}</p>
+
+        {% dropzone "gc-check-top" scope="template" %}
+        <div class="row" id="form-viewport">
+            <div class="col-xs-12 ">
+                <div id="gc-balance-form-container" class="mz-l-formfieldgroup">
+                    {% include "modules/giftcard/check-gc-balance-form" %}
+                </div>
+            </div>
+        </div>
+        {% dropzone "gc-check-bottom" scope="template" %}
+
+    </div>
+{% endblock body-content %}

@@ -1,0 +1,20 @@
+﻿.mz-pricestack {
+    position: relative;
+    .mz-pricestack-price-upper {
+        position: relative;
+        &::before {
+            content: "\2014";
+            position: absolute;
+            top: 50%;
+            left: -@gutter;
+            margin-top: -10px;
+        }
+    }
+    &.mz-pricestack-range-sale {
+        .mz-pricestack-price-upper {
+            &::before {
+                margin-top: -16px;
+            }
+        }
+    }
+}

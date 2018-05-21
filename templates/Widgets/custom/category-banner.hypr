@@ -1,0 +1,7 @@
+{% if pageContext.isDesktop %}
+	<div class="mz-category-banner">
+		{% if model.config.categoryBanner %}
+			<img src="{% make_url "image" model.config.categoryBanner %}" {% if model.config.categoryBanner.altText %}alt="{{ model.config.categoryBanner.altText }}"{% endif %}>
+		{% endif %}
+	</div>
+{% endif %}

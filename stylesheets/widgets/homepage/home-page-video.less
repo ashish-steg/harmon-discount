@@ -1,0 +1,90 @@
+.mz-home-page-video {
+    top: 84px;
+    @media (max-width: 767px) {
+        margin-top: 10% !important;                   
+    }
+    .mz-alltext {
+        display: inline-block;
+        .mz-title {
+            .roboto-light;
+            color: @black;
+            font-size: 2.285714rem;
+            @media (min-width: 200px) and (max-width: 767px) {
+                font-size: 2.16666rem;             
+            }
+        }
+        .mz-subtitle {
+            .roboto-light;
+            color: @black;
+            margin: 0 10%;
+            display: block;
+            font-size: 0.85714rem;
+            @media (min-width: 200px) and (max-width: 767px) {
+                margin: 0 8%;
+                font-size: 1rem;             
+            }
+        }
+        .mz-view-video {
+            .roboto-medium;
+            color: @black;
+            margin: 6%;
+            cursor: pointer;
+            font-size: 0.85714rem;
+            text-transform: uppercase;
+            @media (min-width: 200px) and (max-width: 767px) {
+                font-size: 1rem;             
+            }
+        }
+    }
+    .mz-img {
+        max-width: 100%;
+        margin-top: 2rem;
+        display: inline-block;
+        
+        @media(max-width: 767px) {
+            max-width: none;
+            margin-top: 0;
+        }
+        img {
+            max-width: 100%;
+            max-height: 268px;
+            
+            @media(max-width: 767px) {
+                max-width: none;
+                max-height: none;
+                width: 100%;
+            }
+        }
+    }
+    .video-contaier {
+        display: block;
+       // height: 19.5rem;
+        .mz-iframe {
+            width: 100%;
+            height: 19.5rem;
+        }
+        .close-video {
+            top: -10px;
+            right: 5px;
+            position: absolute;
+            @media(min-width: 200px) and (max-width: 767px) {
+                top: 20px;
+                right: 7px;
+            }
+            a {
+                color: #fff;
+                text-decoration: none;
+            }
+        }
+    }
+    //home-page-video close icon
+    .mz-home-page-video .video-contaier .close-video {
+        margin: 12.5px 0; 
+    }
+}
+
+
+
+
+
+

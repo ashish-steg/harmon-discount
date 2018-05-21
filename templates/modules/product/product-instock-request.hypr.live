@@ -1,0 +1,48 @@
+{% comment %}
+<div class="mz-instock-request">
+    {% if subscribed %}
+    <p>{{ labels.notifyWidgetSuccess }}</p>
+    {% else %}
+    <div>{{ labels.notifyWidgetHeader }}</div>
+    <div>
+        {{ labels.email }}: <input type="text" data-mz-role="email" value="{{ user.email }}" class="mz-instock-request-email" />
+        <button data-mz-action="widgetNotifyUserAction">{{ labels.notifyWidgetButton }}</button>
+        <span class="mz-validationmessage" data-mz-validationmessage-for="email"></span>
+    </div>
+    {% endif %}
+</div>
+{% endcomment %}
+
+{% if subscribed %}
+    <span class="mz-validationmessage inline">{{ labels.notifyWidgetSuccess }}</span>
+{% else %}<!-- Trigger the modal on click-->
+<span class="mz-validationmessage inline">
+    {{ labels.productOutOfStock }} 
+</span>
+{% comment %}
+    <a class="email-popup-link mz-validationmessage inline" data-toggle="modal" data-target="#instock-email" href="#">{{ labels.emailMe}}</a>
+    <span class="mz-validationmessage inline">{{labels.whenAvailable }}.</span>
+{% endcomment %}
+<!-- Modal -->
+<div class="modal fade mz-instock-request instock-request-modal" id="instock-email" role="dialog">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content">
+        <div class="modal-header">
+            <button class="submit-btn close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">{{ labels.notifyWidgetHeader }}</h4>
+        </div>
+        {% if subscribed %}
+        {% else %}
+         <div class="modal-body">
+                <input type="text" data-mz-role="email" value="{{ user.email }}" maxlength="{{themeSettings.emailLength}}" class="input"/>
+                <button class="btn button-primary button_promotional" data-mz-action="widgetNotifyUserAction">
+                    <span class="hidden-xs hidden-sm">{{ labels.notifyWidgetButton }}</span>
+                    <span class="visible-xs visible-sm"><i class="glyphicon glyphicon-chevron-right"></i></span>
+                </button>
+            <span class="mz-validationmessage" data-mz-validationmessage-for="email"></span>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+</div>
+{% endif %}

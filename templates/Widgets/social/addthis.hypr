@@ -1,0 +1,11 @@
+﻿<div>
+    <!-- AddThis Button BEGIN -->
+    <div class="addthis_toolbox addthis_default_style" addthis:url="{{PageContext.url}}" addthis:description="One of my favorite discoveries at ChristmasTreeShops.com: {{PageContext.metaTitle}}" addthis:media={{pageModel.mainImage.src}}>
+        <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+        <a class="addthis_button_google_plusone" g:plusone:size="tall"></a>
+        <a class="addthis_button_pinterest_pinit" pi:pinit:url="{{PageContext.url|replace('https:','http:')}}" pi:pinit:media="{{pageModel.mainImage.src}}" pi:pinit:description="One of my favorite discoveries at ChristmasTreeShops.com: {{PageContext.metaTitle}}"></a>
+        <a class="addthis_counter addthis_pill_style"></a>
+    </div>
+    <script type="text/javascript" src="{%if PageContext.isSecure %}https:{% else %}http:{% endif %}//s7.addthis.com/js/250/addthis_widget.js#pubid={{Model.config.profileId}}"></script>
+    <!-- AddThis Button END -->
+</div>

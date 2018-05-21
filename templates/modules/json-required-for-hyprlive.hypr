@@ -1,0 +1,34 @@
+﻿{% preload_json apiContext "apicontext" %}
+{% preload_json pageContext "pagecontext" %}
+{% preload_json siteContext "sitecontext" %}
+{% preload_json user "user" %}
+{% set_var isProduction=true %}
+{% if pageContext.url|split('sandbox')|length > 1 %}{% set_var isProduction=false %}{% endif %}
+{% with now|date("m-d-Y") as currentDate %}{% set_var serverDate=currentDate %}{% endwith %}
+{% set_var siteName=siteContext.generalSettings.websiteName %}
+{% set_var pageType="Default" %}
+{% if pageContext.cmsContext.template.path == "home" %}
+{% set_var pageType="Home Page" %}
+{% else %}
+{% if pageContext.cmsContext.template.path == "search-results" %}
+{% set_var pageType="search results" %}
+{% else %}
+{% if pageContext.cmsContext.template.path == "cart" %}
+{% set_var pageType="shopping cart" %}
+{% else %}
+{% if pageContext.cmsContext.template.path == "my-account" %}
+{% set_var pageType="my account" %}
+{% else %}
+{% if pageContext.cmsContext.template.path == "product" %}
+{% set_var pageType="pdp" %}
+{% else %}
+{% set_var pageType=pageContext.cmsContext.template.path %}
+{% endif %}
+{% endif %}
+{% endif %}
+{% endif %}
+{% endif %}
+{% set_var customerType="guest" %}
+{% if user.isAuthenticated %}
+{% set_var customerType="registered" %}
+{% endif %}

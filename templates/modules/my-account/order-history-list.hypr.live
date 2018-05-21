@@ -1,0 +1,5 @@
+      <ul class="mz-orderlist">
+        {% for order in model.items %}
+        	<li data-mz-parentCheckoutNumber="{{ order.parentCheckoutNumber }}">{% include "modules/my-account/order-history-order-listing" with model=order %}</li>
+        {% endfor %}
+      </ul>

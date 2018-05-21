@@ -1,0 +1,79 @@
+﻿{% extends "page" %}
+
+{% block title-tag-content %}{% firstof pageContext.metaTitle labels.orderStatus %} - {% parent %}{% endblock title-tag-content %}
+
+{% block body-tag-classes %} mz-loginpage {% endblock body-tag-classes %}
+{% block ensighten-data %}
+<script type="text/javascript">
+        var pageData = {
+            "page": {
+                "serverDate": "{{serverDate}}",
+                "isProduction": "{{isProduction|lower}}",
+                "name":"order status",
+                "siteName": "{{ siteContext.generalSettings.websiteName }}",
+                "page": "",
+                "isMobile": "{{pageContext.isMobile|lower}}",
+                "type": "my account"
+            },
+            "customer": {
+                "status":"{{customerType}}"
+            }
+        };
+    </script>
+{% endblock ensighten-data %}
+{% block body-content %}
+    <div class="mz-l-container">
+        {% include "modules/common/message-bar" with model=model.messages %}
+        <div class="mz-l-2column">
+            <div class="mz-l-column">
+                <h1 class="mz-pagetitle">{{ labels.orderStatus }}</h1>
+                <p>Orders placed as a guest or single order lookup</p>
+                <form method="post" class="mz-loginform mz-loginform-page" name="mz-anonymousorder">
+                    <input type="hidden" name="order-returnUrl" value="{{ model.returnUrl }}"/>
+                    <div class="mz-l-formfieldgroup">
+                        <div class="mz-l-formfieldgroup-row">
+                            <div class="mz-l-formfieldgroup-cell">
+                                <label for="ordernum">{{ labels.orderNumber }}</label>
+                            </div>
+                            <div class="mz-l-formfieldgroup-cell">
+                                <input name="ordernum" value="" type="text" data-mz-order-number />
+                            </div>
+                        </div>
+                        <div class="mz-l-formfieldgroup-row">
+                            <div class="mz-l-formfieldgroup-cell">
+                                <label for="verifywith">{{ labels.verifyWith }}</label>
+                            </div>
+                            <div class="mz-l-formfieldgroup-cell">
+                                <select data-mz-verify-with>
+                                    {% if themeSettings.zipCodeEnabled %}<option value="zipCode">{{ labels.billingPostalCode }}</option>{% endif %}
+                                    {% if themeSettings.phoneNumberEnabled %}<option value="phoneNumber">{{ labels.billingPhoneNumber }}</option>{% endif %}
+                                    {% if themeSettings.billingEmailEnabled %}<option value="email">{{ labels.billingEmail }}</option>{% endif %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mz-l-formfieldgroup-row">
+                            <div class="mz-l-formfieldgroup-cell">
+                                <label for="verification">{{ labels.verification }}</label>
+                            </div>
+                            <div class="mz-l-formfieldgroup-cell">
+                                <input name="verification" value="" type="text" data-mz-verification />
+                            </div>
+                        </div>
+                        <div class="mz-l-formfieldgroup-row">
+                            <div class="mz-l-formfieldgroup-cell"></div>
+                            <div class="mz-l-formfieldgroup-cell">
+                                <section data-mz-role="popover-message" class="mz-popover-message"></section>
+                            </div>
+                        </div>
+                        <div class="mz-l-formfieldgroup-row">
+                            <div class="mz-l-formfieldgroup-cell"></div>
+                            <div class="mz-l-formfieldgroup-cell">
+                                <button class="mz-button button_primary mz-button-large mz-login-button" data-mz-action="anonymousorder-submit">{{ labels.submit }}</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock body-content %}

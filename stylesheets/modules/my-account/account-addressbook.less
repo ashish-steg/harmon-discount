@@ -1,0 +1,68 @@
+﻿.mz-accountaddressbook {
+    &.mz-l-stack-section {
+        .mz-l-stack-sectiontitle {
+            margin: 0;
+        }
+    }
+    .mz-accountaddressbook-contact {
+        border-right: 1px solid #eee;
+        margin: @gutter 0 0 0;
+        // width: @addressTileWidth;
+        min-height: @addressTileHeight;
+        &:last-child {
+            border-right-width: 0;
+        }
+        .clearfix();
+        .mz-l-formfieldgroup-row,
+        .mz-validate-address-wrapper,
+        .mz-contacttypes {
+            margin: @gutter 0 0 0;
+            .primary-billing-wrapper,
+            .primary-shipping-wrapper {
+                margin-left: 24px;
+                margin-top: @gutter/2;
+            }
+        }
+        .mz-addressform-firstname {
+            margin: @gutter/2 0 0 0;
+        }
+        .mz-contact-save {
+            margin: @gutter @gutter @gutter 0;
+        }
+        .mz-validationmessage {
+            font-size: @fontSize;
+        }
+        .mz-validate-address-wrapper {
+            border-top: 1px solid @successBackground;
+            .fontsMedium();
+            padding: 10px;
+            .mz-address-label {
+                line-height: 30px;
+            }
+        }
+    }
+
+    .mz-accountaddressbook-form {
+        float: left;
+        margin: 0;
+    }
+
+    .mz-accountaddressbook-actions {
+        float: right;
+        margin: 0 @gutter/2;
+        a {
+            .permalink(#666);
+            display: inline-block;
+            padding: 0 @gutter/4;
+            border-right: 1px solid #eee;
+            &:last-child {
+                border-right-width: 0;
+                padding-right: 0;
+            }
+        }
+    }
+    .mz-accountaddressbook-contactdetails {
+        float: left;
+        clear: both;
+    }
+}

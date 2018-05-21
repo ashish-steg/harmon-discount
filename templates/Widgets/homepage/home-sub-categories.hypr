@@ -1,0 +1,51 @@
+<div class="row">
+    <div class="col-xs-24 col-sm-24 col-md-24 col-lg-24">
+        <ul class="mz-home-sub-cat-container" id="{% if pageContext.isTablet %}owl-slider{% endif %}">
+            {% for catID in model.config.categories %}
+            {% with navigation|find:catID as cat %}
+                <li class="cat-section {% if pageContext.isDesktop %}show-all{% else %}hide-remaining{% endif %}" data-mz-category-id="{{ cat.originalId }}" style="{% if pageContext.isMobile %}max-width:50%;min-width:50%;width:100%;{% endif %}">
+                    <div class="image-container category-image-{{ cat.originalId }}" id="category-image-{{ cat.originalId }}">
+                        <!--image view-->
+                    </div>
+                    <a href="{{cat.url}}">
+                    <div class="mz-home-sub-cat-details">
+                        <div class="cat-name">
+                            <h1 class="mz-home-sub-cat-title">{{ cat.name }}</h1>
+                            <div class="bar-color" style="
+                            {% if forloop.index == 1 %} background: {{ model.config.stripColor1 }}; {% endif %}
+                            {% if forloop.index == 2 %} background: {{ model.config.stripColor2 }}; {% endif %}
+                            {% if forloop.index == 3 %} background: {{ model.config.stripColor3 }}; {% endif %}
+                            {% if forloop.index == 4 %} background: {{ model.config.stripColor4 }}; {% endif %}
+                            {% if forloop.index == 5 %} background: {{ model.config.stripColor5 }}; {% endif %}
+                            {% if forloop.index == 6 %} background: {{ model.config.stripColor6 }}; {% endif %}
+                            {% if forloop.index == 7 %} background: {{ model.config.stripColor7 }}; {% endif %}
+                            {% if forloop.index == 8 %} background: {{ model.config.stripColor8 }}; {% endif %}
+                            "></div>
+                        </div>
+                        <div class="shop-btn"><span>{{ labels.ShopNow }}</span>
+                            <span>  
+                                <svg width="15px" height="15px" viewBox="0 0 36 65" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+                                    <!-- Generator: Sketch Beta 3.3.2 (12041) - http://www.bohemiancoding.com/sketch -->
+                                    <title>chevron right product detail page photo</title>
+                                    <desc>Created with Sketch Beta.</desc>
+                                    <defs></defs>
+                                    <g id="PDP" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+                                        <g id="PDP:-Desktop-HD" sketch:type="MSArtboardGroup" transform="translate(-696.000000, -389.000000)" fill="#fff">
+                                            <g id="Photo-Slider-Controls" sketch:type="MSLayerGroup" transform="translate(203.000000, 389.000000)">
+                                                <path d="M494.4199,64.5140182 C493.735545,63.8467115 493.735545,62.7619103 494.4199,62.0946035 L524.763142,32.5072491 L494.4199,2.91989476 C493.735545,2.25258802 493.735545,1.1677868 494.4199,0.500480058 C495.104255,-0.166826686 496.21677,-0.166826686 496.901125,0.500480058 L528.486734,31.2992528 C529.171089,31.9665596 529.171089,33.0513608 528.486734,33.7186675 L496.901125,64.5174403 C496.557193,64.8528047 496.107975,65.0170648 495.658758,65.0170648 C495.21305,65.0136428 494.763832,64.8459606 494.4199,64.5140182 Z" id="chevron-right-product-detail-page-photo" sketch:type="MSShapeGroup"></path>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </span>
+                        </div>
+                    </div>
+                    </a>
+                    <div class="container-bg"></div>
+                </li>
+            {% endwith %}
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% require_script "widgets/homepage/home-sub-categories" %}

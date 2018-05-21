@@ -1,0 +1,309 @@
+.mz-pageheader {
+    .ml-header-content {
+        position: relative;
+        .ml-header-logo-wrapper {
+            float: left;
+            margin-right: 75px;
+            .logo {
+                display: block;
+                background: url("../resources/images/prima-supply-logo.png") left top no-repeat;
+                width: 250px;
+                height: 68px;
+                background-size: contain;
+                transition: all 0.5s ease-in-out;
+            }
+            img {
+                display: block;
+                transition: width 0.5s ease-in-out;
+            }
+        }
+        .ml-header-search-wrapper {
+            float: left;
+            margin: 15px 0 0;
+            position: absolute;
+            left: 340px;
+            width: auto;
+            .mz-searchbox-field {
+                display: inline-block;
+                position: relative;
+                border: 1px solid @inputBorder;
+                background: white;
+                height: 46px;
+                .mz-searchbox-input {
+                    width: 550px;
+                    height: 44px;
+                    font-size: 16px;
+                    color: #3d3d3d;
+                    line-height: 20px;
+                    padding-left: 26px;
+                    padding-right: 72px;
+                }
+                .mz-searchbox-button {
+                    background: #495363;
+                    color: #fff;
+                    display: block;
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    width: 46px;
+                    height: 44px;
+                    margin-left: -1em;
+                    border-width: 0;
+                    border-radius: 0;
+                    padding: 0;
+                }
+            }
+            ::-webkit-input-placeholder {
+                /* Chrome/Opera/Safari */
+                color: #495363;
+            }
+            ::-moz-placeholder {
+                /* Firefox 19+ */
+                color: #495363;
+            }
+            :-ms-input-placeholder {
+                /* IE 10+ */
+                color: #495363;
+            }
+            :-moz-placeholder {
+                /* Firefox 18- */
+                color: #495363;
+            }
+        }
+    }
+}
+
+.mz-sitenav {
+    background: #495363;
+}
+
+.mz-sitenav .mz-sitenav-list>.mz-sitenav-item .mz-sitenav-item-inner>.mz-sitenav-link {
+    font-family: 'Lato', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    text-transform: capitalize;
+}
+
+.mz-sitenav .mz-sitenav-item .mz-sitenav-link.main-link:after {
+    content: "";
+    background: #fff;
+    position: absolute;
+    top: 13px;
+    right: -5.5px;
+    width: 1px;
+    height: 22px;
+}
+
+.mz-sitenav .mz-sitenav-item:last-child .mz-sitenav-link.main-link:after {
+    display: none;
+}
+
+.fa-user {
+    color: #495363;
+    font-size: 25px;
+}
+
+.mz-header-top {
+    width: 100%;
+    background: #00adce;
+    p {
+        color: #fff;
+        padding: 6px 0;
+        font-size: 16px;
+        margin: 0;
+    }
+    .pull-right {
+        padding: 0px;
+    }
+    .live-Chat {
+        margin-left: 60px;
+        float: left;
+        color: #fff;
+        padding: 6px;
+        font-weight: 700;
+        a {
+            color: #fff;
+            .fa-comments {
+                font-size: 16px;
+                color: #fff;
+            }
+        }
+    }
+    .phone-no {
+        padding: 6px 0;
+        font-weight: 700;
+        a {
+            color: #fff;
+        }
+    }
+}
+
+.mz-pageheader {
+    .container {
+        padding: 0px;
+    }
+    .ml-header-links-wrapper {
+        background: #fff;
+        a {
+            color: #495363;
+            text-align: center;
+            &:hover,
+            &:active,
+            &:visited {
+                color: #495363;
+                text-decoration: none;
+            }
+        }
+        nav.mz-utilitynav {
+            .mz-login {
+                .mz-utilitynav-list {
+                    margin-left: 15px;
+                    text-transform: capitalize;
+                    .live-chat {
+                        margin-left: 60px;
+                        .fa-comments {
+                            font-size: 25px;
+                            display: block;
+                        }
+                        p {
+                            margin: 5.5px 0;
+                            float: left;
+                            padding: 6px;
+                        }
+                        a {
+                            &:active {
+                                color: #495363;
+                                text-decoration: none;
+                            }
+                            &:visited {
+                                color: #495363;
+                                text-decoration: none;
+                            }
+                        }
+                    }
+                    .mz-utilitynav-item,
+                    .link-flyer {
+                        float: left;
+                        border-left: 0;
+                        border-right: 0;
+                        padding: 10px;
+                        height: 52px;
+                    }
+                }
+            }
+        }
+    }
+    .ml-header-content {
+        .ml-header-global-cart-wrapper {
+            padding: 0px;
+            width: 40px;
+            a {
+                color: #495363;
+                font-size: 14px;
+                font-weight: 700;
+                text-align: left;
+                .ml-icon.ml-icon-global-cart {
+                    padding-top: 11px;
+                }
+                span {
+                    &.ml-header-global-cart-count {
+                        &.mz-cartmonitor {
+                            &.hidden-xs {
+                                &.pull-right {
+                                    position: absolute;
+                                    top: -7px;
+                                    right: 0;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .ml-icon {
+                &.ml-icon-global-cart {
+                    padding-top: 12px;
+                    float: left !important;
+                    .fa-shopping-cart {
+                        font-size: 25px;
+                    }
+                }
+            }
+            .ml-header-global-cart-count {
+                background: #d15f2a;
+                margin: 0;
+            }
+        }
+    }
+}
+#global-cart{
+        position: absolute;
+        top: 65px;
+        width: 713px;
+        padding:0;
+        box-shadow: 0px 3px 7px 0 rgba(0, 0, 0, 0.35);
+                .arrow-up:after {
+                        border-bottom-color: #d05f2a;
+                    }
+        .arrow-up {
+            right: 17px;
+        }
+    #global-cart-listing{
+            .media-list{
+                    .row{
+                        &.heading{
+                            background-color: #d05f2a;
+                            padding:0;
+                            p{
+                            color: white;
+                            font-size: 14px;
+                            text-align: left;
+                            }    
+                    }
+            }
+            .row{
+                &.listing{
+                    .price-each {
+                        .mz-item-price {
+                        padding-right: 0px; 
+                        padding-left: 0px;
+                        text-align: center;
+                    }
+                }
+                    #qty{
+                        width:60px;
+                    }
+                    .cart-item-qty{
+                        .mz-carttable-item-remove{
+                            a{
+                                color: #d05f2a;
+                            }
+                        }
+                    }
+                }
+            }
+     }
+            .row{
+                &.checkout{
+                   button,a{
+                    background-color: #d05f2a;
+                    display: block;
+                    text-align: center; 
+                    color:#ffffff;
+                    }
+                  
+                }
+        }
+ }
+    #global-cart-rti{
+        background-color:black;
+    }
+}
+#global-cart .listing .price-each .mz-item-price {
+    display: block;
+    padding-left: 0px;
+    text-align: center;
+}
+#global-cart #global-cart-listing .media-list .row.heading .col-xs-6 p {
+    margin-left: 11px;
+    font-size: 16PX;
+}

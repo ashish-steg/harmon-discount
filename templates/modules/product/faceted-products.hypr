@@ -1,0 +1,111 @@
+﻿{% if not pageContext.query.partial %}
+{% comment %}
+{% block ensighten-data %}
+    <script type="text/javascript">
+        var pageData = {
+            "page": {
+                "productCategories": [{% for breacrumb in navigation.breadcrumbs %}"{{breacrumb.name|replace("&amp;","&")|replace('"','\"')|replace(themeSettings.columnBreaker,"")|replace("_"," ")|safe}}"{% if not forloop.last %},{% endif %}{% endfor %}],
+                "serverDate": "{{serverDate}}",
+                "isProduction": "{{isProduction|lower}}",
+                "siteName": "{{ siteContext.generalSettings.websiteName }}",
+                "page": "",
+                "isMobile": "{{pageContext.isMobile|lower}}",
+                "type": "{{pageType}}"
+            },
+            "productList": {
+                "totalResults": "{{ model.totalCount }}",
+                "currentPage": "{{ model.currentPage }}"
+            },
+            "products": [{% for item in model.items %}{"id":"{{item.productCode}}"}{% if not forloop.last %},{% endif %}{% endfor %}],
+            "customer": {
+                "status": "{{customerType}}"
+            }
+        };
+    </script> 
+{% endblock ensighten-data %}
+{% endcomment %}
+<script type="text/json" id="data-mz-preload-facetedproducts">
+{
+    "items" : {% json model.items %},
+	"facets": {% json model.facets %}, 
+	"currentPage": {{ model.currentPage }},
+	"firstIndex": {{ model.firstIndex }},
+	"hasNextPage": {{ model.hasNextPage|lower }},
+	"hasPreviousPage": {{ model.hasPreviousPage|lower }},
+	"lastIndex": {{ model.lastIndex }},
+	"middlePageNumbers": {% json model.middlePageNumbers %},
+	"pageCount": {{ model.pageCount }},
+	"pageSize": {{ model.pageSize }},
+	"startIndex": {{ model.startIndex }},
+	"totalCount": {{ model.totalCount }},
+	"currentSort": "{{ model.currentSort }}"
+}
+</script>
+{% endif %}
+
+<div class="row">
+    {% if pageContext.isDesktop %}
+        {% if model.facets %}
+        <div class=" col-xs-12 col-sm-3 col-md-2">
+            <div data-mz-facets class="mz-l-sidebar">
+                {% dropzone "sidebar-above-facets" scope="template" %}
+                {% include "modules/product/faceting-form" %}
+                {% dropzone "sidebar-below-facets" scope="template" %}
+            </div>
+        </div>
+        {% endif %}
+    {% endif %}
+
+    <div class="{% if model.facets %} col-xs-12 col-sm-9 col-md-10{%else%} col-xs-12{% endif %}">
+        <div class="mz-l-paginatedlist">
+            <div class="mz-l-paginatedlist-header">
+                <h1 class="mz-pagetitle">{{ navigation.currentNode.name|upper }}</h1>
+                <div class="col-sm-4">
+                    <div class="row">
+                        <div data-mz-pagesort class="mz-sortby">
+                            {% include "modules/common/page-sort" %}
+                        </div>
+                    </div>
+                </div>
+                {% if pageContext.isDesktop %}
+                <div class="col-sm-6 col-md-offset-2">
+                    <div class="row">
+                        <div data-mz-pagenumbers class="mz-pagenumbers">
+                            {% include "modules/common/page-numbers" %}
+                        </div>
+                        <div data-mz-pagingcontrols class="mz-pagingcontrols">
+                            {% include "modules/common/paging-controls" %}
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+
+            {% if pageContext.isMobile or pageContext.isTablet %}
+                {% if model.facets %}
+                <div data-mz-facets class="mz-l-sidebar">
+                    {% include "modules/product/faceting-form" %}
+                </div>
+                {% endif %}
+            {% endif %}
+
+            <div data-mz-productlist class="mz-l-paginatedlist-list">
+                {% include "modules/product/product-list-tiled" %}
+            </div>
+            <div class="mz-l-paginatedlist-footer">
+                {% if pageContext.isMobile or pageContext.isTablet %}
+                    <div class="mz-back-to-top text-center">
+                        <button class="btn btn-default mz-back-to-top-button">{{ labels.backToTop }}</button>
+                    </div> 
+                {% endif %}
+                <div data-mz-pagenumbers class="mz-pagenumbers">
+                    {% include "modules/common/page-numbers" %}
+                </div>
+                <div data-mz-pagingcontrols class="mz-pagingcontrols">
+                    {% include "modules/common/paging-controls" %}
+                </div>
+            </div>
+        </div>    
+    </div>
+</div>
+

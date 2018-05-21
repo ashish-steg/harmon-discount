@@ -1,0 +1,23 @@
+﻿{% extends "page" %}
+{% block main-container-class %}container{% endblock main-container-class %}
+
+{% block title-tag-content %}{{ labels.searchTitle|string_format(pageContext.search.query) }}  - {% parent %}{% endblock title-tag-content %}
+
+{% block body-tag-classes %}mz-searchresults{% endblock body-tag-classes %}
+
+{% block body-content %}
+
+{% block breadcrumbs %}{% endblock breadcrumbs %}
+
+{% require_script "pages/search" %}
+
+<div {% if pageContext.categoryId %}data-mz-category="{{ pageContext.categoryId }}" {% endif %}data-mz-search="{{ pageContext.search.query }}" class="mz-l-container">
+	{% include "pages/search-interior" %}
+</div>
+<div class="quickviewSlider">
+{% block quickview-slider %}          
+{% endblock quickview-slider %}
+</div>
+{% require_script "modules/quickview" %}
+{% endblock body-content %}
+

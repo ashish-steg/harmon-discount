@@ -1,0 +1,14 @@
+﻿<div class="mz-newsletter">
+	<h4>{{ labels.stayConnected }}</h4>
+	<p>{{ labels.signUpTitle }}</p>
+	<form>
+		<div class="form-group">
+			<div class="input-group">					  	
+				<input type="email" class="form-control" placeholder="{{ labels.enterEmailAddress }}">
+				<span class="input-group-btn">
+					<button class="btn btn-default" type="submit" >{{ labels.join }}</button>
+				</span>
+			</div>
+		</div>						
+	</form>
+</div>

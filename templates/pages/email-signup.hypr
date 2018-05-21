@@ -1,0 +1,72 @@
+{% extends "page" %}
+{% block main-container-class %}container{% endblock main-container-class %}
+
+{% block title-tag-content %}{% firstof pageContext.metaTitle|safe labels.signUp %} - {% parent %}{% endblock title-tag-content %}
+
+{% block body-tag-classes %}mz-email-signuppage{% endblock body-tag-classes %}
+{% block breadcrumbs %}{% endblock breadcrumbs %}
+{% block body-content %}
+
+    <div class="mz-l-container">
+        <h1 class="mz-pagetitle">{{ labels.emailSignUp }}</h1>
+        {% dropzone "email-signup-top" scope="template" %}
+        <div class="already-registered-panel text-center" style="display:none">
+            <div class="">{{labels.emailSignupAlreadyRegistered|safe}}</div>
+            <div class="">
+                <a href="#" onclick="window.history.back();return false;" class="btn button-primary">
+                    <div class="cart-btn-continue"> {{ labels.continueShopping }}</div>
+                </a>
+            </div>
+        </div>
+        <div class="register-success-panel text-center" style="display:none">
+            <div class="">{{labels.emailSignupSuccess|safe}}</div>
+            <div class="">
+                <a href="#" onclick="window.history.back();return false;" class="btn button-primary">
+                    <div class="cart-btn-continue"> {{ labels.continueShopping }}</div>
+                </a>
+            </div>
+        </div>
+
+        <form method="post" class="mz-signupform mz-signup-page" style="display:none" name="mz-emailSignupform">
+           <input type="hidden" name="returnUrl" value="{{ model.returnUrl }}" />
+           <div class="mz-l-formfieldgroup">
+                <div class="mz-l-formfieldgroup-row">
+                    <div class="mz-l-formfieldgroup-cell">
+                        <label for="firstName">{{ labels.firstName }}</label>
+                    </div>
+                    <div class="mz-l-formfieldgroup-cell">
+                        <input  id="firstName" type="text" class="input" name="firstName" data-mz-signup-firstname maxlength="{{themeSettings.firstNameLength}}" />
+                    </div>
+                </div>
+                <div class="mz-l-formfieldgroup-row">
+                    <div class="mz-l-formfieldgroup-cell">
+                        <label for="lastName">{{ labels.lastName }}</label>
+                    </div>
+                    <div class="mz-l-formfieldgroup-cell">
+                        <input id="lastName" type="text" class="input" name="lastName" data-mz-signup-lastname maxlength="{{themeSettings.lastNameLength}}" />
+                    </div>
+                </div>
+                <div class="mz-l-formfieldgroup-row">
+                    <div class="mz-l-formfieldgroup-cell">
+                        <label for="emailAddress">{{ labels.emailAddress }}</label>
+                    </div>
+                    <div class="mz-l-formfieldgroup-cell">
+                        <input id="emailAddress" type="email" class="input" name="emailAddress" data-mz-signup-emailaddress maxlength="{{themeSettings.emailLength}}" />
+                    </div>
+                </div>
+                <div class="mz-l-formfieldgroup-row">
+                    <div class="mz-l-formfieldgroup-cell"></div>
+                    <div class="mz-l-formfieldgroup-cell">
+                        <button class="button button-primary mz-sign-up-page-button" data-mz-action="emailSignuppage-submit">{{ labels.signUp }}</button>
+                    </div>
+                </div>
+                <div class="mz-l-formfieldgroup-row">
+                    <div class="mz-l-formfieldgroup-cell"></div>
+                    <div class="mz-l-formfieldgroup-cell">
+                        <section data-mz-role="popover-message" class="mz-popover-message"></section>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock body-content %}

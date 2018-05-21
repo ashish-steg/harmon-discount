@@ -1,0 +1,8 @@
+<h2>New for less than {{model.config.price|currency}}</h2>
+<div id="recently-added" data-price="{{model.config.price}}">
+
+
+
+</div>
+
+{% require_script "widgets/recently-added" %}

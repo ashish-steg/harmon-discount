@@ -1,0 +1,60 @@
+<div class="mz-productlisting {% block module-classes %}{% endblock module-classes %} mz-product-sold-out" data-mz-product="{{ model.productCode }}">
+                <div class="product-image-swatch-wrapper">
+                    <div class="mz-productlisting-image">
+                        {% block product-image %}                        
+                            {% include "modules/product/product-image" with productImage=model.mainImage productMaxWidth=themeSettings.productImageDirectoryMaxWidth productAltText=model.mainImage.altText productImageClass="mz-sold-out-blur" as_parameter %}  
+                        <a href='{% make_url "product" model %}'>                          
+                            <div class="mz-product-badge sold-out"><div>Sold Out</div></div>                            
+                        </a>                        
+                        {% endblock product-image %}
+                    </div>
+                    <span class="visible-xs">{{model.content.productName|safe}}</span>
+                    <!--Color Swatch-->
+                    {% for option in model.options %}
+                        {% if option.attributeFQN=="tenant~COLOR" and option.values.length!=0 %}
+                            <div class="ml-product-swatch mz-sold-out-blur">
+                                <div class="row">
+                                    <ul class="mz-sold-out">
+                                        {% include "modules/facets/facet-color" with allfacets=option.values parent=option isListing="true" as_parameter %}
+                                    </ul>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="mz-productlisting-info mz-sold-out-blur">
+                    <div class="ml-product-info-wrapper">
+                        <span class="hidden-xs">{{model.content.productName|safe}}</a>
+                        {% if model.content.productShortDescription and themeSettings.listProductShortDesc %}
+                        <p class="mz-productlisting-shortdesc">{{ model.content.productShortDescription|truncatewords(themeSettings.maxProductSummaryWords)|safe }}</p>
+                        {% endif %}
+                        {% block product-code %}
+                        {% if themeSettings.listProductCode %}
+                        <div class="mz-productlisting-productcode">#{{model.productCode}}</div>
+                        {% endif %}
+                        {% endblock product-code %}
+                        {% block product-extrainfo %}
+                            {% if dealOfTheDay %}
+                                {% if dealOfTheDay.savings %}
+                                    {% if model.price.discount.impact %}
+                                        <p class="mz-productlisting-savings">You save: {{ model.price.discount.impact|currency }}</p>
+                                    {% endif %}
+                                {% endif %}
+                                {% if dealOfTheDay.expirationDate %}
+                                    {% if model.price.discount.discount.expirationDate %}
+                                    <p class="mz-productlisting-expirationdate">Expires: {{ model.price.discount.discount.expirationDate|date("F j, Y") }}</p>
+                                    {% endif %}
+                                {% endif %}
+                            {% endif %}
+                        {% endblock product-extrainfo %}
+                    </div>
+                    <div class="ml-product-price-wrapper">
+                        {% include "modules/product/price-stack" %}
+                    </div>
+                    {% comment %}
+                    <div class="mz-directory-ratings">
+                        {% include "modules/product/product-ratings" %}
+                    </div>
+                    {% endcomment %}
+                </div>
+            </div>

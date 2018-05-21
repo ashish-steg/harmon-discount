@@ -1,0 +1,157 @@
+﻿{% extends "email/email" %}
+
+{% block body-content %}
+    <table cellpadding="0" cellspacing="0" border="0" id="backgroundTable" width="100%" bgcolor="#ffffff" style="font-family:arial,helvetica,sans-serif;font-weight: 500;font-size: 14px;line-height: 24px;color: #333;max-width: 600px; border:none;" align="center">
+        <tbody>
+            <tr>
+                <td style="padding:20px;">
+                    <p>{{ labels.orderWelcome }} {{ model.billingInfo.billingContact.firstName }} {{ model.billingInfo.billingContact.lastNameOrSurname }}!</p>
+    
+                    <p>{{ labels.orderConfirmationBlob1|string_format(siteContext.generalSettings.websiteName, domainName)|safe }}</p>
+                        
+                    <div class="order-number">{{ labels.yourOrderNumber|string_format(model.number)|safe }}</div>                  
+                    <div class="order-date"><span>{{labels.customerId}}</span><strong>{{ model.customerAccountId }}</strong></div>
+                    <div class="mz-created-date-order" style="margin-bottom: 10px;"><span>Date: </span><span>{{ model.submittedDate|date("m/d/Y H:i:s") }}</span></div>
+                    
+                     <div class="mz-multiship-email">
+                        <div class="mz-table-header" style="border-bottom: 1px solid #e1e1e1">
+                        <span style="line-height: 1.1;font-size: 24px;font-family: Arial, Helvetica, sans-serif;font-weight:bold;">{{ labels.orderDetails }}</span>                      
+                        </div>
+                        <!--- Payment details ****************** -->
+                        <div class="mz-email-section" style="padding-top:10px;">
+                        <span style="line-height: 1.1;font-size: 24px;font-family: Arial, Helvetica, sans-serif;font-weight: bold;">{{ labels.payments }}</span>
+                        {% for payment in model.payments %}
+                            {% if payment.status != "Voided" and payment.status != "Declined" %}
+                            <div class="mz-checkout-payment mz-email-summary-container" style="border-top: 1px solid #e1e1e1;">
+                                <h4 class="mz-checkout-paymenttitle">
+                                <strong>
+                                    {% if payment.amountCollected > 0 %}
+                                    {{ payment.amountCollected|currency }} &mdash;
+                                    {% else %}
+                                    {{ payment.amountRequested|currency }}
+                                    {% endif %}
+                                </strong>
+                                {% if payment.billingInfo.paymentType == "Check" %}{{ labels.checkByMail }}{% endif %}
+                                {% if payment.billingInfo.paymentType == "CreditCard" %}{{ labels.creditCard }}{% endif %}
+                                {% if payment.billingInfo.paymentType == "StoreCredit" or payment.billingInfo.paymentType == "GiftCard" %}{{ labels.digitalCredit }}{% endif %}
+                                {% if payment.billingInfo.paymentType == "PurchaseOrder" %}{{ labels.purchaseOrder }} - {{ payment.billingInfo.purchaseOrder.purchaseOrderNumber }}{% endif %}
+                                </h4>
+
+                                <div style="width:100%">
+                                {% if payment.billingInfo.billingContact.email %}
+                                    <div class="mz-l-stack-item" style="display:inline-flex;width:100%;padding-bottom: 10px;">
+                                    <strong>{{ labels.billingEmail }}:&nbsp; </strong>
+                                    <div>{{ payment.billingInfo.billingContact.email }}</div>
+                                    </div>
+                                {% endif %}
+                                {% if payment.billingInfo.paymentType == "StoreCredit" or payment.billingInfo.paymentType == "GiftCard" or payment.billingInfo.paymentType|lower == "gsipaypal" %}
+                                    <div class="mz-l-stack-item" style="display:inline-flex;width:100%;padding-bottom: 10px;">
+                                    {% if payment.billingInfo.paymentType|lower == "gsipaypal" %}
+                                        <div>
+                                        <img alt="PayPal" src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/PP_logo_h_100x26.png" align="left" width="100px" height="26px" style="margin-right:7px;">
+                                        </div>
+                                    {% else %}
+                                        <strong>{{ labels.digitalCreditCode }}:&nbsp; </strong>
+                                        <div>{{ payment.billingInfo.storeCreditCode }}</div>
+                                    {% endif %}
+                                    </div>
+                                {% else %}
+                                    <div class="mz-l-stack-item" style="display:inline-flex;width:100%;padding-bottom: 10px;">
+                                    <strong>{{ labels.billingName }}: &nbsp;</strong>
+                                    <div>{{ payment.billingInfo.billingContact.firstName }} {{ payment.billingInfo.billingContact.lastNameOrSurname }}</div>
+                                    </div>
+                                    <div class="mz-l-stack-item" style="display:inline-flex;width:100%;padding-bottom: 10px;">
+                                    <strong>{{ labels.billingAddress }}:&nbsp; </strong>
+                                    <div class="mz-addresssummary">{% include "modules/common/address-summary" with model=payment.billingInfo.billingContact %}</div>
+                                    </div>                                
+                                {% endif %}                              
+                                {% if payment.billingInfo.paymentType == "PurchaseOrder" %}
+                                <div class="mz-l-stack-item" style="display:inline-flex;width:100%;padding-bottom: 10px;">
+                                    <strong>{{ labels.purchaseOrderPaymentTerm }}:&nbsp; </strong>
+                                    <div> {{payment.billingInfo.purchaseOrder.paymentTerm.code }} </div>
+                                </div>
+                                {% endif %}
+                                {% if payment.billingInfo.paymentType == "CreditCard" %}
+                                    <div class="mz-l-stack-item" style="display:inline-flex;width:100%;padding-bottom: 10px;">
+                                    <strong>{{ labels.cardtype }}:&nbsp; </strong>
+                                    <div>{{ payment.billingInfo.card.paymentOrCardtype }}</div>
+                                    </div>
+                                    <div class="mz-l-stack-item" style="display:inline-flex;width:100%;padding-bottom: 10px;">
+                                    <strong>{{ labels.cardNumber }}:&nbsp; </strong>
+                                    <div>{{ payment.billingInfo.card.cardNumberPartOrMask|default("****************") }}</div>
+                                    </div>
+                                {% endif %}
+                                {% if payment.billingInfo.paymentType == "Check" %}
+                                    <!--
+                                    <small>{{ labels.checkNumber }}</small>
+                                    <div>{{ payment.billingInfo.check.checkNumber }}</div>
+                                    -->
+                                    <div class="mz-l-stack-item" style="display:inline-flex;width:100%;padding-bottom: 10px;">
+                                    <strong>{{ labels.mailCheckTo }}:&nbsp; </strong>
+                                    <div class="mz-addresssummary">
+                                        <span>{{ ViewData.mailCheckTo.shippingOriginContact.firstName }} {{ ViewData.mailCheckTo.shippingOriginContact.lastNameOrSurname }}</span>
+                                        <span>{{ ViewData.mailCheckTo.shippingOriginContact.companyOrOrganization }}</span>
+                                        {% include "modules/common/address-summary" with model=ViewData.mailCheckTo %}
+                                    </div>
+                                    </div>
+                                {% endif %}
+                                </div>
+                            </div>
+                            {% endif %}
+                        {% endfor %}                     
+
+                        </div>
+                        <!--- Ship To ****************** -->
+                        <div class="mz-email-section" style="padding-top:10px;">
+                        <div style="border-bottom:1px solid #e1e1e1;">
+                            <span style="line-height: 1.1;font-size: 24px;font-family: Arial, Helvetica, sans-serif;font-weight: bold;">{{ labels.shipTo }}</span>
+                        </div>
+                            {% for order in model.orders %}
+                            {% with order.items|findwhere("fulfillmentMethod", "Ship") as shipItems %}
+                                {% if shipItems %}
+                                    <table class="mz-ordersummary-email" cellpadding="1" width="100%" style="border-bottom: 1px solid #e1e1e1;margin-top: 10px;margin-bottom: 10px;">
+                                    <tbody>
+                                        <tr class="mz-email-fulfillment-info" style="font-family: Arial,Helvetica,sans-serif;font-weight: 500; font-size: 14px;line-height: 24px;color: #333;">
+                                        <td class="mz-addresssummary" colspan="2"><strong>{{ labels.shipTo }}</strong><br/>{% include "modules/common/address-summary" with model=order.fulfillmentInfo.fulfillmentContact %}</td>                                      
+                                        </tr>
+                                        <tr class="mz-email-fulfillment-info" style="font-family: Arial,Helvetica,sans-serif;font-weight: 500; font-size: 14px;line-height: 24px;color: #333;">
+                                        <td class="mz-addresssummary" colspan="2"><strong>{{ labels.shippingMethod }}</strong>: {{ order.fulfillmentInfo.shippingMethodName }}</td>
+                                        </tr>
+                                        {% for item in order.items %}
+                                        <tr>
+                                            <td>                                        
+                                                <strong>{{ labels.product }}</strong>: {{item.product.name }} 
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>{{ labels.qty }}</strong>: {{ item.quantity }}                                        
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                    </table>
+                                {% endif %}
+                            {% endwith %}
+                            {% endfor %}
+                        </div>
+                        </div>                                   
+                        <div class="mz-email-section" style="padding-top:10px;">                      
+                        <div class="mz-email-summary-container">
+                            <div style="border-bottom:1px solid #e1e1e1;padding-top:10px;">
+                            <span style="line-height: 1.1;font-size: 24px;font-family: Arial, Helvetica, sans-serif;font-weight: bold;">{{ labels.orderSummary }}</span>
+                            </div>                 
+                            {% include "modules/common/email-order-summary-v2" %}
+                        </div>
+                        </div>                    
+                        <div class="mz-email-section" style="border-top: 1px solid #e1e1e1;width: 100%;padding-top:10px;">
+                            <!-- ******Price Details*******-->
+                            {% include "email/email-confirmation-price-summary" %}
+                            <!-- *************************** -->
+                        </div>                                                      
+                    </div>         
+                </td>
+            </tr>
+        </tbody>
+    </table>    
+{% endblock body-content %}

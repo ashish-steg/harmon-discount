@@ -1,0 +1,179 @@
+.mz-pagefooter {
+    background: #415265;
+    font-family: 'Lato', sans-serif;
+    .mz-footer-top {
+        padding-top: 33px;
+        padding-bottom: 36px;
+        img {
+            max-width: 100%;
+        }
+        h4 {
+            color: #fff;
+            font-size: 16px;
+            font-weight: 700;
+            margin: 0;
+            line-height: 1;
+            text-transform: uppercase;
+            &:after {
+                content: "---";
+                display: block;
+                color: #808b98;
+                font-size: 16px;
+                line-height: 17px;
+            }
+        }
+        ul {
+            margin-bottom: 10px;
+            padding: 0;
+            li {
+                list-style: none;
+                a { 
+                    color: #fff;
+                    font-size: 16px;
+                    font-weight: 400;
+                    line-height: 24px;
+                    text-transform: capitalize;
+                }
+            }
+        }
+
+        .mz-footer-logo-section {
+            max-width: 320px;
+            margin: 0 auto;
+            padding-top: 47px;
+            .mz-footer-logo {
+                img {
+                    max-width: 93px;
+                }
+            }
+            ul {
+                li {
+                    margin-bottom: 30px;
+                    &:last-child {
+                        margin-bottom: 0;
+                    }
+                }
+           }
+        }
+        .mz-contact {
+            margin-top: 35px;
+        }
+        .mz-payment-options {
+            margin-top: 13px;
+            img {
+                margin: 7px 0px 6px;
+            }
+            p {
+                font-style: italic;
+                margin-top: 0;
+            }
+        }
+        .mz-newsletter {
+            h4 {
+                &:after {
+                   display: none;
+                }
+            }
+            p {
+                margin-top: 4px;
+            }
+            form {
+                margin-top: 12px;
+                .form-control,
+                .btn {
+                    border-radius: 0;
+                    border: none;
+                    height: 45px;
+                }
+                .form-control {
+                    max-width: 360px;
+                    padding-right: 21px;
+                    padding-left: 21px;
+                }
+                ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+                    color: #000;
+                }
+                ::-moz-placeholder { /* Firefox 19+ */
+                    color: #000;
+                }
+                :-ms-input-placeholder { /* IE 10+ */
+                    color: #000;
+                }
+                :-moz-placeholder { /* Firefox 18- */
+                    color: #000;
+                }
+                .btn {
+                    background: #313a47;
+                    width: 80px;
+                    color: #fff;
+                    text-transform: uppercase;
+                    transition: all 0.3s ease 0s;
+                    &:hover,
+                    &:focus {
+                        background: #d15f2a;
+                        border: none;
+
+                    }
+                }
+            }
+        }
+        .mz-social-icon {
+            border-top: 1px solid #808b98;
+            margin-top: 29px;
+            padding-top: 21px;
+            a {
+                color: #fff;
+                font-size: 14px;
+                margin-right: 16px;
+                transition: all 0.3s ease 0s;
+                &:hover,
+                &:focus {
+                    color: #d15f2a;
+                }
+            }
+        }
+        .mz-policy {
+            margin-top: 77px;
+            ul {
+                margin-bottom: 0;
+                li {
+                    display: inline-block;
+                    border-left: 1px solid #fff;
+                    line-height: 10px;
+                    padding: 0 8px;
+                    &:first-child {
+                        border-left: none;
+                        padding-left: 0;
+                    }
+                    a {
+                        font-size: 14px;
+                        display: block;
+                        line-height: 10px;
+                    }
+                }
+            }
+        }
+        address,
+        address a,
+        p {
+            color: #fff;
+            font-size: 15px;
+            margin-bottom: 0;
+        }
+        address {
+            a {
+                cursor: none;
+                text-decoration: none;
+            }
+        }
+        .mz-pagefooter-copyright {
+            color: #fff;
+            font-size: 14px;
+            margin-top: 77px;
+        }  
+    }
+    .mz-footer-bottom {
+        border-top: 1px solid #808b98;
+        padding: 5px 0 10px;
+    }
+}

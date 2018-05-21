@@ -1,0 +1,40 @@
+{% extends "page" %}
+
+{% block title-tag-content %}{% firstof pageContext.metaTitle|safe model.name|safe %}  - {% parent %}{% endblock title-tag-content %}
+
+
+{% block body-tag-classes %}mz-category{% endblock body-tag-classes %}
+
+{% block body-content %}
+<div data-mz-category="{{model.categoryId}}" class="mz-l-container">
+    <h1 class="mz-pagetitle parent-heading">{{ model.name|replace(themeSettings.columnBreaker,"")|replace("_"," ")|safe }}</h1>
+    <div class="row">
+        <div data-mz-facets class="mz-l-sidebar col-xs-12 col-sm-3 new-hierarchy">
+            {% for link in navigation.tree %}
+            {% if not link.isHidden and not link.isEmpty and link.nodeType != "page" %}
+            {% if model.categoryId==link.categoryCode %}
+            {%for child in link.items%}
+            {% if not child.isHidden and not child.isEmpty %}
+            <div class="sub-category"><a href="{{child.url}}" class="mz-facetingform-link">{{ child.name|replace(themeSettings.columnBreaker,"")|replace("_"," ")|safe }}</a></div>
+            {% if themeSettings.showChildCategoriesInFaceting and child.items.length > 0 %}
+            <ul>
+                {% for subchild in child.items%}
+                {% if not subchild.isHidden and not subchild.isEmpty %}
+                <li><a href="{{subchild.url}}" class="mz-facetingform-link">{{ subchild.name|replace(themeSettings.columnBreaker,"")|replace("_"," ")|safe }}</a></li>
+                {% endif %}
+                {% endfor %}
+            </ul>
+            {% endif %}
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+            {%endif%}
+            {% endfor %}
+        </div>
+        <div class="col-xs-12 col-sm-9">
+            {% dropzone "parent-category-page-top" scope="page" %}
+        </div>
+    </div>
+    {% dropzone "parent-category-page-bottom" scope="page" %}
+</div>
+{% endblock body-content %}

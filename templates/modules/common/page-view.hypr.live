@@ -1,0 +1,9 @@
+{# Page View Toggle Block #}
+<div class="ml-grid-view-toggle-container btn-group">
+    <button data-btn-view-toggle type="button" id="gridView" aria-label="{{labels.toggleGridView}}" class="active btn btn-default">
+       <span class="ml-icon-lib ml-icon-th-grid"></span>
+    </button>
+    <button data-btn-view-toggle type="button" id="listView" aria-label="{{labels.toggleListView}}" class="btn btn-default">
+      <span class="ml-icon-lib ml-icon-th-list"></span>
+    </button>
+</div>

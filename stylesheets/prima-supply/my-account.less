@@ -1,0 +1,102 @@
+/*Open Delete after discussion*/
+@media (min-width: 768px) { 
+    .mz-login-model {
+        .modal-dialog {
+            &.login-modal {
+                width: 700px!important;
+            }
+        }
+    }
+}
+/*Close Delete after discussion*/
+.mz-login-model {
+    top: 50px;
+    .modal-content {
+        border-radius: 0;
+        button {
+            &.close {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                z-index: 1;
+            }
+        }
+    }
+    .modal-body {
+        margin-top: 10px;
+        .tab-pane {
+            display: block;
+        }
+        .pull-left,
+        .pull-right {
+            width: 50%;
+        }
+        .pull-left {
+            padding-right: 15px;
+        }
+        .pull-right {
+            border-left: 1px solid #e0e0e0;
+            padding-left: 15px;
+        }
+        .mz-pagetitle {
+            font-size: 22px;
+            margin: 10px 0;
+            text-transform: uppercase;
+        }
+        p {
+            color: #666;
+        }
+        .input-group {
+            margin-bottom: 10px;
+        }
+        .input-group-addon {
+            padding: 10px 15px;
+            font-size: 12px;
+            line-height: 10px;
+            border-radius: 0;
+        }
+        input[type="text"], 
+        input[type="password"],
+        input[type="email"], 
+        input[type="tel"] {
+            border: 1px solid #d4d4d4;
+            margin-bottom: 0px;
+            width: 100%;
+            height: 36px;
+        }
+        .mz-signupform {
+            margin-top: 32px;
+        }
+        .mz-validationmessage {
+            font-size: 12px;
+        }
+        .mz-button {
+            width: 100%;
+            padding: 7px 0;
+            line-height: 20px;
+        }
+        .checkbox {
+            label {
+                text-transform: capitalize;
+            }
+        }
+        .mz-forgot {
+            color: #00adce;
+            text-decoration: underline;
+            &:hover {
+                text-decoration: none;
+            }
+        }
+        .mz-popover-message {
+            margin-top: 10px;
+        }
+    }
+    .modal-footer {
+        p {
+            margin: 6px 0;
+            i {
+                margin-right: 6px;
+            }
+        }
+    }
+}

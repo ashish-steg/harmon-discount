@@ -1,0 +1,61 @@
+﻿<nav class="mz-sitenav collapse" id="ml-nav" aria-label="{{labels.siteNavigation|safe}}">
+    <div class="container">
+      <ul class="mz-sitenav-list" 
+          data-mz-contextify='.mz-sitenav-link[href="{{ navigation.currentNode.url }}"]'
+          data-mz-contextify-attr='class'
+          data-mz-contextify-val='is-current'>
+          <li class="hide" aria-hidden="true">For Blank</li>
+          {% partial_cache %}
+          {% for link in navigation.tree %}
+            {% if not link.isHidden and not link.isEmpty and link.nodeType != "page" %}
+            <li class="mz-sitenav-item">
+              <div class="mz-sitenav-item-inner">
+                <a class="mz-sitenav-link main-link" {% if link.openInNewWindow %}target='_blank'{% endif %} href="{{link.url}}">{{link.name|replace("_", " ")|replace(themeSettings.columnBreaker, "")|safe}}</a>
+                {% if link.items %}
+                <div class="mz-sitenav-sub-container">
+                    <span class="sub-nav-arrow"></span>
+                  <ul class="mz-sitenav-sub">
+                    <li class="hide" aria-hidden="true">For Blank</li>
+                  {% for sublink in link.items %}
+                        {% if not sublink.isHidden and not sublink.isEmpty %}
+                            {%if sublink.name|first == themeSettings.columnBreaker%}
+                                </ul>
+                                <ul class="mz-sitenav-sub">
+                                <li class="hide" aria-hidden="true">For Blank</li>
+                            {%endif%}
+                          <li data-mz-role="sitemenu-item" class="mz-sitenav-item">
+                            <a class="mz-sitenav-link sub-link" {% if link.openInNewWindow %}target='_blank'{% endif %} href="{{sublink.url}}">{{ sublink.name|replace("_", " ")|replace(themeSettings.columnBreaker, "")|safe }}</a>
+                            
+                            {% if sublink.items %}
+                                <ul class="mz-sitenav-sub-sub clearfix">
+                                  {% for subsublink in sublink.items %}
+                                    {% if not subsublink.isHidden and not subsublink.isEmpty %}
+                                    <li class="mz-sitenav-item">
+                                    <a class="mz-sitenav-link sub-sub-link" {% if link.openInNewWindow %}target='_blank'{% endif %} href="{{subsublink.url}}">{{ subsublink.name|replace("_", " ")|replace(themeSettings.columnBreaker, "")|safe }}</a>
+                                    </li>
+                                    {% endif %}
+                                  {% endfor %}
+                                  <li class="hide" aria-hidden="true">For Blank</li>
+                                </ul>
+                            {% endif %}
+                            
+                          </li>
+                        {% endif %}
+                  {% endfor %}
+                  </ul>
+                  <div class="col-xs-12" id="{{link.originalId}}">
+                    {% with "id eq {0}"|string_format(link.originalId) as filter %}
+                      {% include_entities "modules/category-attributes" listFQN=themeSettings.categoryEntityName filter=filter %}
+                    {% endwith %}                    
+                  </div>
+                </div>
+                {% endif %}
+              </div>
+            </li>
+            {% endif %}
+          {% endfor %}
+          {% endpartial_cache %}
+          {% require_script "modules/contextify" %}
+      </ul>
+    </div>
+</nav>

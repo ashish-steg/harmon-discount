@@ -1,0 +1,291 @@
+﻿.mz-location-parent{
+    .mz-pagetitle{
+        font-size: 24px;
+    }
+    .mz-locationlist {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        max-height: 400px;
+        overflow-y: auto;
+        font-family: @fontFamily !important;
+        &.store-detail{
+            max-height: 500px;
+            .dir-btn-container{
+                padding: 5px 5px 5px 0;
+            }
+            .store-details{
+                cursor: text;
+                border-bottom: none;
+            }
+            .mz-locationlisting-locationdetails,.show-store-detail,div[data-marker-id]{
+                cursor: text;
+                padding: 0;
+            }
+        }
+        &::-webkit-scrollbar {
+            -webkit-appearance: none;
+            width: 7px;
+        }
+        &::-webkit-scrollbar-thumb {
+            border-radius: 4px;
+            background-color: rgba(0,0,0,.5);
+            -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
+        }        
+    }
+    .empty-store-container{
+        display: none;
+        &.active{
+            display: block;
+        }
+        .label-nearby-stores{
+            font-size: @fontSize - 1;
+        }
+        .error-success-message-container{
+            p{    
+                color: @errorText;
+            }
+        }
+    }    
+    .search-view-container{
+        display: none;
+        &.active{
+            display: block;
+        }
+        .label-nearby-stores{
+            font-size: @fontSize - 1;
+        }
+        .error-success-message-container{
+            font-size: @fontSize - 1px;
+            .fontsMedium();
+            line-height: 25px;
+            color: @colorGray;
+            margin: 20px 0 12px;
+            border-bottom: 1px solid @colorLighterGray;
+            p{
+                margin: 0;
+            }
+        }
+        .empty-search{
+            color: @errorText;
+        }
+    }
+    .store-search-container{
+        border: 1px solid @colorLightGray;
+        &.has-error{
+            border-color: @errorText;
+        }
+    }
+    .store-image-container{
+        img{
+            float: right;
+            -moz-box-shadow: 0px 0px 6px @colorLighterGray;
+            -webkit-box-shadow: 0px 0px 6px @colorLighterGray;
+            box-shadow: 0px 0px 6px @colorLighterGray;
+            border-radius: 3px;
+        }
+    }
+    #map{
+        height: 535px;
+        width: 100%;
+        margin: 15px 0;
+        .mz-locationlisting-name{
+            text-transform: uppercase;
+        }
+        .mz-addresssummary{
+            cursor:text;
+            margin:0;
+        }
+        .button_primary{
+            outline: 0;
+        }
+    }
+    .search-address-form{
+        margin-top: 20px;
+        .search-address-container{
+            .start-address-label{
+                font-size: @fontSize - 1;
+                margin: 0 0 5px;
+            }
+            input{
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                appearance: none;
+                width: 100%;
+                margin-bottom: 0;
+                outline: 0;
+                border: 1px solid @inputBorder;
+                border-radius: 0;
+                box-shadow: none;
+            }        
+        }
+        .dir-btn-container{
+            padding: 5px 0;            
+        }
+    }    
+    .mz-locationlisting {
+        margin: 0;
+        display: table;
+        width: 100%;
+        cursor: pointer;
+        .mz-locationlisting-locationdetails {
+            vertical-align: middle;
+            display: table-cell;
+            padding: 15px @gutter/2 0 0;
+            width: 160px;
+            h4 {
+                margin: 0 0 @gutter/4;
+                .fontsMedium();
+                font-size: @fontSizeLarger + 2px;
+                color: @colorGray;
+            }
+        }
+        .mz-addresssummary{
+            margin: 10px 0;
+            font-size: @fontSize - 1px;
+            .store-hours-heading{
+                margin: 0;
+            }
+            .store-hours-desc{
+                width: 70px;
+                float: left;
+            }
+        }
+        .social-share-container{
+            font-size: @fontSize - 1px;
+            margin: @defaultGutter 0;
+            cursor: text;            
+            .social-icons-wrapper {
+                margin: 5px 0 0 0;
+                .fb-like-icon {
+                    .fb-like {
+                        &> span {
+                            height: 27px!important;
+                        }
+                    }
+                }
+                .twitter-share-button {
+                    height: 22px!important;
+                }
+                span{
+                    display: inline-block;
+                }
+            }
+        }
+        .store-details{
+            border-bottom: 1px solid @colorLightGray;
+        }
+        .mz-locationlisting-inventory, .mz-locationlisting-distance, .mz-locationlisting-actions {
+            vertical-align: middle;
+            display: table-cell;
+            padding: @gutter/2 @gutter;
+            text-align: right;
+        }
+        .mz-locationlisting-inventorystatus {
+            .fontsBold();
+            text-transform: uppercase;
+            color: @availableText;
+        }
+        &.is-disabled {
+            .opacity(.75);
+            .mz-locationlisting-inventorystatus {
+                color: @unavailableText;
+            }
+        }
+    }
+    //Store Locator Search bar css
+    .stylish-input-group{
+        .input-group-addon{
+            padding: 0;
+            background: transparent;
+            border: none;
+            z-index: 0;
+        }
+        .form-control{
+            border: none;
+            box-shadow: 0 0 0;
+            z-index: 0;
+            padding: 0 @defaultGutter;
+            color: @colorGray;
+        }
+        button{
+            border: 0;
+            background: transparent;
+            font-size: 16px;
+            position: relative;
+            top: 3px;
+            right: 3px;
+            color: @colorOrange;
+        }
+    }
+    //Pagination Styling
+    .pagination-wrapper{
+        margin: 10px 0;
+        height: 10px;
+        #showLessStores,#showMoreStores{
+            color: @colorGray;
+            text-decoration: underline;
+            font-size: @fontSize - 2px;
+        }
+    }
+    .dir-btn-container{
+        padding: @defaultGutter 0;
+        a.btn-success{
+            color: @colorWhite;
+            background: @colorGreen;
+            &:active:focus{
+                background: @colorGreen;
+            }
+        }
+    }
+    //store-locator-overlay
+    .store-locator-overlay{
+        display: none;
+        &.active{
+            position: fixed;
+            top: 0;
+            left: 0;
+            background: @colorGray;
+            opacity: 0.8;
+            z-index: 111;
+            width: 100%;
+            height: 100%;
+            cursor: wait;
+            display: block;
+        }
+        .store-locator-spinner{
+            position: fixed;
+            padding: 15px;
+            margin: 0px;
+            width: 30%;
+            top: 40%;
+            left: 35%;
+            text-align: center;
+            color: @colorWhite;
+            font-size: 60px;
+        }
+    }
+}
+.mz-locationlist {
+    .location-item {
+        &:first-child {
+            .mz-locationlisting {
+                .mz-locationlisting-locationdetails {
+                    padding-top: 0;
+                }
+            }
+        }
+        &:last-child {
+            .mz-locationlisting {
+                margin-bottom: 0;
+                .mz-locationlisting-locationdetails {
+                    padding-bottom: 0;
+                }
+                .store-details {
+                    border-bottom: 0;
+                }
+            }
+        }
+    }
+}

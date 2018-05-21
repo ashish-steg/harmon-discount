@@ -1,0 +1,77 @@
+﻿@fontFamily:            {{ themeSettings.primaryFont }}, sans-serif;
+@fontSize:              {{ themeSettings.fontSize }};
+@fontSizeSmall:         @fontSize - 2px;
+@fontSizeLarger:        @fontSize + 2px;
+@fontSizeLarge:         @fontSize + 6px;
+@storeBrandingFontSize: 36px;
+
+@textColor: #495363;
+@linkColor: #d15f2a;
+@linkHoverColor: @textColor;
+@linkVisitedColor: @textColor;
+@errorText: #b94a48;
+@errorBackground: #FFFFFF;
+@warningText: @textColor;
+@warningBackground: #ffefcf;
+@successText: @textColor;
+@successBackground: #eef2ee;
+
+@availableText: #237e0e;
+@unavailableText: #ae1231;
+
+@bodyBackgroundColor: {{ themeSettings.bodyBackgroundColor }};
+
+@errorBorder: darken(spin(@errorBackground, -10), 3%);
+@successBorder: darken(spin(@successBackground, -10), 3%);
+@warningBorder: darken(spin(@warningBackground, -10), 3%);
+
+@errorIcon: "../resources/images/error-exclamation.png";
+@columnWidth-2col: 435px;
+@gutter: {{themeSettings.gutterWidth}};
+@inputBorder: #495363;
+
+@defaultTileHeight: 250px;
+@defaultTileWidth: 250px;
+@productTileHeight: 360px;
+@productTileWidth: @defaultTileWidth;
+@addressTileHeight: 220px;
+@addressTileWidth: @defaultTileWidth;
+@productImagesContainerWidth: {{ themeSettings.productImagesContainerWidth }}px;
+@orderDetailWidth: 200px;
+@itemListingThumbSize: {{ themeSettings.itemListingThumbSize }};
+@itemListingThumbSizePX: {{ themeSettings.itemListingThumbSize }}px;
+@productListingThumbSize: {{ themeSettings.listProductThumbSize }}px;
+
+/* Colors */
+@primaryColor: #002C50;
+@secondaryColor: #0EB1C9;
+@navBorder: #48708a;
+@colorWhite: #FFFFFF;
+@colorGray: #333333; 
+@colorMediumGray: #666666;
+@colorLighterGray: #9E9E9E;
+@colorLightGray: #E1E1E1;
+@colorOrange: #FFB540;
+@colorGreen: #7AB332;
+@defaultGutter: @gutter;
+@mobileRowHeight: 50px;
+@colorDarkGray: #393939;
+@facetColorBox: 50px;
+
+@gray-dark: lighten(#000, 20%);   // #333
+@white: #ffffff;
+
+
+/**** Custom Variables ****/
+@baseBlueColor: #495363;
+@cartColor: #d05f2a; 
+@headingTwoFontSize: 24px;
+@headingTwoColor: #00adce; 
+@dropzoneMargin: 70px;
+@primaryColor: #002C50;
+@textColorWhite: #fff;
+@buttonBgColor: #d15f2a;
+@blueBgButton: #00adce; 
+@defaultBorderColor: #d4d4d4;
+@learningCenterTextColor: #666;
+@listItemColor: #00adce; 

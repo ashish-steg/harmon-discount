@@ -1,0 +1,43 @@
+<div class="associate-login">
+    <h1 class="mz-pagetitle">{{themeSettings.associateLogin}}</h1>
+</div>
+<div class="mz-loginform mz-loginform-page" id="associate-login-form">
+   <div class="mz-l-formfieldgroup">
+        <div class="mz-l-formfieldgroup-row">
+            <div class="mz-l-formfieldgroup-cell">
+                <label for="associate-id">ASSOCIATE ID</label>
+            </div>
+            <div class="mz-l-formfieldgroup-cell">
+                <input name="associate-id" type="text" id="associate-id" maxlength="5" data-mz-value="associate-id">
+            </div>
+        </div>
+        <div class="mz-l-formfieldgroup-row">
+            <div class="mz-l-formfieldgroup-cell">
+            </div>
+            <div class="mz-l-formfieldgroup-cell">
+        <div class="mz-validationmessage" data-mz-validationmessage-for="associate-id"></div>
+        </div>
+        </div>
+        <div class="mz-l-formfieldgroup-row">
+            <div class="mz-l-formfieldgroup-cell">
+                <label for="store-no">STORE NUMBER</label>
+            </div>
+            <div class="mz-l-formfieldgroup-cell">
+                <input name="store-no" type="text" id="store-no" maxlength="3" data-mz-value="store-no">
+            </div>
+        </div>     
+        <div class="mz-l-formfieldgroup-row">
+            <div class="mz-l-formfieldgroup-cell">
+            </div>
+            <div class="mz-l-formfieldgroup-cell">        
+        <div class="mz-validationmessage" data-mz-validationmessage-for="store-no"></div>
+        </div>
+        </div>
+        <div class="mz-l-formfieldgroup-row">
+            <div class="mz-l-formfieldgroup-cell"></div>
+            <div class="mz-l-formfieldgroup-cell">
+                <button class="mz-button mz-button-large mz-login-button button_primary button_width pull-left" id="mz-aos-detail" data-mz-action="associateSignup()">SIGN IN</button>
+            </div>
+        </div>
+    </div>
+</div>

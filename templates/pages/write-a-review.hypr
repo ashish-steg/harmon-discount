@@ -1,0 +1,21 @@
+{% extends "page" %}
+{% block body-content %}
+
+{% block breadcrumbs %}{% endblock breadcrumbs %}
+<script type="text/javascript" src="//ui.powerreviews.com/stable/4.0/ui.js"></script>
+<div id="pr-write"></div>
+
+<script>
+  POWERREVIEWS.display.render({
+    api_key: '{{ pageContext.query.pr_api_key }}',
+    locale: '{{ pageContext.query.locale }}',
+    merchant_group_id: '{{ pageContext.query.pr_merchant_group_id }}',
+    merchant_id: '{{ pageContext.query.pr_merchant_id }}',
+    return_url : '{{pageContext.query.pr_returnUrl}}',
+    components: {
+      Write: 'pr-write'
+    }
+  });
+</script>
+
+{% endblock body-content %}

@@ -1,0 +1,31 @@
+<div class="mz-home-page-video">
+    <div class="image-video-wrapper text-center">
+        <div class="mz-alltext">
+            <div class="mz-title">{{ Model.config.homepagevideotitle }}</div>
+            <div class="mz-subtitle">{{ Model.config.homepagevideosubtitle }}</div>
+            <div class="mz-view-video">
+                <span id="play-video">{{ labels.viewVideo }}</span>
+            </div>
+        </div>
+        <div class="mz-img">
+            <img src="{{Model.config.homepagevideoimageurl.0.url}}?max=400"
+                data-srcset="{{Model.config.homepagevideoimageurl.0.url}}?max={width}"
+                data-sizes="auto"
+                data-absurl="false"
+                data-optimumx="2" 
+                data-quality="75"
+                data-widths="[160, 320, 375, 414, 480, 640, 800, 960, 1280, 1349, 1536, 1920, 2560, 5500]"
+                class="lazyload"
+            >
+        </div>
+	</div>
+	<div class="video-contaier hidden">
+        <iframe id="thevideo" class="mz-iframe" frameborder="0"  allowfullscreen src="{{ Model.config.homepageviewvideo }}?enablejsapi=1&version=3&playerapiid=ytplayer""></iframe>
+        <p class="close-video">
+            <a id="stop" href="#" onclick="javascript:return false;">X</a>
+        </p>
+    </div>
+</div>
+
+{% require_script "pages/homepage" %} 
+

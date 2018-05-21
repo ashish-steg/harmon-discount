@@ -1,0 +1,5 @@
+﻿<div class="mz-payment-options">
+    <h4>{{ labels.paymentOptions}}</h4>
+    <img src="/../resources/images/footer-images/payment-options.png" alt="payment-options">
+    <p>{{ labels.paymenOptionsDesc }}</p>
+</div>

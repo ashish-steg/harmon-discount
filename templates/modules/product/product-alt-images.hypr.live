@@ -1,0 +1,13 @@
+{% if model.content.productImages.length > 1 %}
+<figure class="mz-productimages-thumbs" data-length="{{model.content.productImages.length}}">
+    <ul{% if model.content.productImages.length > 4 %} id="productpager-Carousel"{% endif %} class="products_list ">
+    {% for image in model.content.productImages %}
+      	<li data-mz-productimage-thumb="{{ image.sequence }}" data-label="{{image.imageLabel}}">
+        	<a class="mz-productimages-thumb" data-slide-index="{{ forloop.index0 }}" href="">
+                {% include "modules/product/product-image" with productImage=image productAltText=image.altText productMaxWidth=themeSettings.maxProductImageThumbnailSize productImageClass="mz-productimages-thumbimage" isThumb="true" as_parameter %}
+      		</a><br>
+    	</li>
+    {% endfor %}
+    </ul>
+</figure>
+{% endif %}

@@ -1,0 +1,26 @@
+<div class="mz-productdetail-shortdesc mz-l-stack-section">
+  <span itemscope="description" itemprop="description">{{ model.content.productShortDescription|safe }}</span>
+</div>
+<div class="stock-info"></div>
+<div class="col-xs-12 mz-reset-padding-left">
+    <div class="col-xs-12 email-popup">
+      {% dropzone "email-notification" scope="template" %}
+    </div>
+</div>
+{% include "modules/product/product-validation" %}
+{% if model.inventoryInfo.onlineStockAvailable > 0 and model.inventoryInfo.onlineStockAvailable <= model.minimumQuantityForInStockQuantityMessage %}
+<div class="col-xs-12 col-sm-12">
+    <div class="mz-validationmessage out-of-stock-message" data-mz-validationmessage-for="quantity">
+      *Only {{model.inventoryInfo.onlineStockAvailable}} left in stock.
+    </div>
+</div>
+{% endif %}
+<section class="mz-l-stack-section mz-productdetail-conversion row">
+    <div class="mz-productdetail-conversion-buttons col-xs-12">
+      <div class="col-xs-12 add-to-cart-container">
+        <button id="add-to-cart" class="mz-productdetail-addtocart font-large button_primary pull-right{% if not model.purchasableState.isPurchasable %} button_disabled{% endif %}" data-mz-action="addToCart" >
+            {{ labels.addToCart }}
+        </button>
+      </div>
+    </div>
+</section>

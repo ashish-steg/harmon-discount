@@ -1,0 +1,68 @@
+﻿<div class="mz-messagebar" data-mz-message-bar>
+    {% if model.length > 0 %}
+        {% for msg in model %}
+            {% if msg.messageType %}
+                {% if msg.messageType == "exclusivePricelist" %}
+                    <ul class="is-showing mz-infos">
+                        <li class="mz-message-item" >{{ labels|prop(msg.messageType) }}</li>
+                        <ul>
+                            {% for itemsRemoved in msg.productsRemoved %}
+                            <li class="mz-message-item">{{itemsRemoved.name}} ({% if itemsRemoved.variationProductCode %}{{itemsRemoved.variationProductCode}}{%else%}{{itemsRemoved.productCode}}{%endif%})</li>
+                            {% endfor %}
+                        </ul>
+                    </ul>
+                {% endif %}
+                {% if msg.messageType == "newPricelist" %}
+                        <ul class="is-showing mz-success">
+                            <li class="mz-message-item" >{{ labels|prop(msg.messageType) }}</li>
+                        </ul>
+                 {% endif %}
+                 {% if msg.messageType == "returnSuccess" %}
+                        <ul class="is-showing mz-success">
+                            <li class="mz-message-item" >{{ labels|prop(msg.messageType) }}</li>
+                        </ul>
+                 {% endif %}
+                 {% if msg.messageType == "returnFailure" %}
+                        <ul class="is-showing mz-success">
+                            <li class="mz-message-item" >{{ labels|prop(msg.messageType) }}</li>
+                        </ul>
+                 {% endif %}
+                 {% if msg.messageType == "noReturnableItems" %}
+                        <ul class="is-showing mz-infos">
+                            <li class="mz-message-item" >{{ labels|prop(msg.messageType) }}</li>
+                        </ul>
+                 {% endif %}
+                 {% if msg.messageType == "success" %}
+                        <ul class="is-showing mz-success">
+                            <li class="mz-message-item" >{{ msg.message|safe }}</li>
+                        </ul>
+                 {% endif %}
+            {% else %}
+                <ul class="is-showing mz-errors">
+                    {% if msg.message == 'Missing or invalid parameter: password Password must be different from the previous 4 utilized passwords.' %}
+                        <li class="mz-message-item">Password must be different from the previous 4 utilized passwords.</li>
+                    {% else %}
+                        {% if msg.message == 'Missing or invalid parameter: OldPassword ' %}
+                            <li class="mz-message-item">{{ labels.invalidOldPassword }}</li>
+                        {% else %}
+                            {% if msg.message.indexOf('Validation Error: The following items have limited quantity or are out of stock') == 0 %}
+                                <li class="mz-message-item">{{msg.message|replace('Validation Error: The following items have limited quantity or are out of stock:','')|replace('.','')}} {{labels.outOfStockError}}</li>
+                            {% else %}
+                                {% if msg.message.indexOf('quantity cannot be null or empty') == 0 or msg.message.indexOf('quantity must be a positive number') == 0 or msg.message.indexOf("Validation Failure: PropertyName: 'quantity'") == 0 %}
+                                    <li class="mz-message-item">{{labels.quantityError}}</li>
+                                {% else %}
+                                    {% if msg.message.indexOf('Adding coupon failed for the following reason:') == 0 %}
+                                        <li class="mz-message-item">{{labels.couponCodeError}}</li>
+                                    {% else %}
+                                        <li class="mz-message-item">{{ msg.message|safe }}</li>
+                                    {% endif %}
+                                {% endif %}
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                    <!-- <li class="mz-message-item" >{{ msg.message }}</li> -->
+                </ul>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+</div>

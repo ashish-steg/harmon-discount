@@ -1,0 +1,143 @@
+{% with paymentId|default(0) as paymentId %}
+<div class="mz-l-formfieldgroup mz-paymentselector">
+    {% if siteContext.checkoutSettings.purchaseOrder.isEnabled and model.purchaseOrder.isEnabled %}
+    <div class="mz-l-formfieldgroup-row mz-paymentselector-option mz-paymentselector-newcreditcard mz-checkoutform {% if model.paymentType == "PurchaseOrder" %}mz-checkoutform-active{% endif %}">
+        <div class="mz-l-formfieldgroup-row">
+            <div class="mz-l-formfieldgroup-cell">
+                <input data-mz-value="paymentType" data-mz-purchase-order data-mz-payment-type id="paymentType-purchase-order-{{ paymentId }}" name="paymentType" type="radio" class="mz-paymenttype-input" value="PurchaseOrder" {% if model.paymentType == "PurchaseOrder" %}checked="true"{% endif %} />
+            </div>
+            <div class="mz-l-formfieldgroup-cell">
+                <label class="mz-paymentselector-label mz-paymentselector-label-purchaseorder mz-checkoutform-radio" for="paymentType-purchase-order-{{ paymentId }}">{{ labels.purchaseOrder }}</label>
+            </div>
+        </div>
+        {% if model.paymentType == "PurchaseOrder" %}
+        {% include "modules/checkout/billing-purchase-order-form" with model=model.purchaseOrder %}
+        <div class = "mz-l-stack-section">
+            <h4 class="mz-checkoutform-title">{{ labels.billingAddress }}</h4>
+            {% include "modules/checkout/billing-address-purchase-order-selector" %}
+        </div>
+        {% endif %}
+    </div>
+    {% endif %}
+    <div class="mz-l-formfieldgroup-row mz-paymentselector-option mz-paymentselector-newcreditcard mz-checkoutform {% if model.paymentType == "CreditCard" and not model.usingSavedCard %}mz-checkoutform-active{% endif %}">
+        <div class="mz-l-formfieldgroup-row">
+            <div class="mz-l-formfieldgroup-cell">
+                <input data-mz-value="paymentType" data-mz-new-credit-card data-mz-payment-type id="paymentType-newcreditcard-{{ paymentId }}" name="paymentType" type="radio" class="mz-paymenttype-input pull-left" value="CreditCard" {% if model.paymentType == "CreditCard" and not model.usingSavedCard %}checked="true"{% endif %} />
+            </div>
+            <div class="mz-l-formfieldgroup-cell">
+                <label class="mz-paymentselector-label mz-paymentselector-label-newcreditcard mz-checkoutform-radio" for="paymentType-newcreditcard-{{ paymentId }}">{% if model.savedPaymentMethods %}{{ labels.newCreditCard }}{% else %}{{ labels.creditCard }}{% endif %}</label>
+            </div>
+        </div>
+        {% if model.paymentType == "CreditCard" and not model.usingSavedCard %}
+        {% include "modules/checkout/billing-credit-card-form" with model=model.card %}
+        <div class="mz-l-stack-section">
+            <h4 class="mz-checkoutform-title">{{ labels.billingAddress }}</h4>
+            {% include "modules/checkout/billing-address-selector" %}
+        </div>
+        {% endif %}
+    </div>
+    {% if model.savedPaymentMethods %}
+        <div class="mz-l-formfieldgroup-row mz-paymentselector-option mz-paymentselector-savedcreditcard mz-checkoutform {% if model.paymentType == "CreditCard" and model.usingSavedCard %}mz-checkoutform-active{% endif %}">
+            <div class="mz-l-formfieldgroup-row">
+                <div class="mz-l-formfieldgroup-cell">
+                    <input data-mz-value="paymentType" data-mz-saved-credit-card data-mz-payment-type id="paymentType-savedcreditcard-{{ paymentId }}" name="paymentType" type="radio" class="mz-paymenttype-input pull-left" value="CreditCard" {% if model.paymentType == "CreditCard" and model.usingSavedCard %}checked="checked"{% endif %} />                
+                    <label class="mz-paymentselector-label mz-paymentselector-label-savedcreditcard mz-checkoutform-radio" for="paymentType-savedcreditcard-{{ paymentId }}">{{ labels.savedCreditCard }}</label>
+                    <select aria-label="{{labels.savedPaymentMethods}}" {% if not model.usingSavedCard %}disabled="true"{% endif %} name="savedPaymentMethods" class="mz-payment-select-saved-payments" data-mz-value="savedPaymentMethodId">
+				        <option selected="selected" value="">{{ labels.selectSavedCreditCard }}</option>
+                        {% for card in model.savedPaymentMethods %}
+                        <option value="{{ card.id }}" {% if model.savedPaymentMethodId == card.id %} selected="selected" {% endif %}>{{ card.cardType }} {{ card.cardNumberPartOrMask }} {{ labels.expires }} {{ card.expireMonth }}/{{ card.expireYear }}</option>
+                        {% endfor %}
+                    </select>
+                    <span class="mz-validationmessage" data-mz-validationmessage-for="savedPaymentMethodId"></span>
+                {% if model.paymentType == "CreditCard" and model.usingSavedCard %}
+                    {% if not themeSettings.isCvvSuppressed %}
+                    <div class="mz-paymentselector-reenter-cvv">
+                        <div class="mz-l-formfieldgroup-cell">
+                            <label for="mz-payment-security-code-{{ paymentId }}" class="mz-paymentselector-label">{{ labels.securityCode }} <span class="is-required">*</span></label>
+                        </div>
+                        <div class="mz-l-formfieldgroup-cell">
+                            <input type="tel" {% if not model.usingSavedCard %}disabled="true"{% endif %} data-mz-saved-cvv name="security-code" id="mz-payment-security-code-{{ paymentId }}" class="mz-l-formfieldgroup-halfsize" data-mz-value="card.cvv" value="{{ model.card.cvv }}" autocomplete="off" maxlength="{{themeSettings.paymentSecurityCodeLength}}"/>
+                            <span class="mz-validationmessage" data-mz-validationmessage-for="card.cvv"></span>
+                        </div>                                               
+                    </div>
+                    {% endif %}
+                {% endif %}
+                </div>
+                {% if model.paymentType == "CreditCard" and model.usingSavedCard and model.savedPaymentMethodId %}
+                <div class="mz-l-stack-section">
+                    <h4 class="mz-checkoutform-title">{{ labels.billingAddress }}</h4>
+                    {% include "modules/checkout/billing-address-selector" %}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    {% endif %}
+    {% if siteContext.checkoutSettings.payByMail %}
+    <div class="mz-l-formfieldgroup-row mz-paymentselector-option mz-paymentselector-check mz-checkoutform {% if model.paymentType == "Check" %}mz-checkoutform-active{% endif %}">
+        <div class="mz-l-formfieldgroup-row">
+            <div class="mz-l-formfieldgroup-cell">
+                <input data-mz-value="paymentType" data-mz-check data-mz-payment-type id="paymentType-check-{{ paymentId }}" name="paymentType" type="radio" class="mz-paymenttype-input pull-left" value="Check" {% if model.paymentType == "Check" %}checked="checked"{% endif %} />            
+                <label class="mz-paymentselector-label mz-paymentselector-label-check mz-checkoutform-radio" for="paymentType-check-{{ paymentId }}">{{ labels.checkByMail }}</label>
+            </div>
+        </div>
+        {% if model.paymentType == "Check" %}
+        {% include "modules/checkout/checking-account-form" %}
+        <div class="mz-l-stack-section">
+            <h4 class="mz-checkoutform-title">{{ labels.billingAddress }}</h4>
+            {% include "modules/checkout/billing-address-selector" %}
+        </div>
+        {% endif %}
+    </div>
+    {% endif %}
+    {% for externalPayment in siteContext.checkoutSettings.externalPaymentWorkflowSettings %}
+		{% if externalPayment.isEnabled %}
+            {% with externalPayment.name|lower as name %}
+                <div class="mz-l-formfieldgroup-row mz-paymentselector-externalworkflows">
+                    <div class="mz-l-formfieldgroup-cell text-center margin-bottom-15">
+                    {% if name == "visacheckout"%}
+                        <div class="mz-digitalwallets">
+                            <img alt="Visa Checkout" class="v-button" role="button"
+                            src="{{pageContext.visaCheckoutButtonUrl}}?size=154&amp;color=neutral"/>
+                        </div>
+                    {% endif %}
+                    {% if name == "GSIPaypal" %}
+                        <img id="btn_xpressPaypal" class="p-button {{externalPayment.namespace}}" alt="Check out with PayPal" role="button" src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/checkout-logo-medium.png" width="170" height="32">
+                    {%endif%}
+                    </div>
+                </div>
+            {% endwith %}
+		{% endif %}
+        {% if externalPayment.isEnabled and externalPayment.name == "GSIPaypal" %}
+            <div class="mz-l-formfieldgroup-row mz-paypal-padding">
+                <div class="mz-paymentselector-label-separator">&ndash; {{ labels.or }} &ndash;</div>
+            </div>
+            <div class="mz-l-formfieldgroup-row">
+                <div class="mz-l-formfieldgroup-cell">
+                    <input data-mz-value="paymentType" data-mz-paypal data-mz-payment-type id="paymentType-paypal-{{ paymentId }}" name="paymentType" type="radio" class="mz-paymenttype-input pull-left" value="GSIPaypal" {% if model.paymentType == "GSIPaypal" %}checked="checked"{% endif %}>
+                    <label class="mz-paymentselector-label mz-paymentselector-label-paypal mz-checkoutform-radio" for="paymentType-paypal-{{ paymentId }}">{{ labels.checkoutPaypal }}</label>
+                </div>
+            </div>
+            {% if model.paymentType == "GSIPaypal" %}
+                <div class="mz-l-stack-section mz-paypal-padding">
+                    <a href="#" onclick="javascript:window.open('https://www.paypal.com/cgi-bin/webscr?cmd=xpt/Marketing/popup/OLCWhatIsPayPal-outside','olcwhatispaypal','toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=400, height=350');">
+                        <img id="" alt="Check out with PayPal" src="/resources/images/PayPal_mark_50x34.gif">
+                    </a>
+                    <span class="paypal-checkout-link" onclick="javascript:window.open('https://www.paypal.com/cgi-bin/webscr?cmd=xpt/Marketing/popup/OLCWhatIsPayPal-outside','olcwhatispaypal','toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=400, height=350');">What is PayPal?</span>                    
+                </div>
+                 <div class="mz-l-stack-section">
+                    <h4 class="mz-checkoutform-title">{{ labels.billingAddress }}</h4>
+                    {% include "modules/checkout/billing-address-selector" %}
+                </div>
+            {% endif %}
+        {%endif%}
+    {%endfor%}
+    <div class="mz-l-formfieldgroup-row mz-paymentselector-validation">
+        <div class="mz-formfieldgroup-cell">
+        </div>
+        <div class="mz-formfieldgroup-cell">
+            <span class="mz-validationmessage" data-mz-validationmessage-for="paymentType"></span>
+        </div>
+    </div>
+</div>
+
+{% endwith %}

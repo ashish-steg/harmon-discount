@@ -1,0 +1,82 @@
+.home-trending-now {
+    margin: 1.922rem 2rem;
+    @media (min-width: 1500px) {
+        .mz-cms-row .mz-cms-col-2-12 {
+            width: 16.666%;
+        }
+    }
+    .trendTitle {
+        text-align: center;
+        margin: 0 0 1.428rem 0;
+        .titleHead {
+            .roboto-thin;
+            font-size: 2rem;
+            color: @masala;
+        }
+        .border-bottm {
+            display: block; 
+            width: 2rem; 
+            border: 2px solid #fa451c; 
+            margin: 0.6rem auto;
+        }
+    }
+    #mz-drop-zone-home-trend-now {
+        .trendBlock {
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            width: 95%;
+            margin: 0 auto;
+            @media screen and (max-width: 768px) {
+                width: 100%;
+            }
+        }
+    }
+    .sliderTrendTab #mz-drop-zone-home-trend-now, .sliderTrend #mz-drop-zone-home-trend-now {
+        .mz-cms-col-2-12 {
+            width: 100%;
+        }
+    }
+    .trend-image {
+        img {
+            display: block;
+            height: auto;
+            width: 100%;
+        }
+    }
+    .trend-name {
+        margin: 0.714rem 0.571rem 0.357rem 0.571rem;
+        font-size: 1.3rem;
+        text-align: left;
+        width: auto;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .trend-desc {
+        margin: 0 0.571rem 0 0.571rem;
+        font-size: 0.7rem;
+        height: 3rem;
+        text-align: left;
+    }
+    .trendLink {
+        display: block;
+        background-color: @table-bg-accent;
+        .orangeArrow {
+            background-color: #ff4200;
+            display: block;
+            width: 2rem;
+            height: 2rem;
+            position: relative;
+            float: right;
+            span {
+                text-align: center;
+                display: block;
+                vertical-align: middle;
+                position: relative;
+                top: 4px;
+            }
+        }
+        .clear {
+            clear: both;
+        }
+    }
+}

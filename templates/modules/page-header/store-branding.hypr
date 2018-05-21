@@ -1,0 +1,4 @@
+﻿<a class="logo" href="/" title="{{ siteContext.generalSettings.websiteName }}">
+    <span class="hide">{{ siteContext.generalSettings.websiteName }}</span>
+    <img class="print-only" src="/{{ themeSettings.primaSupplylogo }}" alt="{{ siteContext.generalSettings.websiteName }}">
+</a>

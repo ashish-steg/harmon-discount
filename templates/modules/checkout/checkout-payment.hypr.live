@@ -1,0 +1,82 @@
+﻿<div class="mz-checkout-payment">
+    <h3 class="mz-checkout-paymenttitle"><strong>{% if model.amountCollected > 0 %}{{ model.amountCollected|currency }}{% else %}{{ model.amountRequested|currency }}{% endif %}</strong> &mdash; {% if model.billingInfo.paymentType == "Check" %}{{ labels.checkByMail }} {% endif %}{% if model.billingInfo.paymentType == "CreditCard" %}{{ labels.creditCard }}{% endif %}{% if model.billingInfo.paymentType == "StoreCredit" or model.billingInfo.paymentType == "GiftCard" %}{{ labels.digitalCredit }}{% endif %}</h3>
+    <dl class="mz-propertylist">
+        {% if model.billingInfo.billingContact.email %}
+        <dt>{{ labels.billingEmail }}</dt>
+        <dd class="mobile-text-overflow">{{ model.billingInfo.billingContact.email }}</dd>
+        {% endif %}
+    {% if model.billingInfo.paymentType == "StoreCredit" or model.billingInfo.paymentType == "GiftCard" or  model.billingInfo.paymentType|lower == "gsipaypal"%}
+        <dt>Payment Method</dt>
+        {% if model.billingInfo.paymentType|lower == "gsipaypal" %}
+            <dd>
+                <img alt="PayPal" src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/PP_logo_h_100x26.png" align="left" width="100px" height="26px" style="margin-right:7px;">
+            </dd>
+        {% else %}
+            <dt>{{ labels.digitalCreditCode }}</dt>
+            <dd>{{ model.billingInfo.storeCreditCode }}</dd>
+        {%endif%}
+        {% else %}
+        <dt>{{ labels.billingName }}</dt>
+        <dd>{{ model.billingInfo.billingContact.firstName }} {{ model.billingInfo.billingContact.lastNameOrSurname }}</dd>
+        <dt>{{ labels.billingAddress }}</dt>
+        <dd class="mz-addresssummary">
+        {% include "modules/common/address-summary" with model=model.billingInfo.billingContact %}
+        </dd>
+        {% endif %}                    
+    </dl>
+    {%comment%}
+    {% if model.status != "Voided" %}
+    <div class="mz-propertylist">
+        <div>
+            {% if model.paymentType == "CreditCard" %}
+            <!--Type Column-->
+            <div>
+                <dt>Type</dt>
+                <dd>{{ model.billingInfo.card.paymentOrCardType }}</dd>
+            </div>
+            <!--End Type Column-->
+            <!--Info-->
+            <div>
+                <dt>Card Number</dt>
+                <dd>{{ model.billingInfo.card.cardNumberPartOrMask }}</dd>
+            </div>
+            <!--End Info Column-->                         
+            {% else %}
+            <!--Type Column-->
+                {% if model.paymentType == "Check" %}
+                <div>
+                    <dt>Check</dt>
+            <!--End Type Column-->
+            <!--Info Column-->
+                    {% if model.interactions %}
+                    <dd>
+                    {% for interaction in model.interactions %}
+                        {% if interaction.interactionType == "Captured" %}{% endif %}
+                    {% endfor %}
+                    </dd>
+                    {%endif%}
+            <!--End Info Column-->
+            <!--Exp Date Column-->
+                    <dd>N/A</dd>
+                    </div>
+            <!--End Exp Date Column-->
+                {% endif %}
+                {% if model.paymentType == "StoreCredit" %}
+            <!--Type Column-->
+                <div>
+                    <dt>Gift Card/Store Credit</dt>
+            <!--End Type Column-->
+            <!--Info Column-->
+                    <dd>{{ model.billingInfo.storeCreditCode }}</dd>
+            <!--End Info Column-->
+            <!--Exp Date Column-->
+                    <dd>N/A</dd>
+                </div>
+            <!--End Exp Date Column-->
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+    {% endif %}
+    {%endcomment%}
+</div>

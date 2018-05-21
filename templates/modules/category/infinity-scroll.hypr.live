@@ -1,0 +1,7 @@
+{% if model.products %}
+<div class="mz-productlist mz-productlist-tiled clear">
+    <ul class="mz-productlist-list ml-list-view-toggle grid-view mz-l-tiles" id="more-product-list">
+    </ul>
+    <div id="loaderIcon"></div>
+</div>
+{% endif %}

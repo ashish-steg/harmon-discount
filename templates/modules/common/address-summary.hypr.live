@@ -1,0 +1,75 @@
+﻿    <div>{{ model.firstName }} {{ model.lastNameOrSurname }}</div>
+    <div>{{ model.address.address1 }}</div>
+    {% if model.address.address2 %}
+        <div>{{ model.address.address2 }}</div>
+    {% endif %}
+    {% if model.address.address3 %}
+        <div>{{ model.address.address3 }}</div>
+    {% endif %}
+    {% if model.address.address4 %}
+        <div>{{ model.address.address4 }}</div>
+    {% endif %}
+    <div>{{ model.address.cityOrTown }} {{ model.address.stateOrProvince }} {{ model.address.postalOrZipCode }}</div>
+    <div>{{ model.address.countryCode }}</div>
+    {% if model.phone %}<div>{{model.phone}}</div>{% endif %}
+    {% if model.address.addressType=="Commercial" %}<div>{{ model.phoneNumbers.home }} (office)</div>{% endif %}
+    {% if model.address.addressType=="Residential" %}<div>{{ model.phoneNumbers.home }} (home)</div>{% endif %}
+    {% if model.regularHours %}
+        <br>
+        {% if model.regularHours.monday.label!="" or model.regularHours.tuesday.label!="" or model.regularHours.wednesday.label!="" or model.regularHours.thursday.label!="" or model.regularHours.friday.label!="" or model.regularHours.saturday.label!="" or model.regularHours.sunday.label!="" %}
+        <h5 class="store-hours-heading">{{ labels.storeHours }}</h5>
+        {% endif %}
+        {% with model.regularHours.monday.label|replace("~", "-") as groupDay %}
+            {% if groupDay != model.regularHours.monday.label %}
+                {% if model.regularHours.monday.label !== ""%}        
+                    <div>
+                        <div class="store-hours-desc">{{ labels.monday }}-{{ labels.saturday }}</div> 
+                        <div>{{ model.regularHours.monday.label|replace("~", "-") }}</div>
+                    </div>
+                {% endif %}
+            {% else %}
+                {% if model.regularHours.monday.label !== ""%}        
+                    <div>
+                        <div class="store-hours-desc">{{ labels.monday }} </div> 
+                        <div>{{ model.regularHours.monday.label }}</div>
+                    </div>        
+                {% endif %}
+                {% if model.regularHours.tuesday.label !== ""%}        
+                    <div>
+                        <div class="store-hours-desc">{{ labels.tuesday }}</div> 
+                        <div>{{ model.regularHours.tuesday.label }}</div>
+                    </div>        
+                {% endif %}
+                {% if model.regularHours.wednesday.label !== ""%}        
+                    <div>
+                        <div class="store-hours-desc">{{ labels.wednesday }}</div> 
+                        <div>{{ model.regularHours.wednesday.label }}</div>
+                    </div>        
+                {% endif %}
+                {% if model.regularHours.thusday.label !== ""%}        
+                    <div>
+                        <div class="store-hours-desc">{{ labels.thusday }}</div> 
+                        <div>{{ model.regularHours.thusday.label }}</div>
+                    </div>        
+                {% endif %}
+                {% if model.regularHours.friday.label !== ""%}        
+                    <div>
+                        <div class="store-hours-desc">{{ labels.friday }}</div> 
+                        <div>{{ model.regularHours.friday.label }}</div>
+                    </div>        
+                {% endif %}
+                {% if model.regularHours.saturday.label !== ""%}        
+                    <div>
+                        <div class="store-hours-desc">{{ labels.saturday }}</div> 
+                        <div>{{ model.regularHours.saturday.label }}</div>
+                    </div>        
+                {% endif %}
+            {% endif %}
+        {% endwith %}
+        {% if model.regularHours.sunday.label !== ""%}
+            <div>
+                <div class="store-hours-desc">{{ labels.sunday }}</div> 
+                <div>{{ model.regularHours.sunday.label }}</div>
+            </div>        
+        {% endif %}
+    {% endif %}

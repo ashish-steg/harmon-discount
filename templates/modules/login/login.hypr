@@ -1,0 +1,70 @@
+<!-- Modal -->
+<div class="modal fade mz-login-model" id="liteRegistrationModal" >
+    <div class="modal-dialog login-modal" role="document">
+        <div class="modal-content">
+            <button type="button" class="close" data-dismiss="modal"><i class="fa fa-times"></i></button>                 
+            <div class="modal-body clearfix">
+                <div class="tab-content">
+                    <div class="tab-pane pull-left" id="login">
+                        <h3 class="mz-pagetitle">{{ labels.logIn }}</h3>
+                        <p>{{ labels.logInMsg }}.</p>
+                        <form name="login" onsubmit="return false" novalidate>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                                <input type="email" class="form-control" data-mz-login-email placeholder="{{ labels.emailAddress }}" id="email">
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                <input type="password" class="form-control"  data-mz-login-password id="password" placeholder="{{ labels.password }}">
+                            </div>
+                            <span data-mz-role="popover-message" class="popover-message">
+                                <span class="hide">For Error Message</span>
+                            </span>
+                            <div class="input-group">
+                                <a href="/user/forgotpassword" class="mz-forgot">{{ labels.liteRegForgotPasswordLabel }}</a>
+                            </div>
+
+                            <button class="mz-button mz-button-large mz-login-button" id="login-submit" type="submit" data-mz-action="doLogin">{{ labels.logIn }}</button> 
+                            <input type="hidden" class="hidden-return" name="returnUrl" id="returnUrl" value="" />  
+                            <script type="text/javascript">document.getElementById('returnUrl').value = window.location.href;</script>
+                        </form>
+                    </div>  
+                    <div class="tab-pane pull-right" id="newshopper">
+                        <h3 class="mz-pagetitle">{{ labels.signUp }}</h3>
+                        <p>{{ labels.signUpMsg }}.</p>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                            <input type="email" id="newemail" class="form-control" data-mz-signup-emailaddress placeholder="{{ labels.emailAddress }}">
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                            <input type="password" id="newpassword" class="form-control" data-mz-signup-password placeholder="{{ labels.password }}" maxlength="50">
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                            <input type="password" id="newconfirmpassword" class="form-control" data-mz-signup-confirmpassword placeholder="{{ labels.reEnterPassword }}">
+                        </div>    
+                        <p>{{ labels.signUpEmailMsg }}</p>
+                        <div class="checkbox">
+                            <label for="signupEmailupdates"><input type="checkbox" id="signupEmailupdates" data-mz-signup-emailupdates>{{ labels.primaDeals }}</label>
+                        </div>
+                        {# Open Static Section #}
+                        <div class="checkbox">
+                            <label><input type="checkbox" value="">{{ labels.primaDigest }}</label>
+                        </div>
+                        <div class="checkbox">
+                            <label><input type="checkbox" value="">{{ labels.primaLearningCenter }}</label>
+                        </div>
+                        {# Close Static Section #}                        
+
+                        <span data-mz-role="popover-message" class="popover-message"><span class="hide">For Error Message</span></span>                                    
+                        <button class="mz-button mz-button-large mz-sign-up-page-button" id="signup-submit" type="submit" data-mz-action="doSignup">{{ labels.createNewAccount }}</button>
+                    </div>                          
+                </div>              
+            </div>
+            <div class="modal-footer">
+                <p class="text-center"><i class="fa fa-lock"></i>{{ labels.SecurityMsg }}</p>
+            </div>
+        </div>
+    </div>
+</div>

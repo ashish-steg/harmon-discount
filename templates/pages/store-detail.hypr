@@ -1,0 +1,59 @@
+{% extends "page" %}
+{% block title-tag-content %}{% firstof location.name|safe pageContext.metaTitle|safe labels.localStores %} - {% parent %}{% endblock title-tag-content %}
+{% block secondary-nav %}{% endblock secondary-nav %}
+{% block body-tag-classes %}mz-locations{% endblock body-tag-classes %}
+
+{% block body-content %}
+    {% require_script "pages/location" %}
+    
+    {% preload_json model "product" %}
+
+    <div class="mz-l-container mz-location-parent">
+        <h1 class="mz-pagetitle">{{ labels.localStores }}</h1>
+        <div class="mz-l-stack">
+            <p class="mz-locationsearch-pleasewait hidden">
+                {{ labels.locationWait|safe }}
+             </p>             
+             <div class="search-view-container active">
+                <div class="row">
+                    <div class="col-md-3 col-sm-5">
+                        <p class="label-nearby-stores">{{ labels.locateStore }}</p>
+                        <div class="store-search-container"> 
+                            <div class="input-group stylish-input-group">
+                                <input id="searchTermView" type="text" class="form-control"  placeholder="{{themeSettings.searchStorePlaceHolder}}">
+                                <span class="input-group-addon">
+                                    <button class="btn-find-stores" type="submit">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>  
+                                </span>
+                            </div>                             
+                        </div> 
+                        <p class="hidden empty-search">{{ labels.emptyStoreSearch }}</p>                                         
+                        <div class="error-success-message-container hidden">
+                            <p id="success-shops"></p>                                 
+                            <p class="hidden invalid-location">{{ labels.invalidStoreLocation }}</p> 
+                            <p id="noNearbyStores" class="hidden">{{ labels.noNearByStores }}</p>
+                        </div>
+                        <div class="mz-l-stack-section mz-locationlist fades-in hidden" id="location-list">
+                        </div>                   
+                    </div>
+                    <div class="col-md-9 col-sm-7">
+                        <div class="map-container">                                                    
+                            {%if themeSettings.googleMapAPIKey%}
+                                <div class="clearfix"></div>
+                                <div id="map"></div>
+                                <script src="//maps.googleapis.com/maps/api/js?key={{themeSettings.googleMapAPIKey}}&libraries=places"></script>                                
+                            {%endif%}
+                        </div> 
+                    </div>         
+                </div>   
+             </div>                
+        </div>
+        <div class="store-locator-overlay active">
+            <div class="store-locator-spinner">
+                <i class="fa fa-spinner fa-spin"></i>
+            </div>
+        </div>
+    </div>  
+    
+{% endblock body-content %}

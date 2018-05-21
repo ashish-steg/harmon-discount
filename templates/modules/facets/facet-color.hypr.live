@@ -1,0 +1,17 @@
+{% for fval in allfacets %}
+    {%if isListing=="true" and allfacets.length>themeSettings.facetMoreColorCount and forloop.index==themeSettings.facetMoreColorCount|add(1) %}
+    <li>
+        <div data-product-code="{{model.productCode}}" class="showMoreSwatches mz-productoptions-optionlabel option-label mz-link-span" data-option="{{ parent.attributeDetail.name }}">
+            <span class="swatch-icon fa fa-plus visible-inline-xs"></span>
+            <span class="swatch-label hidden-xs">See all {{allfacets.length}} {{ parent.attributeDetail.name|lower }}s</span>
+        </div>
+    </li>
+    {% endif %}
+    <li data-product-code="{{model.productCode}}" data-filter-name='{{ fval.stringValue|default(fval.value) }}' {% if isListing=="true" %} data-mz-facet-value="{{ fval.value }}" {% else %} data-mz-facet-value="tenant~COLOR:{{ fval.value }}" {% endif %} data-mz-url="{% make_url "facet" fval %}" class="{% if not fval.isEnabled %}disabled{% endif %} {%if isDirectory=="true" and showMore and showMore > 0 and forloop.counter0 >= showMore %}mz-hide-text hide {% endif %}{%if isListing=="true" and forloop.index > themeSettings.facetMoreColorCount %}mz-hide-color {% endif %}color-options{% if fval.isApplied or fval.isSelected %} active{% endif %}" style="background-color: {{ fval.value|slugify }};{% if isListing=="true" or isPDP=="true" %} background-image: url({{labels.imagePDPPathFormat|string_format(siteContext.cdnPrefix, model.productCode, fval.value)}});{% else %} background-image: url({{labels.imagePathFormat|string_format(siteContext.cdnPrefix, fval.value)}});{%endif%} background-repeat: no-repeat;" title="{{ fval.stringValue|default(fval.value) }}{% if showCount %} ({{fval.count}}){% endif %}" data-mz-action='selectSwatch' data-mz-swatch-color='{{fval.value}}' data-value="{{fval.value}}" data-mz-product-option-attribute="tenant~COLOR">
+        <input type="checkbox" id="{{model.productCode}}_{{ fval.value|slugify }}" class="mz-facetingform-value" {% if fval.isApplied %}checked="checked" {% endif %} data-mz-facet="{{ allfacets.field }}" data-filter-name='{{ fval.stringValue|default(fval.value) }}' data-mz-facet-value="{{ fval.value }}"{% if isListing=="true" or isDirectory=="true" %} data-mz-url="{% make_url "facet" fval %}"{% endif %}>
+        <label class="mz-facetingform-valuelabel" data-filter-name='{{ fval.stringValue|default(fval.value) }}' data-mz-facet-value="tenant~COLOR:{{ fval.value }}" for="{{model.productCode}}_{{ fval.value|slugify }}"><span class="hide">{{ fval.stringValue|default(fval.value) }}{% if showCount %} ({{fval.count}}){% endif %}</span></label>
+    </li>
+{% endfor %}
+{% if isDirectory=="true" and showMore and showMore > 0 and allfacets.length > showMore %}
+    <li class="show-more-li"><a href="javascript:void(0);" class="show-more">{{labels.navMore}}</a></li>
+{% endif %}

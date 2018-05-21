@@ -1,0 +1,94 @@
+﻿  {% extends "email/email" %}
+
+  {% block body-content %}
+  
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tbody>         
+         <tr>
+            <td align="center" border="0" cellpadding="0" cellspacing="0" style="max-width:600px" width="100%">
+               <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:600px" bgcolor="#e1e1e1">
+                  <tbody>
+                     <tr>
+                        <td>
+                           <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                              <tbody>
+                                 <tr>
+                                    <td align="center">
+                                       <img src="https://{{domainName|safe}}/{{themeSettings.defaultStoreImage|safe}}" alt="{{ labels.newUserEmailSalutation|string_format(siteContext.generalSettings.websiteName) }}" height="240" style="display:block;color: #042a47;font-style:italic;font-family:Arial, Helvetica, sans-serif;font-size:32px;line-height:76px;border:0;width:100%;max-width:600px;height:auto;" tabindex="0">
+                                    </td>
+                                 </tr>
+                              </tbody>
+                           </table>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+         </tr>
+         <tr>
+            <td align="center" border="0" cellpadding="0" cellspacing="0" style="max-width:600px" width="100%">
+               <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:600px" bgcolor="#ffffff">
+                  <tbody>
+                     <tr>
+                        <td>
+                           <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                              <tbody>
+                                 <tr>
+                                    <td align="center" style="padding:20px 20px 0px 20px;">
+                                       <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                          <tbody>
+                                             <tr>
+                                                <td align="left" style="font-family:Arial, Helvetica, sans-serif;font-weight: 500;font-size: 14px;-webkit-font-smoothing: antialiased;line-height:24px;color: #333;">
+                                                   <p style="font-family:Arial, Helvetica, sans-serif;font-weight: 500;font-size: 14px;-webkit-font-smoothing: antialiased;line-height: 24px;color: #333;">
+                                                      {% if user and user.firstName %}
+                                                          {{ labels.emailOpening|string_format(user.firstName)|safe }}
+                                                      {% else %}
+                                                          {{ labels.emailOpeningAlternative|safe }}
+                                                      {% endif %}
+                                                    </p>                                                   
+                                                </td>
+                                             </tr>
+                                             <tr>
+                                                <td align="left" style="font-family:Arial, Helvetica, sans-serif;font-weight: 500;font-size: 14px;-webkit-font-smoothing: antialiased;line-height: 24px;color:#333333;">
+                                                  {{ labels.newUserEmailSalutation|string_format(siteContext.generalSettings.websiteName) }}                                                  
+                                                </td>
+                                             </tr>
+                                             <tr>
+                                                <td align="left" style="font-family:Arial, Helvetica, sans-serif;font-weight: 500;font-size: 14px;-webkit-font-smoothing: antialiased;line-height: 24px;color:#333333;">
+                                                    {{ labels.newUserEmailNotification|string_format(domainName, model.UserEmailAddress)|safe }}
+                                                </td>
+                                             </tr>
+                                             <tr>
+                                                <td align="center">
+                                                   <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                      <tbody>
+                                                         <tr>
+                                                            <td align="center" style="padding: 10px 0;">
+                                                               <table border="0" cellspacing="0" cellpadding="0">
+                                                                  <tbody>
+                                                                     <tr>
+                                                                        <td align="center" bgcolor="#7ab332"><a href="https://{{siteContext.domains.primary.domainName}}" style="font-size: 14px;font-family:Arial, Helvetica, sans-serif;color:#ffffff;font-weight: 500;text-decoration:none;text-transform:uppercase;letter-spacing:1px;padding:16px 32px;border: 1px solid #7ab332;display:inline-block;">View the Collection</a></td>
+                                                                     </tr>
+                                                                  </tbody>
+                                                               </table>
+                                                            </td>
+                                                         </tr>
+                                                      </tbody>
+                                                   </table>
+                                                </td>
+                                             </tr>
+                                          </tbody>
+                                       </table>
+                                    </td>
+                                 </tr>
+                              </tbody>
+                           </table>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+         </tr>         
+      </tbody>
+   </table>
+{% endblock body-content %}

@@ -1,0 +1,69 @@
+<div class="feed-item-wrapper">
+{% for item in Model %}
+<div class="feed-item">
+
+
+    <div class="photo-block">
+        <img src="{{ item.images.standard_resolution.url }}"/>
+
+    </div>
+    <div class="right-content-block">
+    {%if item.config.showUsername %}
+        <div class="user-info-block">
+            <span class="user-avatar"><img src="{{ item.profilePicture }}"/></span>
+            <span class="posted-by-text">Posted By</span>
+            <span class="user-name"> {{ item.username }}</span>
+        </div>
+    {%endif%}
+
+    {%if item.config.showPostedTime %}
+        <div class="posted-time">
+            {{item.timeElapsed}};
+        </div>
+    {%endif%}
+
+    {%if item.config.showDescription == true %}
+        <div class="photo-desc">
+            {{ item.caption }}
+        </div>
+    {%endif%}
+
+    {%if item.config.showActionLink %}
+        {%if item.actionLink.desktopLink.link != 'null' ||  item.actionLink.mobileLink.link != 'null'%}
+        <div class="item-call-to-action call-to-action" data-action-link="{{ item.actionLinkString }}">
+            {%if Model.config.templateType == 'mobile' %}
+
+            <a href="{{ item.actionLink.desktopLink.link }}" class="call-to-action-text">
+              <span>
+                 {%if item.actionLink.actionText != "" %}
+                    {{ item.actionLink.actionText }}
+                {%else%}
+                    Shop this look.
+                {%endif%}
+              </span>
+            </a>
+            <a href="{{ item.actionLink.desktopLink.link }}" class="call-to-action-icon">
+                <img src="/resources/images/exernal_link.png"/>
+            </a>
+
+            {%else%}
+            <a href="{{ item.actionLink.desktopLink.link }}" class="call-to-action-text">
+            <span>
+                {%if item.actionLink.actionText != "" %}
+                    {{ item.actionLink.actionText }}
+                {%else%}
+                    Shop this look.
+                {%endif%}
+            </span>
+            </a>
+            <a href="{{ item.actionLink.desktopLink.link }}" class="call-to-action-icon">
+                <img src="/resources/images/exernal_link.png"/>
+            </a>
+            {%endif%}
+        </div>
+        {%endif%}
+    {%endif%}
+    </div>
+    {% endfor %}
+    </div>
+</div>

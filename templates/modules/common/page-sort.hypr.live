@@ -1,0 +1,12 @@
+﻿<label class="mz-pagingcontrols-pagesort-label">
+  <span class="mz-paging-sorttitle">{{ labels.sortBy }}:</span>
+  <span class="sort-by-wrapper">
+    <select data-mz-value="sortBy" class="mz-pagingcontrols-pagesort-dropdown" autocomplete="off" title="{{ labels.sortBy }}">
+        <option data-mz-url="{% make_url "sorting" model with sortBy='createDate asc' %}&startIndex=0" data-value="createDate asc" class="dp-sort-item" {% if model.currentSort == 'createDate asc' %} selected {% endif %}>{{ labels.sortByOurPicks }}</option>
+        <option data-mz-url="{% make_url "sorting" model with sortBy='createDate desc' %}&startIndex=0" data-value="createDate desc" class="dp-sort-item" {% if model.currentSort == 'createDate desc' %} selected {% endif %}>{{ labels.sortByNewArrivals }}</option>
+        <option data-mz-url="{% make_url "sorting" model with sortBy='tenant~BestSelling desc' %}&startIndex=0" data-value="tenant~BestSelling desc" class="dp-sort-item" {% if model.currentSort == 'tenant~BestSelling desc' %} selected {% endif %}>{{ labels.sortByBestSelling }}</option>
+        <option data-mz-url="{% make_url "sorting" model with sortBy='price asc' %}&startIndex=0" data-value="price asc" class="dp-sort-item" {% if model.currentSort == 'price asc' %} selected {% endif %}>{{ labels.sortByPriceAsc }}</option>
+        <option data-mz-url="{% make_url "sorting" model with sortBy='price desc' %}&startIndex=0" data-value="price desc" class="dp-sort-item" {% if model.currentSort == 'price desc' %} selected {% endif %}>{{ labels.sortByPriceDesc }}</option>
+    </select>
+  </span>
+</label>

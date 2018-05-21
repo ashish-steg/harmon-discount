@@ -1,0 +1,10 @@
+﻿<div class="btn-group">
+    {% for size in themeSettings.pageSizeOptions %}
+      {% if model.pageSize == size %}
+        <span class="btn selected">{{ size }}</span>
+      {% else %}
+        <a class="btn" data-mz-url="{% make_url "paging" model with pageSize=size page=1 %}" >{{ size }}</a>
+      {% endif %}
+    {% endfor %}
+    <a class="btn view-all{% if model.pageSize == themeSettings.viewAllPageSize %} selected{% endif %}" data-mz-url="{% make_url "paging" model with pageSize=themeSettings.viewAllPageSize page=1 %}">{{ labels.viewAll }} ({{ model.totalCount }})</a>
+</div>

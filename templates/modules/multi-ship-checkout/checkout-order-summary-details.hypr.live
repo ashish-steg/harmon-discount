@@ -1,0 +1,78 @@
+<div class="mz-ordersummary col-xs-12 mz-reset-padding">
+        <div class="mz-header-basket-md-sm hidden-xs">
+                <div class="mz-ordersummary-header-product col-sm-8 mz-order-content-container">{{ labels.product }}</div>
+                <div class="mz-ordersummary-header-each col-sm-2">{{ labels.price }}</div>
+                <div class="mz-ordersummary-header-total col-sm-2 text-right">{{ labels.total }}</div>
+        </div>
+        {% for item in model.items %}
+          {% if item.fulfillmentMethod == fulfillmentMethod %}
+            <div class="mz-ordersummary-lineitems mz-carttable-item">
+              <div class="mz-ordersummary-line mz-ordersummary-line-item {% if item.discountTotal > 0 %}is-discounted{% endif %}">
+                    <div class="mz-ordersummary-item-product col-sm-8 col-xs-12 mz-order-content-container">
+                      <div class="pull-left mz-order-summary-image">
+                        {% with item.product|get_product_attribute("tenant~color") as colorAttr %}
+                          {% if colorAttr %}
+                            {% with colorAttr.value|replace(" ","_") as colorValue %}
+                              {% with labels.accountImageFormatWithColor|string_format(siteContext.cdnPrefix, item.product.productCode, colorValue) as fileName %}
+                                  {% include "modules/product/product-image" with productImage=fileName productAltText=item.product.imageAlternateText productMaxWidth=themeSettings.itemListingThumbSize productImageClass="mz-productimages-thumbimage" as_parameter %}
+                              {% endwith %}     
+                            {% endwith %}
+                          {% else %}
+                            {% if item.product.imageUrl %}
+                              {% include "modules/product/product-image" with productImage=item.product productAltText=item.product.imageAlternateText productMaxWidth=themeSettings.itemListingThumbSize productImageClass="mz-productimages-thumbimage" as_parameter %} 
+                            {% else %}
+                              {% include "modules/product/product-no-image" %}
+                            {% endif %}
+                          {% endif %}  
+                        {% endwith %}                       
+                      </div>
+                      <div class="mz-carttable-item-info-wrap pull-left col-xs-8 mz-reset-padding-right">
+                        <div class="mz-carttable-item-title" >{{ item.product.name|safe }}</div>
+                         <div class="mz-carttable-item-code">
+                          {{ labels.item }}# <span>{{ item.product.productCode }}</span>
+                        </div>
+                        {% if item.product.options and themeSettings.showCartItemOptions and item.product.productType != themeSettings.oneSizeProductType %}
+                        <div>
+                          {% for option in item.product.options %}
+                          <div>{% if option.name == "OTHER" %}
+                            OPTION
+                            {% else %}
+                            {{ option.name }}
+                            {% endif %}:
+                            <span class="text-capitalize">
+                              {% if option.stringValue %}
+                                    {% if option.stringValue == 'CHR(38)' %}
+                                    &amp;
+                                    {% else %}
+                                      {% if option.stringValue == 'CHR(64)' %}
+                                      @
+                                      {% else %}
+                                        {{ option.stringValue }}
+                                      {% endif %}
+                                    {% endif %}
+                              {% else %}
+                                    {{ option.shopperEnteredValue }}
+                              {% endif %}
+                            </span>
+                          </div>          
+                          {% endfor %}
+                        </div>
+                        {% endif %}
+                        <div class="mz-propertylist ">
+                          <div>Qty:&nbsp;<span class="text-capitalize">{{ item.quantity }}</span></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="clearfix visible-xs mz-print-hide"></div>
+                    <div class="col-sm-2 col-xs-6 hidden-xs mz-price-each-display mz-price-main-container">
+                        {% include "modules/common/item-price" %}
+                    </div>
+                    <div class="col-sm-2 col-xs-6 mz-checkout-item-total-container pull-right text-right">
+                        {% include "modules/common/item-total" %}
+                    </div>
+                </div>
+            </div>
+          {% endif %}
+        {% endfor %} 
+        {% include "modules/multi-ship-checkout/checkout-order-price-summary" %} 
+    </div>

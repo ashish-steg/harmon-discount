@@ -1,0 +1,16 @@
+<div id="wrapper" >
+	<ul id="employee_cards">
+		<li id="card" style='background:url({% make_url "image" model.config.cardBackground %});'>
+			<h3>Employee Picks</h3>
+			<img src="{% make_url "image" model.config.employeeImage %}" />
+			<p> 
+				{{model.config.field1}} : {{model.config.field1Value}} <br/>
+				{{model.config.field2}} : {{model.config.field2Value}} <br/>
+
+				{{model.config.employeeRecommendation}}
+
+
+			</p>
+		</li>
+	</ul>
+</div>

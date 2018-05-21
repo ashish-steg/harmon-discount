@@ -1,0 +1,30 @@
+.mz-instock-request {
+    background: none;
+    width: 100%;
+    border: 1px solid @colorGray;
+    padding: @defaultGutter;    
+    .modal-header{
+        border-bottom: 1px solid @colorLightGray;
+        .modal-title{
+            .fontRegular();
+            text-align: center;
+        } 
+    }
+    .modal-body {
+        text-align: center;
+        input{
+            width: 235px;
+            height: 44px;
+            border: 1px solid @colorLightGray;
+            border-right: 0;
+        }
+        button {            
+            border-radius: 0;
+            margin-left: -5px;
+            height: 44px;
+        }
+        .mz-validationmessage{
+            font-size: 14px;
+        }
+    }  
+}

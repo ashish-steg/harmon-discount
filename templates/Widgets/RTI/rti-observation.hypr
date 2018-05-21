@@ -1,0 +1,9 @@
+{% if pageContext.isEditMode == 'true' %}
+<div>Observer tag deployed.</div>
+{% endif %}
+{% require_script "widgets/rti-observation" %}
+<script type="text/javascript">
+     document.addEventListener("load", function(){
+        {% require_script "vendor/baynote" %}
+     });
+</script>

@@ -1,0 +1,13 @@
+<div class="popular-product-container">
+    <p class="slider-title hidden">{{ model.config.configurableTitle }} </p>
+    <div class="ig-popular-products carousel-parent">
+        <div data-ig-popular-products="{% json_attribute Model.config%}">
+            {% include_products "modules/product/related-product-tiles" with  productCodes=Model.config.productCodes as_parameter %}
+        </div>
+    </div>
+</div>
+
+{% require_script "widgets/catalog/popular-products" %}
+
+
+

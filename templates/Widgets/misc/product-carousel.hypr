@@ -1,0 +1,1 @@
+{% include_products "Widgets/misc/product-carousel-listing" with productCodes=model.config.products as_parameter %}

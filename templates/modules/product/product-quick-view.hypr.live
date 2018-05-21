@@ -1,0 +1,106 @@
+<!-- Modal -->
+<div id="quickViewModal" class="modal fade quickviewElement">
+    {% include "modules/product/product-validation" %}
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Quick view</h4>
+                <span class="mz-close-icon" aria-hidden="true" data-mz-quickview-close="true"></span>
+            </div>
+            
+            <div class="modal-body">
+                <div class="row first">
+                    <div class="col-xs-6 col-fixed-1">
+                        <div data-mz-productimages class="mz-productimages mz-l-sidebar mz-product-left-container">
+                            {% include "modules/product/product-images" %}
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-fixed-2">
+                        <div class="row">
+                            <div class="col-xs-12 no-padding-right">
+                                <div class="mz-product-detail-tabs">
+                                    <div class="tab_container">
+                                        <div id="overview-tab">
+                                            <div class="mz-product-top-content">
+                                                <div class="mz-pagetitle" itemprop="name">{{ model.content.productName|safe }}</div>
+                                                <div class="row">
+                                                    <div class="col-xs-12 col-sm-12">
+                                                        <div class="mz-productcodes-productcode p-3" itemprop="sku">Item # {{ model.productCode }}</div>
+                                                    </div>
+                                                </div>
+                                                {% comment %}
+                                                <div class="mz-all-review-container">
+                                                    <span class="mz-reviews-pdp-stars">
+                                                        {% include "modules/product/product-ratings" %}
+                                                    </span>
+                                                    <span class="mz-reviews-pdp-text">
+                                                        <a href="#">4.9(10) {{ labels.readAReview }}</a>
+                                                    </span>
+                                                </div>
+                                                {% endcomment %}
+                                                <div class="qvPromo" role="button" style="display: none;">
+                                                    {{ model|get_product_attribute_value("tenant~Promo") }}
+                                                </div>
+
+                                                <div class="stock-info"></div>
+                                                <div class="item-error"><span class="mz-validationmessage" data-mz-validationmessage-for="item-out-of-stock"></span></div>
+                                                {% if model.options and model.options.length > 0 %}
+                                                <div class="mz-productdetail-options mz-l-stack-section">
+                                                <!-- <h4 class="mz-l-stack-sectiontitle">{{ labels.options }}</h4> -->
+                                                {% include "modules/product/product-options" %}
+                                                </div>
+                                                {% endif %}
+
+                                                <div class="mz-l-stack-section mz-productdetail-conversion row">
+                                                    <div class="mz-productdetail-conversion-controls col-xs-4">
+                                                        <label class="mz-qty-label text-uppercase" for="mz_quickview_qty">{{ labels.qty }}</label>
+                                                        <div class="qty-block"> 
+                                                            <input id="mz_quickview_qty" class="mz-productdetail-qty text-center" type="text" value="1" readonly="readonly" data-mz-value="quantity" title="Quantity">
+                                                            <div class="qty-counter" id="plus" data-mz-qty-plus role="button"><i class="fa fa-angle-up" aria-hidden="true"></i></div>
+                                                            <div class="qty-counter" id="minus" data-mz-qty-minus role="button"><i class="fa fa-angle-down" aria-hidden="true"></i></div>   
+                                                        </div>
+                                                        <span class="mz-validationmessage validation-msg" data-mz-validationmessage-for="quantity"></span>
+                                                    </div>
+                                                    <div itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="mz-productdetail-price mz-l-stack-section pull-right col-xs-8">
+                                                    {% include "modules/product/price-stack" %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="add-to-cart-container">
+                                    <button id="add-to-cart" class="mz-productdetail-addtocart btnAddToCart button_primary mz-button{% if not model.purchasableState.isPurchasable %} button_disabled{% endif %}" data-mz-action="addToCart" >{{ labels.addToCart }}
+                                </button>
+                                <div class="full-product">
+                                    <a href="{% make_url "product" model %}" class="link-green">{{ labels.fullProductDetails }}</a>
+                                </div>
+                            </div>
+                            <div class="surcharge">
+                            {% include "modules/product/product-delivery-surcharge" %}
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Delivery surcharge modal -->
+<div class="del-surcharge-popup" style="display:none;">
+  <div class="">
+    <div class="">
+      <div class="modal-header">
+          <h3 class="modal-title">{{themeSettings.deliverySurchargeHeader}}</h3>
+      </div>
+      <div class="close-modal" id="mz-close-button">
+          <span class="mz-close-icon" aria-hidden="true" data-dismiss="modal"></span>  
+      </div>
+      <div class="modal-body">
+         {{themeSettings.deliverySurchargeContent}}
+      </div>
+  </div>
+</div>
+</div>
+<!-- Delivery surcharge modal end-->

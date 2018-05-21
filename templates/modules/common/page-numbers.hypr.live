@@ -1,0 +1,55 @@
+﻿{% if model.pageSize != themeSettings.viewAllPageSize and model.pageSize < model.totalCount%}        
+    <ul class="pagination">
+        <li>
+            {% if not model.hasPreviousPage %}
+                <span class="mz-pagenumbers-prev is-disabled"><i class="fa fa-chevron-left" aria-hidden="true"></i>
+                    <span class="hide">Previous</span>
+                </span>
+            {% else %}
+                <a class="mz-pagenumbers-prev" href="{% make_url "paging" model with page="previous" %}" data-mz-action="page" data-mz-page-num="{{ model.currentPage|subtract(1) }}"><i class="fa fa-chevron-left" aria-hidden="true"></i>
+                    <span class="hide">Previous</span>
+                </a>
+            {% endif %}
+        </li>
+        {% if model.currentPage > 2 and not model.hasNextPage  %}
+            {% for pageNumber in model.middlePageNumbers %}
+                {%if forloop.index == 1%}
+                    <li>                
+                        <a class="mz-pagenumbers-number" href="{% make_url "paging" model with page=pageNumber %}" data-mz-action="page" data-mz-page-num="{{ model.currentPage|subtract(2) }}" >
+                        {{ model.currentPage|subtract(2) }}
+                        </a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+        {% if model.hasPreviousPage %}
+            <li><a class="mz-pagenumbers-number" href="{% make_url "paging" model with page="previous" %}" data-mz-action="page" data-mz-page-num="{{ model.currentPage|subtract(1) }}">{{ model.currentPage|subtract(1) }}</a></li>
+        {% endif %}
+            
+        <li><span class="mz-pagenumbers-number is-current" data-mz-page-num="{{ model.currentPage }}">{{ model.currentPage }}</span></li>
+        
+        {% if model.hasNextPage %}
+            <li><a class="mz-pagenumbers-number" href="{% make_url "paging" model with page="next" %}" data-mz-action="page" data-mz-page-num="{{ model.currentPage|add(1) }}">{{ model.currentPage|add(1) }}</a></li>
+        {% endif %}
+        {% if model.currentPage == 1 and model.pageCount > 2  %}
+            <li>
+                <a class="mz-pagenumbers-number" href="{% make_url "paging" model with page=3 %}" data-mz-action="page" data-mz-page-num="{{ model.currentPage|add(2) }}" >
+                    {{ model.currentPage|add(2) }}
+                </a>
+            </li>
+        {% endif %}
+        <li>
+            {% if not model.hasNextPage %}
+                <span class="mz-pagenumbers-next is-disabled">
+                    <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                    <span class="hide">Previous</span>
+                </span>
+            {% else %}
+                <a class="mz-pagenumbers-next" href="{% make_url "paging" model with page="next" %}" data-mz-action="page" data-mz-page-num="{{ model.currentPage|add(1) }}">
+                    <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                    <span class="hide">Previous</span>
+                </a>
+            {% endif %}            
+        </li>
+    </ul>
+{% endif %}

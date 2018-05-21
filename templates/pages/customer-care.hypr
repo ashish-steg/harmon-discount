@@ -1,0 +1,58 @@
+{% extends "page" %}
+{% block main-container-class %}container{% endblock main-container-class %}
+
+{% block title-tag-content %}{% firstof pageContext.metaTitle|safe model.name|safe %}  - {% parent %}{% endblock title-tag-content %}
+
+{% block body-tag-classes %}mz-customer-service{% endblock body-tag-classes %}
+
+{% block body-content %}
+{% block breadcrumbs %}{% endblock breadcrumbs %}
+{% with navigation.breadcrumbs|first as rootPage %}
+	<div class="row">
+	<h1 class="hide">{{labels.customerService}}</h1>
+		<div class="hidden-xs col-sm-4 col-md-3">
+		    <ul class="customer-navs">
+                <li class="sub-customer-nav header">
+                    <a class="sub-customer-nav-link" {% if link.openInNewWindow %}target='_blank'{% endif %} href="{{rootPage.url}}">{{ rootPage.name|safe }}</a>
+                </li>		    			
+	    		{% with navigation.tree|findwhere("originalId", rootPage.originalId) as tree %}
+	                {% for sublink in tree.items %} 
+	                    {% if not sublink.isHidden and not sublink.isEmpty and forloop.counter0 < 8 %}
+	                    	{% if sublink.items %}
+	                    		{% if sublink.items|findwhere("originalId", model.id) %}
+									{% set_var expandList=true %}
+								{% else %} 
+									{% set_var expandList=false %}
+	                    		{% endif %}
+	                    	{% endif %}
+	                        <li class="sub-customer-nav child-nav{% if sublink.originalId == model.categoryId or sublink.originalId == model.id or expandList %} active{%endif%}">
+	                            <a class="sub-customer-nav-link" {% if link.openInNewWindow %}target='_blank'{% endif %} href="{{sublink.url}}">{{ sublink.name|safe }}
+	                            	{% if sublink.items.length %}
+		                            	{% if sublink.originalId == model.id or expandList %}
+		                            		<i class="fa fa-caret-down" aria-hidden="true"></i>
+			                            {% else %}
+			                            	<i class="fa fa-caret-right" aria-hidden="true"></i>
+			                            {% endif %}
+			                        {% endif %}
+	                            </a>
+	                            
+		                        {% if sublink.items %} 
+		                        	<ul class="customer-subsub-navs">
+									{% for subsublink in sublink.items %} 
+										<li class="subsub-customer-nav{% if subsublink.originalId == model.id %} active{%endif%}">
+											<a class="subsub-customer-nav-link" href="{{subsublink.url}}">{{ subsublink.name|safe }}</a>
+									{% endfor %}
+									</ul>
+		                        {% endif %}
+	                        </li>
+	                    {% endif %}
+	                {% endfor %}
+				{% endwith %}
+		    </ul>
+		</div>
+		<div class="col-xs-12 col-sm-8 col-md-9">
+			{% dropzone "customerService" scope="page" %}
+		</div>
+	</div>
+{% endwith %}
+{% endblock body-content %}

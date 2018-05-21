@@ -1,0 +1,81 @@
+﻿  {% extends "email/email" %}
+
+  {% block body-content %}
+    <table cellpadding="0" cellspacing="0" border="0" id="backgroundTable" width="100%" bgcolor="#ffffff" style="font-family:arial,helvetica,sans-serif;font-weight: 500;font-size: 14px;line-height: 24px;color: #333;max-width: 600px; border:none;" align="center">
+        <tbody>
+            <tr>
+                <td style="padding:20px;color: #333;">  
+                    <p style="color: #333;">
+                        {{ labels.orderWelcome }} {{ model.billingInfo.billingContact.firstName }} {{ model.billingInfo.billingContact.lastNameOrSurname }}!
+                    </p>
+                    <p style="color: #333;">{{ labels.orderShipmentBlob1|string_format(siteContext.generalSettings.websiteName, domainName, model.fulfillmentInfo.shippingMethodName)|safe }}</p>
+
+                    <p><b>{{ labels.orderNo }}:</b> {{ model.orderNumber }} <a href="https://{{ domainName }}/user/login">{{ labels.checkOrderStatus }}</a></p> 
+                    <p>
+                        {% if model.packages %}
+                            {% for pkg in model.packages %}
+                                {% if pkg.trackingNumber %}
+                                    {% if pkg.code|first == 'C' %}
+                                            <a class="pull-right" href="{{ themeSettings.cevaLink|string_format(pkg.trackingNumber)}}" >{{ labels.trackPackage }}</a> 
+                                    {% endif %}
+                                    {% if pkg.code|first == 'U' %}
+                                            <a class="pull-right" href="{{ themeSettings.uspsLink|string_format(pkg.trackingNumber)}}" >{{ labels.trackPackage }}</a>
+                                    {% endif %}
+                                    {% if pkg.code|first == 'F'%}
+                                            <a class="pull-right" href="{{ themeSettings.fedxLink|string_format(pkg.trackingNumber)}}" >{{ labels.trackPackage }}</a>
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                    </p>
+                    <p style="color: #333;"><b>{{ labels.orderDate }}:</b> {{ model.submittedDate }}</p>
+
+                    <p style="color: #333;"><b>{{ labels.shipTo }}:</b></p>
+                    <p style="color: #333;">{% include "modules/common/email-address-summary" with model=model.fulfillmentInfo.fulfillmentContact %}</p>
+
+                    <div style="line-height: 1.1;border-bottom: 1px solid #e1e1e1;font-size: 24px; padding-bottom: 5px;margin-top:10px;font-family: Arial, Helvetica, sans-serif;">{{ labels.itemsShipped }}</div>
+
+
+                {% for package in model.packages %}
+                <table width="100%" cellpadding="1" cellspacing="1" width="100%">
+                        <thead>
+                            <tr>
+                                <td colspan="2" style="padding-top: 10px;">
+                                    {{ labels.orderShippedPkgHeader|string_format(package.fulfillmentDate, package.shippingMethodName) }}
+                                </td>
+                            </tr>
+                            <tr style="height: 30px;border-bottom: 1px solid #e1e1e1;">
+                                <td style="padding-top: 10px;"><font style="line-height: 1.1;font-size: 24px;font-family: Arial, Helvetica, sans-serif;">{{ labels.qty }}</font></td>
+                                <td style="padding-top: 10px;"><font style="line-height: 1.1;font-size: 24px;font-family: Arial, Helvetica, sans-serif;">{{ labels.product }}</font></td>
+                            </tr>
+                        </thead>
+                        {% for packageItem in package.items %}
+                        
+                            <tbody class="mz-ordersummary-package">
+                                <tr class="mz-ordersummary-line mz-ordersummary-line-item">
+                                    <td style="padding-top: 10px;">{{ packageItem.quantity }}</td>
+                                    <td class="mz-ordersummary-item-product">
+                                        {{ packageItem.product.name|safe }}
+                                        {% if packageItem.product.productUsage == 'Bundle' %}
+                                        <dl class="mz-propertylist">
+                                        {% for bundledProduct in packageItem.product.bundledProducts %}
+                                        <dt>{{ bundledProduct.productCode }}</dt>
+                                        <dd>{{ bundledProduct.name|safe }} ({{ bundledProduct.quantity }})</dd>
+                                        {% endfor %}
+                                        </dl>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            </tbody>
+                    
+                        {% endfor %}
+                    </table>
+                    {% endfor %}
+
+
+                    {{ labels.orderShipmentBlob2|safe }}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+{% endblock body-content %}

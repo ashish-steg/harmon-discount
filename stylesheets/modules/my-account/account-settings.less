@@ -1,0 +1,119 @@
+﻿.mz-accountsettings {
+    > h3 {
+        margin: 0 !important;
+    }
+    .mz-accountsettings-label{
+        display: block;
+        font-size: @fontSizeLarger;
+        color: @textColor;
+    }
+    .mz-accountsettings-displayname,
+    .mz-accountsettings-displayemail,
+    .mz-accountsettings-displayphone {
+        display: inline-block;
+        margin-right: @gutter/4;
+    }
+
+    .mz-accountsettings-displayname {
+        font-size: @fontSize;
+        margin: 0 @gutter/4 0 0;
+    }
+
+    /*.mz-accountsettings-sectionheader {
+        border-top: 1px solid #eee;
+        padding-top: 5px;
+        
+    }*/
+
+    .mz-accountsettings-name {
+        input {
+            margin-right: @gutter;
+        }
+    }
+
+    .mz-accountsettings-acceptsmarketing {
+        > label {
+            margin: 0;
+        }
+    }
+    
+    .mz-accountsettings-name {
+        margin: @gutter/2 0 0 0;
+    }
+    
+    .mz-accountsettings-acceptsmarketing,
+    .mz-subscription-message-account,
+    .mz-accountsettings-email-wrapper,
+    button {
+        margin: @gutter 0 0 0;
+        > label {
+            .fontsMedium();
+            margin: 0;
+            cursor: default;
+        }
+    }
+
+    button {
+        margin-right: @gutter;
+    }
+    .mz-accountsettings-firstname,
+    .mz-accountsettings-lastname {
+        width: 80px;
+        font-size: @fontSizeLarger;
+        height: @fontSizeLarger + 4;
+    }
+    .mz-accountsettings-password {
+        > div {
+            width: 100%;
+            float: left;
+            margin-bottom: @gutter;
+
+            label, input {
+                display: inline-block;
+                margin-bottom: @gutter;
+                vertical-align: middle;
+                width: 140px;
+            }
+        }
+    }
+    .mz-accountsettings-firstname,
+    .mz-accountsettings-lastname {
+        /*width: 200px;*/
+        font-size: @fontSize;
+        min-width: 240px;
+        height: 52px;
+    }
+    .mz-accountsettings-email {
+        min-width: 240px;
+        height: 52px;
+    }
+    .mz-validationmessage{
+        font-size: @fontSize;
+    }
+}
+.mz-passwordsection {
+    margin: @gutter*2 0 0 0;
+    .mz-accountsettings-password{
+        .mz-accountsettings-passwordedit {
+            margin-top: @gutter/2;
+        }
+        input {
+            min-width: 240px;
+            height: 52px;
+            margin-bottom: 0;
+        }
+        label {
+            color: @colorMediumGray;
+            font-size: 16px;
+        }
+        .mz-validationmessage{
+            font-size: @fontSize;
+        }
+        .mz-password-actions {
+            margin-top: @gutter;
+            button {
+                margin-right: @gutter;
+            }
+        }
+    }
+}

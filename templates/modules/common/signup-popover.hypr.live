@@ -1,0 +1,9 @@
+<div class="mz-popover mz-popover-signup">
+  <input type="text" class="mz-popover-signup-firstname" placeholder="{{ labels.firstName }}" data-mz-signup-firstname maxlength="{{themeSettings.firstNameLength}}" />
+  <input type="text" class="mz-popover-signup-lastname" placeholder="{{ labels.lastName }}" data-mz-signup-lastname maxlength="{{themeSettings.lastNameLength}}" />
+  <input type="email" class="mz-popover-signup-email" placeholder="{{ labels.emailAddress }}" data-mz-signup-emailaddress maxlength="{{themeSettings.emailLength}}" />
+  <input type="password" class="mz-popover-signup-password" placeholder="{{ labels.password }}" data-mz-signup-password maxlength="{{themeSettings.passwordMaxLength}}" />
+  <input type="password" class="mz-popover-signup-confirmpassword" placeholder="{{ labels.confirmPassword }}" data-mz-signup-confirmpassword maxlength="{{themeSettings.passwordMaxLength}}"/>
+  <button class="mz-button mz-button-large mz-login-button button_primary button_width pull-left mz-popover-signup-register" data-mz-action="signup">{{ labels.register }}</button><br>
+  <section data-mz-role="popover-message" class="mz-popover-message"></section>
+</div>

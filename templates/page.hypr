@@ -1,0 +1,162 @@
+{% autoescape on %}{% block doctype %}<!DOCTYPE html>{% endblock doctype %}{% block open-html-tag %}
+<!--[if lt IE 7]><html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]><html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]><html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if IE 9]><html class="no-js ie9" lang="en"> <![endif]-->
+<!--[if (gt IE 9)|(!IE) ]><!--><html class="no-js" lang="en"><!--<![endif]-->{%endblock open-html-tag %}
+{% block head-tag %}
+    <head>
+        {% include "modules/json-required-for-hyprlive" %}
+        {% block meta-tags %}
+        {% if not user.isAnonymous and not user.isAuthenticated and user.email !== "" %}
+            <meta http-equiv="refresh" content="0;url=/logout">
+        {% endif %}
+        <meta charset="UTF-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0, user-scalable=no">
+        <meta name="twitter:card" content="summary">
+        <title>{% block title-tag-content %}{{ siteContext.generalSettings.websiteName }}{% endblock title-tag-content %}</title>
+        {% if model.content.productName %}
+            <meta property="og:title" content='{% firstof pageContext.metaTitle|replace("'","&rsquo;")|replace('"','&rdquo;')|safe model.content.productName|replace("'","&rsquo;")|replace('"','&rdquo;')|safe %} - {{ siteContext.generalSettings.websiteName }}'>
+        {% else %}
+            {%if location %}
+                {% with location.name as locationName %}
+                    <meta property="og:title" content='{{ locationName|safe }}'>
+                {% endwith %}
+            {% else %}
+                {%if PageContext.metaTitle %}
+                    <meta property="og:title" content='{{ PageContext.metaTitle|replace("'","&rsquo;")|replace('"','&rdquo;')|safe }}'>
+                {%endif%}
+            {%endif%}
+        {% endif %}
+        {% if PageContext.MetaDescription %}
+            {# <meta property="og:description" content='{{ PageContext.MetaDescription|replace("'","&rsquo;")|safe }}'> #}
+        {% endif %}
+            {% if model.mainImage %}
+                <meta property="og:image" content='https:{% make_url "image" model.mainImage with maxWidth=350 as_parameters %}'>
+            {%else%}
+                <meta property="og:image" content='{% if themeSettings.defaultStoreImage %}{{themeSettings.defaultStoreImage}}{% endif %}'>
+            {% endif %}
+            {% if PageContext.MetaKeywords %}
+                <meta name="keywords" content='{{ PageContext.MetaKeywords|replace("'","&rsquo;") }}'>
+            {% endif %}
+            {% if PageContext.MetaDescription %}
+                <meta name="description" content='{{ PageContext.MetaDescription|replace("'","&rsquo;")|safe}}'>
+            {% endif %}
+            {% if PageContext.correlationId %}
+                <meta name="correlationId" content="{{ PageContext.correlationId }}">
+            {% endif %}
+        {% endblock meta-tags %}
+        {% if PageContext.FeedUrl  %}
+            <link rel="alternate" type="application/rss+xml" title="{{ PageContext.Title }}" href="{{ PageContext.FeedUrl }}">
+        {% endif %}
+        <meta property="og:url" content="{{ PageContext.url }}">
+        <meta property="og:site_name" content="{{ siteContext.generalSettings.websiteName }}">
+        <meta property="og:type" content="website">
+        {% if PageContext.CrawlerInfo.CanonicalUrl  %}
+            <link rel="canonical" href="{{PageContext.CrawlerInfo.CanonicalUrl}}">
+        {% endif %}
+        {% if PageContext.CrawlerInfo.PreviousUrl  %}
+            <link rel="prev" href="{{PageContext.CrawlerInfo.PreviousUrl}}">
+        {% endif %}
+        {% if PageContext.CrawlerInfo.NextUrl  %}
+            <link rel="next" href="{{PageContext.CrawlerInfo.NextUrl}}">
+        {% endif %}
+        {% block stylesheets %}
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,900">
+            <link rel="stylesheet" type="text/css" href="{% make_url "stylesheet" "/stylesheets/storefront.less" %}" title="default" media="all">
+            <link rel="stylesheet" type="text/css" href="{% make_url "stylesheet" "/stylesheets/ml/print.less" %}" media="print">
+        {% endblock stylesheets %}
+        {% block head-tag-scripts %}
+            <script type="text/javascript" src="{% make_url "cdn" "/scripts/vendor/modernizr.min.js" %}"></script>
+        {% endblock head-tag-scripts %}
+        {% cms_resources %}
+        {%header_content%}
+        {% if isProduction %}
+            <script type="text/javascript" src="//nexus.ensighten.com/costplusworldmarket/prod/Bootstrap.js"></script>
+        {% else %}
+            <script type="text/javascript" src="//nexus.ensighten.com/costplusworldmarket/dev-new/Bootstrap.js"></script>
+        {% endif %}
+        <link rel="shortcut icon" href="/resources/images/favicon.ico" type="image/vnd.microsoft.icon">
+    </head>
+{% endblock head-tag %}
+{% block body-tag %}
+    {% block open-body-tag %}
+        <body class="{% block body-tag-classes %}{% endblock body-tag-classes %}">
+        {% block ensighten-data %}
+            <script type="text/javascript">
+                var pageData = {
+                    "page": {
+                        "serverDate": "{{serverDate}}",
+                        "isProduction": "{{isProduction|lower}}",
+                        "siteName": "{{ siteContext.generalSettings.websiteName }}",
+                        "page": "",
+                        "isMobile": "{{pageContext.isMobile|lower}}",
+                        "type": "{{pageType}}"
+                    },
+                    "customer": {
+                        "status": "{{customerType}}"
+                    }
+                };
+            </script> 
+        {% endblock ensighten-data %}
+        <a href="#page-content" class="sr-only">Skip to main content</a>
+        {% endblock open-body-tag %}
+            <div id="page-wrapper" class="mz-l-pagewrapper">
+                {% block utility-bar %}
+                    {% include "modules/utility-bar/header" %}
+                {% endblock utility-bar %}
+
+                {% block page-header %}
+                    {% include "modules/page-header" %}
+                {% endblock page-header %}
+
+                {% block site-nav %}
+                    {% include "modules/site-nav" %}
+                {% endblock site-nav %}
+
+                {% block login-slider %}
+                    {% include "modules/login/login" %}            
+                {% endblock login-slider %}
+                    
+                <div id="home-promo-wrapper" class="container-fluid hidden-sm">
+                    <div class="row" id="home-promo-below-navigation">
+                        <div class="col-xs-12">
+                            <div class="ml-header-global-include-close">
+                                <button aria-label="{{labels.close}}" type="button" id="homePromoCloseBtn" class="glyphicon glyphicon-remove ml-icon-close no-print" data-toggle="collapse" data-target=".ml-global-include-header">
+                                    <span class="hide">Close</span>
+                                </button>
+                            </div>
+                            {% dropzone "home-promo-below-navigation" scope="site" %}
+                        </div>
+                    </div>
+                </div> 
+                <div role="main" id="page-content" class="mz-l-pagecontent container">
+                    {% block breadcrumbs %}
+                        {% if themeSettings.showBreadcrumbs %}
+                            {% include "modules/breadcrumbs" %}
+                        {% endif %}
+                    {% endblock breadcrumbs %}             
+                    {% block body-content %}
+                        {% dropzone "body" scope="page" %}
+                    {% endblock body-content %}
+                    {% block body-below-content %}
+                        {% dropzone "body-bottom" scope="template" %}
+                    {% endblock body-below-content %}
+                </div>
+                {% block secondary-nav %}
+                    {% include "modules/secondary-nav" %}
+                {% endblock secondary-nav %}
+                {% block page-footer %}
+                    {% include "modules/page-footer" %}
+                {% endblock page-footer %}
+                
+            </div>
+        {% block trailing-scripts %}
+            {% include "modules/trailing-scripts" %}
+        {% endblock trailing-scripts %}
+        {% visitor_tracking_pixel %}
+        </body>
+{% endblock body-tag %}
+</html>
+{% endautoescape %}

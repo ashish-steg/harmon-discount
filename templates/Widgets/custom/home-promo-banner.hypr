@@ -1,0 +1,9 @@
+<div class="mz-promo-banner">
+    <div class="row">
+        <div class="col-md-12">
+            <a href="{{model.config.promoUrl}}" target="_blank">
+                <img src="{% make_url "image" model.config.promoImage %}" alt="{{model.config.altText}}">
+            </a>
+        </div>
+     </div>
+</div>

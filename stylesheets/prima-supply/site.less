@@ -1,0 +1,75 @@
+﻿
+/**** Custom Changes ****/
+html, body{
+    height: 100%;
+    min-height: 100%;
+}
+body{
+  background: @textColorWhite;
+  font-family: 'Lato', sans-serif;
+}
+ul, ol{
+    margin: 0;
+}
+img{
+    height: auto;
+    max-width: 100%;
+}
+.clearfix{
+    clear: both;
+}
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+.no-padding{
+    padding: 0;
+}
+
+@media screen and (min-width: 1200px){ 
+    .container{
+        width: 1170px;   
+    }
+}
+@media screen and (min-width: 1500px){
+    .container{
+        width: 1440px;   
+    }
+}
+
+.mz-category,
+.mz-searchresults {
+    .mz-l-pagecontent {
+        padding: 25px 15px;
+    }
+}
+
+.heading-2 {
+    color: #00adce;
+    font-size: 24px;
+    line-height: 28px;
+    margin: 25px 0;
+    position: relative;
+    text-transform: uppercase;
+    span {
+        background: #fff;
+        padding-right: 25px;
+        position: relative;
+        z-index: 9;
+    }
+    &:after {
+        content: "";
+        background: #e0e0e0;
+        width: 100%;
+        height: 1px;
+        position: absolute;
+        top: 14px;
+        right: 0;
+    }
+}
+
+.mz-breadcrumbs {
+    padding: 8px 0 16px;
+    text-transform: capitalize;
+}

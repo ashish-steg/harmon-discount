@@ -1,0 +1,27 @@
+﻿<div class="mz-locationlisting">
+    <div class="mz-locationlisting-locationdetails">
+        <h4  data-marker-id="marker_{{ model.code }}" class="mz-locationlisting-name show-store-detail" data-store-id="{{ model.code }}">{{ model.name }}</h4>
+        <div class="mz-addresssummary" data-marker-id="marker_{{ model.code }}">
+            {% include "modules/common/address-summary" %}           
+        </div>
+        <div class="store-details" data-marker-id="marker_{{ model.code }}">
+            {% if model.attributes and model.attributes.length > 0 %}
+                {% for attribute in model.attributes %}
+                    {% with attribute.values|first as attrValue %}
+                        <span>{{attrValue|safe}}</span>
+                    {% endwith %}
+                {% endfor %}
+            {% endif %}
+        </div>        
+        <div class="dir-btn-container hidden">
+            <a target="_blank" class="btn button_primary btn-block" href="https://maps.google.com/maps?daddr=christmas+tree+shop+{{model.address.address1}}+{{model.address.address2}}+{{model.address.address3}}+{{model.address.cityOrTown}}+{{model.address.stateOrProvince}}+{{model.address.postalOrZipCode}}+{{model.address.countryCode}}">
+                {{ labels.storeDirection }}
+            </a>
+        </div>
+    </div>
+    {% if location.distance %}
+    <div class="mz-locationlisting-distance">
+        {{ labels.milesAway|string_format(location.distance) }}
+    </div>
+    {% endif %}    
+</div>

@@ -1,0 +1,18 @@
+﻿    <div class="mz-l-formfieldgroup-cell">
+        <label for="coupon-code">{{ labels.couponCode }}: </label>
+    </div>
+    <div class="input-group">
+        <input class="input" type="text" id="coupon-code" name="coupon-code" value="{{ model.couponCode }}" data-mz-value="couponCode" maxlength="{{themeSettings.couponCodeLength}}">
+        <span class="input-group-btn">
+            <button type="button" id="cart-coupon-code" class="button_promotional" data-mz-action="addCoupon">{{ labels.apply }}</button>
+        </span>
+    </div>
+    <span class="mz-validationmessage" data-mz-validationmessage-for="couponcode"></span>
+    {% if model.tentativeCoupon %}
+    <div>
+        <span id="couponDisclaimer">{{themeSettings.couponDisclaimer|string_format(model.tentativeCoupon)|safe}}</span>
+    </div>
+    {% endif %}
+<div>
+  {% include "modules/cart/coupon-detail" %}
+</div>

@@ -1,0 +1,3 @@
+<a href='{% make_url "product" model %}'>
+    {% include "modules/product/product-image" with productImage=model.mainImage productMaxWidth=themeSettings.maxProductImageThumbnailSize as_parameter %}
+</a>

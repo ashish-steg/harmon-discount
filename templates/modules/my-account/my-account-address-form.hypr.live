@@ -1,0 +1,37 @@
+﻿{% extends "modules/common/address-form" %}
+{% block address-form %}
+    {% set addresscontext="editingContact." %}
+    {% if model.isShippingContact %}
+    {% set countries=pageContext.shippingCountries %}
+    {% endif %}
+    <li class="mz-accountaddressbook-contact mz-accountaddressbook-form col-sm-4 col-xs-12">
+    {% parent %}
+<div class="mz-contacttypes">
+        <div class="mz-l-formfieldgroup mz-l-formfieldgroup-norows mz-contacttype">
+            <input type="checkbox" id="editingcontact-is-billing" data-mz-value="editingContact.isBillingContact" value="true" {% if model.isBillingContact %} checked="checked" {% endif %}>
+            <label for="editingcontact-is-billing" class="chkbox_label">{{ labels.billingContact }}</label>
+            {% if model.isBillingContact %}
+            <div class="primary-billing-wrapper">
+                <input type="checkbox" id="editingcontact-is-primarybilling" data-mz-value="editingContact.isPrimaryBillingContact" value="true" {% if model.isPrimaryBillingContact %} checked="checked" {% endif %}>
+                <label for="editingcontact-is-primarybilling" class="chkbox_label mz-contacttype-isprimary">{{ labels.primary }}</label>
+            </div>
+            {% endif %}
+        </div>
+        <div class="mz-l-formfieldgroup mz-l-formfieldgroup-norows mz-contacttype">
+            <input type="checkbox" id="editingcontact-is-shipping" data-mz-value="editingContact.isShippingContact" value="true" {% if model.isShippingContact %} checked="checked" {% endif %}>
+            <label for="editingcontact-is-shipping" class="chkbox_label">{{ labels.shippingContact }}</label>
+            {% if model.isShippingContact %}
+            <div class="primary-shipping-wrapper">
+                <input type="checkbox" id="editingcontact-is-primaryshipping" data-mz-value="editingContact.isPrimaryShippingContact" value="true" {% if model.isPrimaryShippingContact %} checked="checked" {% endif %}>
+                <label for="editingcontact-is-primaryshipping" class="chkbox_label mz-contacttype-isprimary">{{ labels.primary }}</label>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    <div class="mz-contact-actions">
+        {% include "modules/my-account/my-account-address-suggestions" with model=model.address %}
+        <button class="button button_primary mz-contact-save" data-mz-action="finishEditContact">{{ labels.save }}</button>
+        <button class="button button_promotional mz-contact-cancel" data-mz-action="cancelEditContact">{{ labels.cancel }}</button>
+    </div>
+    </li>
+{% endblock address-form %}

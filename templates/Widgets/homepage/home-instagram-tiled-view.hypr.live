@@ -1,0 +1,20 @@
+<div class="instafeed mz-multiimg instagram-image-item">
+    {% for data in model.data %}
+    <div class="item">
+        <a href="{{ data.link }}" target="_blank"><span>
+            <img class="slider-container lazyload" alt="{{ data.user.full_name }}"
+                src="{{ data.images.thumbnail.url }}"
+                data-srcset="{{ data.images.thumbnail.url }} 767w,
+                {{ data.images.low_resolution.url }} 5500w"
+                data-sizes="auto"
+                data-absurl="false"
+                data-optimumx="2"
+                data-quality="75"
+            >
+            </span>
+        </a>
+    </div>
+    {% endfor %}
+</div>
+
+

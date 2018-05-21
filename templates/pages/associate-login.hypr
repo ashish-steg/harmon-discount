@@ -1,0 +1,18 @@
+{% extends "page" %}
+
+{% block title-tag-content %}{% firstof pageContext.metaTitle|safe labels.logIn %}  - {% parent %}{% endblock title-tag-content %}
+
+
+{% block body-tag-classes %}mz-associate-login{% endblock body-tag-classes %}
+
+{% block body-content %}
+
+{% require_script "pages/associate-login" %}
+<div class="mz-l-container">
+    <div class="mz-l-2column">
+        <div class="mz-l-column" id="aos">
+            {% include "modules/aos/aos-detail" %}
+        </div>
+    </div>
+</div>
+{% endblock body-content %}

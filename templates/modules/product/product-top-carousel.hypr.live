@@ -1,0 +1,12 @@
+
+{% if model.categories and model.categories|first %}
+    {% with model.categories|first as category %}
+    <div class="row">
+        <div class="mz-l-carousel clearfix col-sm-12 hidden-xs" data-product-id="{{model.productCode}}" data-category-id="{{category.categoryId}}" data-category-url="{{category.url}}" id="carousel-container">
+            <div id="product-carousel-list">
+            </div>
+            <div id="product-loading"></div>
+        </div>
+    </div>
+    {% endwith %}
+{% endif %}

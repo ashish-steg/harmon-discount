@@ -1,0 +1,45 @@
+<div class="mz-productlist mz-prev-margin {% block module-classes %}{% endblock module-classes %}">
+    {% if model.items %}
+        {% for prod in model.items %}
+        	{% if forloop.first && model.items.length >= 1%} 
+    			<ul class="bxslider {% block list-classes %}{% endblock list-classes %}">
+    		{% endif %}
+            <li class="product-code col-sm-3 col-xs-6 mz-reset-padding-left" data-mz-product="{{ prod.productCode }}">	
+		        {% block product-image %}
+		        <a href="{% make_url "product" prod %}"  data-baynote-slot="{{prod.slot}}"  data-baynote-widget="{{prod.widgetId}}" data-baynote-pid="{{prod.productCode}}" data-baynote-href="{{prod.href}}">
+		            {% if prod.mainImage.imageUrl %}
+		                <img class="image" src="{% make_url "image" prod.mainImage with maxWidth=themeSettings.pdpRTIMaxWidth as_parameter  %}" {% if prod.mainImage.altText %}alt="{{ prod.mainImage.altText }}"{% endif %} onerror="replaceImage(this);">
+		            {% else %}
+		                {% include 'modules/product/product-no-image' %}
+		            {% endif %}
+		        </a> 
+		        {% endblock product-image %} 
+		        <p class="mz-related-product-brand-name">{{ prod|get_product_attribute_value('tenant~Brands')|default('')|safe }}</p>
+		        <div class="mz-related-products-title-container">
+                    <a class="mz-productlisting-title" href="{% make_url "product" prod %} "  data-baynote-slot="{{prod.slot}}"  data-baynote-widget="{{prod.widgetId}}" data-baynote-pid="{{prod.productCode}}" data-baynote-href="{{prod.href}}">{{prod.content.productName|safe}}</a>
+                    <div class="mz-productlisting-title mz-productlisting-price">
+                         {% include "modules/product/price-stack" with model=prod %}
+                    </div>
+                </div>
+                {% if prod.properties and prod|get_product_attribute_value("tenant~isExclusive") %}
+                    <p class="exclusive-text">{{ labels.exclusive }}</p>
+                {% endif %}                 
+                {% for option in prod.options %}
+                    {% if option.attributeFQN==='tenant~COLOR' && option.values && option.values.length > 1 %}
+                        <ul class="image-swatches text-center mz-reset-padding-left"> 
+                            {% for imageSwatch in option.availableColors %}
+                             <a data-mz-product-code='{{imageSwatch.productCode}}' data-mz-swatch-color='{{imageSwatch.color}}'><img onmouseleave="jQuery(this).parents('.product-code').find('.image').attr('src','{% make_url "image" prod.mainImage with maxWidth=themeSettings.ProductDetailImageWidth as_parameters %}')" src="{{imageSwatch.swatchIconPath}}" /></a> 
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                {% endfor %}
+            </li>
+    		{% if forloop.last && model.items.length >= 1 %} 
+    			</ul>
+    		{% endif %}
+        {% endfor %}
+    {% endif %}
+</div>
+<script type="text/javascript">
+var BNData = '{{model.bnData}}';
+</script>

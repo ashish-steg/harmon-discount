@@ -1,0 +1,21 @@
+<div class="mz-shop-now-widget">
+    <a href="{{ model.config.shopNowWidgetUrl }}">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-7">
+                    <div class="mz-image-container">
+                        <img src="{% make_url "image" model.config.slideImageOne.imageUrl %}" alt="{{model.config.slideImageOne.altText}}">
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="mz-details-container">
+                        <p class="mz-hot-deal-title-one">{{model.config.TitleOne}}</p>
+                        <p class="mz-hot-deal-title-two">{{model.config.TitleTwo}}</p>
+                        <p class="mz-hot-deal-title-three">{{model.config.TitleThree}}</p>
+                        <span class="mz-btn">{{model.config.ButtonTextValue}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </a>
+</div>

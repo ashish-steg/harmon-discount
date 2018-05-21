@@ -1,0 +1,40 @@
+{% if model.candidateValidatedAddresses %}
+  <div class="mz-formstep-fields mz-l-formfieldgroup mz-checkoutform-active mz-validate-address-wrapper">
+      <div class="mz-address-label">
+        <span>{{ labels.selectValidAddress }}</span>
+      </div>
+
+    {% for addr in model.candidateValidatedAddresses %}
+    <div class="mz-l-formfieldgroup-row address-suggestions-wrapper">
+      <div class="">
+        <span>{{ labels.suggestionNum|string_format(forloop.index) }}</span>
+      </div>
+      <div class="">
+        <input data-mz-action="choose" name="candidateValidatedAddresses" type="radio" value="{{forloop.index0}}"{% if not siteContext.generalSettings.allowInvalidAddresses && forloop.first %} checked="checked"{% endif %} />
+        <span>
+          {{addr.address1}}<br />
+          {% if addr.address2 %}{{addr.address2}}<br />{% endif %}
+          {{addr.cityOrTown}}, {{addr.stateOrProvince}} {{addr.postalOrZipCode}} {{addr.countryCode}}
+        </span>
+      </div>
+    </div>
+    {% endfor %}
+    {% if siteContext.generalSettings.allowInvalidAddresses %}
+    <br/>
+    <div class="mz-l-formfieldgroup-row address-suggestions-wrapper">
+      <div>
+          <span>Original</span>
+      </div>
+      <div class="">
+        <input data-mz-action="choose" name="candidateValidatedAddresses" type="radio" value="-1" checked="checked" />
+        <span>
+          {{model.address1}}<br />
+          {% if model.address2 %}{{model.address2}}<br />{% endif %}
+          {{model.cityOrTown}}, {{model.stateOrProvince}} {{model.postalOrZipCode}} {{model.countryCode}}
+        </span>
+      </div>
+    </div>
+    <br/>
+    {% endif %}
+  </div>    
+{% endif %}

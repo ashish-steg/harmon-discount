@@ -1,0 +1,67 @@
+﻿{% with themeSettings.useDebugScripts|default:pageContext.isDebugMode as debugMode %}
+
+<script src="{{siteContext.cdnPrefix}}/js/require-{% if debugMode %}debug{% else %}min{% endif %}.js"></script>
+<script type="text/javascript">
+    require.config({
+      waitSeconds : 120,
+      cdnPrefix: "{{ siteContext.cdnPrefix }}",
+      cacheKey: "{{ siteContext.hashString }}",
+      urlArgs: "theme={{siteContext.themeId}}&cacheKey={{ siteContext.hashString }}",
+      baseUrl: "{{ siteContext.cdnPrefix }}{% if not debugMode %}/compiled{% endif %}/scripts",
+      paths: {
+        jquery: "vendor/jquery/jquery",
+  		  underscore: "vendor/underscore/underscore",
+  		  backbone: "vendor/backbone/backbone",
+        bootstrap:"vendor/bootstrap/js/bootstrap.min",
+        bxslider:"vendor/jquery-bxslider/jquery.bxslider.min",
+        blockui:"vendor/jquery.blockUI/jquery.blockUI.min",
+        elevatezoom:"vendor/jquery-elevatezoom/jquery.elevatezoom.min",
+        doubletaptogo:"vendor/jquery-doubleTapToGo/jquery.doubleTapToGo.min",
+        doubletaptogoipad:"vendor/jquery-doubleTapToGo/jquery.doubleTapToGoIpad.min",
+        "session-management":"vendor/sessionManagement/sessionManagement",
+        async: "vendor/async/async.min",
+        checkimage: "modules/checkImage",
+        slick: "vendor/slick/slick.min"
+      },
+      "shim": {
+        bootstrap: {
+          deps: ["jquery"]
+        },
+        "session-management":{
+          deps:["jquery"]
+        },
+        doubletaptogo: {
+          deps: ["jquery"]
+        },
+        doubletaptogoipad: {
+          deps: ["jquery"]
+        },
+        bxslider: {
+          deps: ["jquery"]
+        },
+        elevatezoom: {
+          deps: ["jquery"]
+        },
+        blockui: {
+          deps: ["jquery"]
+        },
+        checkimage: {
+          deps: ["jquery"]
+        },
+        slick: {
+          deps: ["jquery"]
+        }
+      }      
+  });
+  {% if debugMode %}
+  require([{% all_scripts %}]);
+  {% else %}
+  require(['jquery'], function() { require(['modules/common'], function() { require([{% all_scripts %}]); }); });
+  {% endif %}
+</script>
+
+{% if siteContext.generalSettings.isGoogleAnalyticsEnabled %}
+  {% include "modules/analytics/google-analytics-tracking-code" %}
+{% endif %}
+
+{%endwith%}

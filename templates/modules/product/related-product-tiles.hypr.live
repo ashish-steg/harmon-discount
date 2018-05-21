@@ -1,0 +1,365 @@
+<div class="{% if pageContext.isMobile %}hidden{% endif %}">
+    <div class="previous {% if model.items.length == 0 %}hidden{% endif %}">
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns" width="19.5px" height="54.3px" viewBox="0 0 23 58" version="1.1">
+            <title>chevron left for subcategory tiles</title>
+            <desc>Created with Sketch Beta.</desc><defs/>
+            <g id="Category" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+                <g id="Category:-Desktop-HD" sketch:type="MSArtboardGroup" transform="translate(-436.000000, -315.000000)" stroke-linecap="square" stroke-width="2" stroke="#D7D7D7">
+                    <g id="Subs:-Photo-next-to-names" sketch:type="MSLayerGroup" transform="translate(0.000000, 280.000000)">
+                        <g id="Tents" sketch:type="MSShapeGroup">
+                            <path d="M438,37 L457.5,63.8300839 L438.133573,91.2595215" id="chevron-right-for-subcategory-tiles"/>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </svg>  
+    </div>
+    <div class="next {% if model.items.length == 0 %} hidden {% endif %}">
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns" width="19.5px" height="54.3px" viewBox="0 0 23 58" version="1.1">
+            <title>chevron right for subcategory tiles</title>
+            <desc>Created with Sketch Beta.</desc><defs/>
+            <g id="Category" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+                <g id="Category:-Desktop-HD" sketch:type="MSArtboardGroup" transform="translate(-436.000000, -315.000000)" stroke-linecap="square" stroke-width="2" stroke="#D7D7D7">
+                    <g id="Subs:-Photo-next-to-names" sketch:type="MSLayerGroup" transform="translate(0.000000, 280.000000)">
+                        <g id="Tents" sketch:type="MSShapeGroup">
+                            <path d="M438,37 L457.5,63.8300839 L438.133573,91.2595215" id="chevron-right-for-subcategory-tiles"/>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </svg>    
+    </div>
+</div>
+{% if model.items %}
+    <div class="related-title {% if model.items.length == 0 %}hidden{% endif %}">
+        <span id="title" class="pull-left title"></span>
+    </div>
+    <div id="owl-example" class="related-prod-owl-carousel"> 
+        {% for prod in model.items %}
+            <div class="row mz-productlisting {% block module-classes %}{% endblock module-classes %}" data-mz-product="{{ prod.productCode }}">
+                {% if prod.price.salePrice > 0 and prod.price.price > prod.price.salePrice %}
+                    <span class="sale-tag-icon">Sale</span>
+                {% endif %}
+                <div class="prod-content mz-productlisting-image-right">
+                    {% block product-image %}
+                        <div class="row product-listing-row-content">
+                            {% if not user.isAnonymous %}
+                                {% if siteContext.generalSettings.isWishlistCreationEnabled %}
+                                    {% if prod.purchasableState.isPurchasable and prod.options.length < 1 %}
+                                        <a class="wishlist-button wishlistHeart" data-target-modal="product-details-quick-view" data-listing-prod-code="{{ prod.productCode }}">
+                                            <span class="blank-heart">
+                                                <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+                                                <svg width="18.2px" height="16px" viewBox="0 0 21 19" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+                                                    <title>Heart Icon</title>
+                                                    <desc>Created with Sketch Beta.</desc>
+                                                    <defs></defs>
+                                                    <g id="Product-Grid" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+                                                        <g id="Product-Grid:-Desktop:-Tile-View" sketch:type="MSArtboardGroup" transform="translate(-483.000000, -329.000000)" fill="#4A4A4A">
+                                                            <g id="Product-Grid:-Tile-View:-Tablet" sketch:type="MSLayerGroup" transform="translate(256.000000, 321.000000)">
+                                                                <g id="Hearts" transform="translate(227.000000, 8.000000)" sketch:type="MSShapeGroup">
+                                                                    <g id="Row-1">
+                                                                        <path d="M15.3243243,3.826536e-15 C13.919027,3.826536e-15 12.5682162,0.531485275 11.5193514,1.49750737 C11.1209189,1.86394945 10.7798108,2.28059697 10.5,2.74052505 C10.2201892,2.28059697 9.87908108,1.86394945 9.48064865,1.4969303 C8.43178378,0.531485275 7.08097297,4.33908079e-15 5.67567568,4.33908079e-15 C2.54610811,4.33908079e-15 0,2.58875456 0,5.77074132 C0,7.91861124 0.657243243,9.61405504 2.19705405,11.4404947 C4.43440541,14.0950357 10.097027,18.1460961 10.3371081,18.3174871 C10.3859189,18.3526886 10.4432432,18.3700008 10.5,18.3700008 C10.5567568,18.3700008 10.6140811,18.3526886 10.6628919,18.3174871 C10.902973,18.1460961 16.5655946,14.0950357 18.8035135,11.4404947 C20.3427568,9.61405504 21,7.91861124 21,5.77074132 C21,2.58875456 18.4538919,1.77635684e-15 15.3243243,1.77635684e-15 L15.3243243,3.826536e-15 Z M18.3727297,11.0653965 C16.3890811,13.4175506 11.4597568,17.0329201 10.5,17.7277173 C9.54024324,17.0329201 4.61091892,13.4175506 2.62783784,11.0653965 C1.18337838,9.35206338 0.567567568,7.76857196 0.567567568,5.77074132 C0.567567568,2.9067224 2.85940541,0.577074132 5.67567568,0.577074132 C6.93964865,0.577074132 8.15594595,1.05546859 9.09924324,1.92454223 C9.57486486,2.36311857 9.96081081,2.88017699 10.2457297,3.46186772 C10.3422162,3.65807292 10.6577838,3.65807292 10.7542703,3.46186772 C11.0391892,2.88017699 11.4251351,2.36311857 11.9007568,1.9251193 C12.8440541,1.05546859 14.0603514,0.577074132 15.3243243,0.577074132 C18.1405946,0.577074132 20.4324324,2.9067224 20.4324324,5.77074132 C20.4324324,7.76857196 19.8166216,9.35206338 18.3727297,11.0653965 L18.3727297,11.0653965 Z" id="Heart-Icon"></path>
+                                                                    </g>
+                                                                </g>
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                </svg>
+                                            </span>
+                                            <span class="filled-heart">
+                                                <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+                                                <svg width="18.2px" height="16px" viewBox="0 0 21 19" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+                                                    <title>Heart Icon - Filled</title>
+                                                    <desc>Created with Sketch Beta.</desc>
+                                                    <defs></defs>
+                                                    <g id="Product-Grid" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+                                                        <g id="Product-Grid:-Desktop:-Tile-View" sketch:type="MSArtboardGroup" transform="translate(-995.000000, -329.000000)" fill="#D0011B">
+                                                            <g id="Product-Grid:-Tile-View:-Tablet" sketch:type="MSLayerGroup" transform="translate(256.000000, 321.000000)">
+                                                                <g id="Hearts" transform="translate(227.000000, 8.000000)" sketch:type="MSShapeGroup">
+                                                                    <g id="Row-1">
+                                                                        <path d="M527.328406,3.826536e-15 C525.922735,3.826536e-15 524.571564,0.531485275 523.52242,1.49750737 C523.123881,1.86394945 522.782682,2.28059697 522.502797,2.74052505 C522.222912,2.28059697 521.881713,1.86394945 521.483174,1.4969303 C520.43403,0.531485275 519.082859,4.33908079e-15 517.677187,4.33908079e-15 C514.546786,4.33908079e-15 512,2.58875456 512,5.77074132 C512,7.91861124 512.657418,9.61405504 514.197639,11.4404947 C516.435587,14.0950357 522.099717,18.1460961 522.339862,18.3174871 C522.388685,18.3526886 522.446025,18.3700008 522.502797,18.3700008 C522.559569,18.3700008 522.616908,18.3526886 522.665732,18.3174871 C522.905877,18.1460961 528.570007,14.0950357 530.808522,11.4404947 C532.348175,9.61405504 533.005594,7.91861124 533.005594,5.77074132 C533.005594,2.58875456 530.458807,1.77635684e-15 527.328406,1.77635684e-15 L527.328406,3.826536e-15 Z" id="Heart-Icon---Filled"></path>
+                                                                    </g>
+                                                                </g>
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                </svg>
+                                            </span>
+                                        </a>
+                                    {% endif %}
+                                {% endif %}
+                            {% endif %}
+                            <div class="mz-subcategory-image-div">
+                                <a href="{{prod.url}}">
+                                    {% if prod.mainImage.imageUrl %}
+                                    <img class="mz-subcategory-image active lazyload" data-main-image-src="{{prod.mainImage.imageUrl}}"
+                                        data-srcset="{{ prod.mainImage.imageUrl }}?max=320 320w 160h,
+                                            {{ prod.mainImage.imageUrl }}?max=480 480w 240h,
+                                            {{ prod.mainImage.imageUrl }}?max=500 675w 337h,
+                                            {{ prod.mainImage.imageUrl }}?max=320 1024w 472h,
+                                            {{ prod.mainImage.imageUrl }}?max=320 1920w 472h, 
+                                            {{ prod.mainImage.imageUrl }}?max=320 2600w 472h,
+                                            {{ prod.mainImage.imageUrl }}?max=320 5500w 472h" 
+                                        data-parent-fit="contain"
+                                        data-sizes="auto"
+                                        data-absurl="false" 
+                                        data-optimumx="2" 
+                                        data-quality="75"
+                                        {% if prod.mainImage.altText %}alt="{{ prod.mainImage.altText }}"{% endif %}
+                                    />
+                                    {% else %}
+                                        <span class="mz-productlisting-imageplaceholder"><span class="mz-productlisting-imageplaceholdertext">{{ labels.productImagePlaceholder }}</span></span>
+                                    {% endif %}
+                                    <span class="mainImageContainer2">
+                                        <span class="spinner icon-spinner-2 imageload"></span>
+                                    </span>
+                                </a>
+                            </div>
+                            <div class="mz-productlisting-info">
+                                <div class="productTitle"><a class="mz-productlisting-title" href="{{prod.url}}">{{prod.content.productName}}</a></div>
+                                <div class="priceSection">
+									{% for property in prod.properties %}
+										{% if property.attributeFQN == "tenant~rating" %}
+											{% for popIndex in property.values %}
+												<span class="rating">
+													{% if popIndex.value == "0" %}
+														<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+														<svg width="31px" height="34px" viewBox="0 0 28 43" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+															<title>Star Circle - 0</title>
+															<desc>Created with Sketch.</desc>
+															<defs></defs>
+															<g id="Explorations" stroke="none" stroke-width="2" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+																<g id="Star-Ratings" sketch:type="MSArtboardGroup" transform="translate(-60.000000, -606.000000)">
+																	<g id="Star-Circle---0" sketch:type="MSLayerGroup" transform="translate(59.978516, 606.652316)">
+																		<text id="0" sketch:type="MSTextLayer" font-family=".Helvetica Neue DeskInterface" font-size="20.7700005" font-weight="normal" sketch:alignment="middle" fill="#4A4A4A">
+																			<tspan x="17.0751815" y="41.3480191">0</tspan>
+																		</text>
+																		<path d="M19.0624682,9.05478027 L15.0287409,13.5651398 L15.9845465,19.9355842 C15.9921323,19.9948417 15.9959251,20.0799223 15.9959251,20.1908261 C15.9959251,20.369142 15.9570481,20.5200037 15.8792941,20.6434114 C15.8015401,20.7668191 15.6884649,20.8285229 15.5400684,20.8285229 C15.3992578,20.8285229 15.2510984,20.777692 15.0955904,20.6760302 L10.1060575,17.6693957 L5.11652454,20.6760302 C4.95343072,20.777692 4.80527137,20.8285229 4.67204648,20.8285229 C4.51653842,20.8285229 4.39990738,20.7668191 4.32215335,20.6434114 C4.24439932,20.5200037 4.20552231,20.369142 4.20552231,20.1908261 C4.20552231,20.1397233 4.21287101,20.0546427 4.22756842,19.9355842 L5.18337404,13.5651398 L1.1382681,9.05478027 C0.952891121,8.82536163 0.860202629,8.62149436 0.860202629,8.44317846 C0.860202629,8.12895104 1.06762572,7.93351028 1.48247191,7.85685619 L7.06084937,6.92640596 L9.56130515,1.12923626 C9.7021158,0.780759134 9.8836999,0.606520574 10.1060575,0.606520574 C10.328415,0.606520574 10.5099991,0.780759134 10.6508098,1.12923626 L13.1512656,6.92640596 L18.729643,7.85685619 C19.1444892,7.93351028 19.3519123,8.12895104 19.3519123,8.44317846 C19.3519123,8.44317846 19.2549568,8.83405997 19.0624682,9.05478027 Z" id="Star" stroke="#F6A623" sketch:type="MSShapeGroup"></path>
+																	</g>
+																</g>
+															</g>
+														</svg>
+													{% endif %}
+													{% if popIndex.value == "0.5" %}
+														<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+														<svg width="31px" height="34px" viewBox="0 0 37 43" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+															<title>Star Circle - 0.5</title>
+															<desc>Created with Sketch.</desc>
+															<defs></defs>
+															<g id="Explorations" stroke="none" stroke-width="2" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+																<g id="Star-Ratings" sketch:type="MSArtboardGroup" transform="translate(-145.000000, -606.000000)">
+																	<g id="Star-Circle---0.5" sketch:type="MSLayerGroup" transform="translate(146.050800, 606.652316)">
+																		<path d="M30.990197,10.5937393 C28.3480883,9.44824231 25.4838363,8.82134182 22.4918919,8.82134182" id="Circle" stroke="#F6A623" sketch:type="MSShapeGroup"></path>
+																		<text id="0.5" sketch:type="MSTextLayer" font-family=".Helvetica Neue DeskInterface" font-size="20.7692308" font-weight="normal" sketch:alignment="middle" fill="#4A4A4A">
+																			<tspan x="7.96842542" y="41.3480191">0.5</tspan>
+																		</text>
+																		<path d="M18.5671304,9.05478027 L14.5334032,13.5651398 L15.4892088,19.9355842 C15.4967945,19.9948417 15.5005874,20.0799223 15.5005874,20.1908261 C15.5005874,20.369142 15.4617104,20.5200037 15.3839564,20.6434114 C15.3062023,20.7668191 15.1931271,20.8285229 15.0447307,20.8285229 C14.9039201,20.8285229 14.7557607,20.777692 14.6002527,20.6760302 L9.61071973,17.6693957 L4.62118681,20.6760302 C4.45809299,20.777692 4.30993364,20.8285229 4.17670875,20.8285229 C4.02120069,20.8285229 3.90456965,20.7668191 3.82681562,20.6434114 C3.74906159,20.5200037 3.71018458,20.369142 3.71018458,20.1908261 C3.71018458,20.1397233 3.71753328,20.0546427 3.73223069,19.9355842 L4.68803631,13.5651398 L0.642930375,9.05478027 C0.457553392,8.82536163 0.3648649,8.62149436 0.3648649,8.44317846 C0.3648649,8.12895104 0.572287995,7.93351028 0.987134185,7.85685619 L6.56551164,6.92640596 L9.06596742,1.12923626 C9.20677807,0.780759134 9.38836217,0.606520574 9.61071973,0.606520574 C9.83307729,0.606520574 10.0146614,0.780759134 10.155472,1.12923626 L12.6559278,6.92640596 L18.2343053,7.85685619 C18.6491515,7.93351028 18.8565746,8.12895104 18.8565746,8.44317846 C18.8565746,8.44317846 18.7596191,8.83405997 18.5671304,9.05478027 Z" id="Star" stroke="#F6A623" sketch:type="MSShapeGroup"></path>
+																	</g>
+																</g>
+															</g>
+														</svg>
+													{% endif %}
+													{% if popIndex.value == "1" %}
+														<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+														<svg width="31px" height="34px" viewBox="0 0 44 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+															<title>Star Circle - 1</title>
+															<desc>Created with Sketch.</desc>
+															<defs></defs>
+															<g id="Explorations" stroke="none" stroke-width="2" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+																<g id="Star-Ratings" sketch:type="MSArtboardGroup" transform="translate(-227.000000, -606.000000)">
+																	<g id="Star-Circle---1" sketch:type="MSLayerGroup" transform="translate(227.474202, 606.652316)">
+																		<path d="M42.5327007,21.1629268 C38.2287555,13.7249768 30.8597301,8.82134182 22.4918919,8.82134182" id="Circle" stroke="#F6A623" sketch:type="MSShapeGroup"></path>
+																		<text id="1" sketch:type="MSTextLayer" font-family=".Helvetica Neue DeskInterface" font-size="20.7692308" font-weight="normal" sketch:alignment="middle" fill="#4A4A4A">
+																			<tspan x="16.5800577" y="41.3480191">1</tspan>
+																		</text>
+																		<path d="M18.5671304,9.05478027 L14.5334032,13.5651398 L15.4892088,19.9355842 C15.4967945,19.9948417 15.5005874,20.0799223 15.5005874,20.1908261 C15.5005874,20.369142 15.4617104,20.5200037 15.3839564,20.6434114 C15.3062023,20.7668191 15.1931271,20.8285229 15.0447307,20.8285229 C14.9039201,20.8285229 14.7557607,20.777692 14.6002527,20.6760302 L9.61071973,17.6693957 L4.62118681,20.6760302 C4.45809299,20.777692 4.30993364,20.8285229 4.17670875,20.8285229 C4.02120069,20.8285229 3.90456965,20.7668191 3.82681562,20.6434114 C3.74906159,20.5200037 3.71018458,20.369142 3.71018458,20.1908261 C3.71018458,20.1397233 3.71753328,20.0546427 3.73223069,19.9355842 L4.68803631,13.5651398 L0.642930375,9.05478027 C0.457553392,8.82536163 0.3648649,8.62149436 0.3648649,8.44317846 C0.3648649,8.12895104 0.572287995,7.93351028 0.987134185,7.85685619 L6.56551164,6.92640596 L9.06596742,1.12923626 C9.20677807,0.780759134 9.38836217,0.606520574 9.61071973,0.606520574 C9.83307729,0.606520574 10.0146614,0.780759134 10.155472,1.12923626 L12.6559278,6.92640596 L18.2343053,7.85685619 C18.6491515,7.93351028 18.8565746,8.12895104 18.8565746,8.44317846 C18.8565746,8.44317846 18.7596191,8.83405997 18.5671304,9.05478027 Z" id="Star" stroke="#F6A623" sketch:type="MSShapeGroup"></path>
+																	</g>
+																</g>
+															</g>
+														</svg>
+													{% endif %}
+													{% if popIndex.value == "1.5" %}
+														<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+														<svg width="31px" height="34px" viewBox="0 0 46 43" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+															<title>Star Circle - 1.5</title>
+															<desc>Created with Sketch.</desc>
+															<defs></defs>
+															<g id="Explorations" stroke="none" stroke-width="2" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+																<g id="Star-Ratings" sketch:type="MSArtboardGroup" transform="translate(-310.000000, -606.000000)">
+																	<g id="Star-Circle---1.5" sketch:type="MSLayerGroup" transform="translate(310.985384, 606.652316)">
+																		<path d="M41.5383882,41.5309245 C43.3977163,38.214379 44.4578273,34.3893372 44.4578273,30.3166932 C44.4578273,17.6331564 34.1757891,7.35111819 21.4922523,7.35111819" id="Circle" stroke="#F6A623" sketch:type="MSShapeGroup"></path>
+																		<text id="1.5" sketch:type="MSTextLayer" font-family=".Helvetica Neue DeskInterface" font-size="20.7692308" font-weight="normal" sketch:alignment="middle" fill="#4A4A4A">
+																			<tspan x="6.97496736" y="37.7900159">1.5</tspan>
+																		</text>
+																		<path d="M17.7419247,7.54565022 L13.8874741,11.3042831 L14.8007995,16.6129869 C14.8080481,16.662368 14.8116724,16.7332686 14.8116724,16.8256884 C14.8116724,16.974285 14.7745233,17.1000031 14.700225,17.2028428 C14.6259267,17.3056825 14.517877,17.3571024 14.376076,17.3571024 C14.2415236,17.3571024 14.0999491,17.3147433 13.9513525,17.2300251 L9.18357663,14.7244964 L4.41580073,17.2300251 C4.25995553,17.3147433 4.11838103,17.3571024 3.99107725,17.3571024 C3.84248066,17.3571024 3.73103322,17.3056825 3.65673493,17.2028428 C3.58243663,17.1000031 3.54528749,16.974285 3.54528749,16.8256884 C3.54528749,16.7831028 3.55230958,16.7122023 3.56635377,16.6129869 L4.47967914,11.3042831 L0.614355691,7.54565022 C0.437217685,7.35446803 0.348648682,7.18457863 0.348648682,7.03598205 C0.348648682,6.77412586 0.546852973,6.61125857 0.943261555,6.54738015 L6.27371112,5.77200497 L8.66303553,0.941030213 C8.79758793,0.650632612 8.97110163,0.505433811 9.18357663,0.505433811 C9.39605163,0.505433811 9.56956533,0.650632612 9.70411773,0.941030213 L12.0934421,5.77200497 L17.4238917,6.54738015 C17.8203003,6.61125857 18.0185046,6.77412586 18.0185046,7.03598205 C18.0185046,7.03598205 17.9258582,7.36171664 17.7419247,7.54565022 Z" id="Star" stroke="#F6A623" sketch:type="MSShapeGroup"></path>
+																	</g>
+																</g>
+															</g>
+														</svg>
+													{% endif %}
+													{% if popIndex.value == "2" %}
+														<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+														<svg width="31px" height="34px" viewBox="0 0 46 51" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+															<title>Star Circle - 2</title>
+															<desc>Created with Sketch.</desc>
+															<defs></defs>
+															<g id="Explorations" stroke="none" stroke-width="2" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+																<g id="Star-Ratings" sketch:type="MSArtboardGroup" transform="translate(-394.000000, -606.000000)">
+																	<g id="Star-Circle---2" sketch:type="MSLayerGroup" transform="translate(394.496566, 606.652316)">
+																		<path d="M33.8013632,49.708371 C40.2075285,45.633477 44.4578273,38.4714404 44.4578273,30.3166932 C44.4578273,17.6331564 34.1757891,7.35111819 21.4922523,7.35111819" id="Circle" stroke="#F6A623" sketch:type="MSShapeGroup"></path>
+																		<text id="2" sketch:type="MSTextLayer" font-family=".Helvetica Neue DeskInterface" font-size="20.7692308" font-weight="normal" sketch:alignment="middle" fill="#4A4A4A">
+																			<tspan x="15.5865996" y="37.7900159">2</tspan>
+																		</text>
+																		<path d="M17.7419247,7.54565022 L13.8874741,11.3042831 L14.8007995,16.6129869 C14.8080481,16.662368 14.8116724,16.7332686 14.8116724,16.8256884 C14.8116724,16.974285 14.7745233,17.1000031 14.700225,17.2028428 C14.6259267,17.3056825 14.517877,17.3571024 14.376076,17.3571024 C14.2415236,17.3571024 14.0999491,17.3147433 13.9513525,17.2300251 L9.18357663,14.7244964 L4.41580073,17.2300251 C4.25995553,17.3147433 4.11838103,17.3571024 3.99107725,17.3571024 C3.84248066,17.3571024 3.73103322,17.3056825 3.65673493,17.2028428 C3.58243663,17.1000031 3.54528749,16.974285 3.54528749,16.8256884 C3.54528749,16.7831028 3.55230958,16.7122023 3.56635377,16.6129869 L4.47967914,11.3042831 L0.614355691,7.54565022 C0.437217685,7.35446803 0.348648682,7.18457863 0.348648682,7.03598205 C0.348648682,6.77412586 0.546852973,6.61125857 0.943261555,6.54738015 L6.27371112,5.77200497 L8.66303553,0.941030213 C8.79758793,0.650632612 8.97110163,0.505433811 9.18357663,0.505433811 C9.39605163,0.505433811 9.56956533,0.650632612 9.70411773,0.941030213 L12.0934421,5.77200497 L17.4238917,6.54738015 C17.8203003,6.61125857 18.0185046,6.77412586 18.0185046,7.03598205 C18.0185046,7.03598205 17.9258582,7.36171664 17.7419247,7.54565022 Z" id="Star" stroke="#F6A623" sketch:type="MSShapeGroup"></path>
+																	</g>
+																</g>
+															</g>
+														</svg>
+													{% endif %}
+													{% if popIndex.value == "2.5" %}
+														<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+														<svg width="31px" height="36px" viewBox="0 0 46 55" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+															<title>Star Circle - 2.5</title>
+															<desc>Created with Sketch.</desc>
+															<defs></defs>
+															<g id="Explorations" stroke="none" stroke-width="2" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+																<g id="Star-Ratings" sketch:type="MSArtboardGroup" transform="translate(-477.000000, -606.000000)">
+																	<g id="Star-Circle---2.5" sketch:type="MSLayerGroup" transform="translate(478.007748, 606.652316)">
+																		<path d="M21.4922523,53.2822682 L21.4922523,53.2822682 C21.8650781,53.2822682 22.2358289,53.2733842 22.6043045,53.2558163 C34.7713751,52.6757232 44.4578273,42.6274043 44.4578273,30.3166932 C44.4578273,17.6331564 34.1757891,7.35111819 21.4922523,7.35111819" id="Circle" stroke="#F6A623" sketch:type="MSShapeGroup"></path>
+																		<text id="2.5" sketch:type="MSTextLayer" font-family=".Helvetica Neue DeskInterface" font-size="20.7692308" font-weight="normal" sketch:alignment="middle" fill="#4A4A4A">
+																			<tspan x="6.97496736" y="37.7900159">2.5</tspan>
+																		</text>
+																		<path d="M17.7419247,7.54565022 L13.8874741,11.3042831 L14.8007995,16.6129869 C14.8080481,16.662368 14.8116724,16.7332686 14.8116724,16.8256884 C14.8116724,16.974285 14.7745233,17.1000031 14.700225,17.2028428 C14.6259267,17.3056825 14.517877,17.3571024 14.376076,17.3571024 C14.2415236,17.3571024 14.0999491,17.3147433 13.9513525,17.2300251 L9.18357663,14.7244964 L4.41580073,17.2300251 C4.25995553,17.3147433 4.11838103,17.3571024 3.99107725,17.3571024 C3.84248066,17.3571024 3.73103322,17.3056825 3.65673493,17.2028428 C3.58243663,17.1000031 3.54528749,16.974285 3.54528749,16.8256884 C3.54528749,16.7831028 3.55230958,16.7122023 3.56635377,16.6129869 L4.47967914,11.3042831 L0.614355691,7.54565022 C0.437217685,7.35446803 0.348648682,7.18457863 0.348648682,7.03598205 C0.348648682,6.77412586 0.546852973,6.61125857 0.943261555,6.54738015 L6.27371112,5.77200497 L8.66303553,0.941030213 C8.79758793,0.650632612 8.97110163,0.505433811 9.18357663,0.505433811 C9.39605163,0.505433811 9.56956533,0.650632612 9.70411773,0.941030213 L12.0934421,5.77200497 L17.4238917,6.54738015 C17.8203003,6.61125857 18.0185046,6.77412586 18.0185046,7.03598205 C18.0185046,7.03598205 17.9258582,7.36171664 17.7419247,7.54565022 Z" id="Star" stroke="#F6A623" sketch:type="MSShapeGroup"></path>
+																	</g>
+																</g>
+															</g>
+														</svg>
+													{% endif %}
+													{% if popIndex.value == "3" %}
+														<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+														<svg width="31px" height="36px" viewBox="0 0 46 55" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+															<title>Star Circle - 3</title>
+															<desc>Created with Sketch.</desc>
+															<defs></defs>
+															<g id="Explorations" stroke="none" stroke-width="2" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+																<g id="Star-Ratings" sketch:type="MSArtboardGroup" transform="translate(-561.000000, -606.000000)">
+																	<g id="Star-Circle---3" sketch:type="MSLayerGroup" transform="translate(561.518930, 606.652316)">
+																		<path d="M10.617799,50.5495571 L10.617799,50.5495571 C13.8547551,52.2929657 17.5579717,53.2822682 21.4922523,53.2822682 C21.8650781,53.2822682 22.2358289,53.2733842 22.6043045,53.2558163 C34.7713751,52.6757232 44.4578273,42.6274043 44.4578273,30.3166932 C44.4578273,17.6331564 34.1757891,7.35111819 21.4922523,7.35111819" id="Circle" stroke="#F6A623" sketch:type="MSShapeGroup"></path>
+																		<text id="3" sketch:type="MSTextLayer" font-family=".Helvetica Neue DeskInterface" font-size="20.7692308" font-weight="normal" sketch:alignment="middle" fill="#4A4A4A">
+																			<tspan x="15.5865996" y="37.7900159">3</tspan>
+																		</text>
+																		<path d="M17.7419247,7.54565022 L13.8874741,11.3042831 L14.8007995,16.6129869 C14.8080481,16.662368 14.8116724,16.7332686 14.8116724,16.8256884 C14.8116724,16.974285 14.7745233,17.1000031 14.700225,17.2028428 C14.6259267,17.3056825 14.517877,17.3571024 14.376076,17.3571024 C14.2415236,17.3571024 14.0999491,17.3147433 13.9513525,17.2300251 L9.18357663,14.7244964 L4.41580073,17.2300251 C4.25995553,17.3147433 4.11838103,17.3571024 3.99107725,17.3571024 C3.84248066,17.3571024 3.73103322,17.3056825 3.65673493,17.2028428 C3.58243663,17.1000031 3.54528749,16.974285 3.54528749,16.8256884 C3.54528749,16.7831028 3.55230958,16.7122023 3.56635377,16.6129869 L4.47967914,11.3042831 L0.614355691,7.54565022 C0.437217685,7.35446803 0.348648682,7.18457863 0.348648682,7.03598205 C0.348648682,6.77412586 0.546852973,6.61125857 0.943261555,6.54738015 L6.27371112,5.77200497 L8.66303553,0.941030213 C8.79758793,0.650632612 8.97110163,0.505433811 9.18357663,0.505433811 C9.39605163,0.505433811 9.56956533,0.650632612 9.70411773,0.941030213 L12.0934421,5.77200497 L17.4238917,6.54738015 C17.8203003,6.61125857 18.0185046,6.77412586 18.0185046,7.03598205 C18.0185046,7.03598205 17.9258582,7.36171664 17.7419247,7.54565022 Z" id="Star" stroke="#F6A623" sketch:type="MSShapeGroup"></path>
+																	</g>
+																</g>
+															</g>
+														</svg>
+													{% endif %}
+													{% if popIndex.value == "3.5" %}
+														<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+														<svg width="31px" height="36px" viewBox="0 0 46 55" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+															<title>Star Circle - 3.5</title>
+															<desc>Created with Sketch.</desc>
+															<defs></defs>
+															<g id="Explorations" stroke="none" stroke-width="2" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+																<g id="Star-Ratings" sketch:type="MSArtboardGroup" transform="translate(-644.000000, -606.000000)">
+																	<g id="Star-Circle---3.5" sketch:type="MSLayerGroup" transform="translate(645.205671, 606.476757)">
+																		<path d="M0.980256523,41.172168 L0.980256523,41.172168 C4.82435266,48.4769255 12.488847,53.4578273 21.3166932,53.4578273 C21.689519,53.4578273 22.0602698,53.4489433 22.4287454,53.4313754 C34.595816,52.8512823 44.2822682,42.8029634 44.2822682,30.4922523 C44.2822682,17.8087154 34.0002301,7.52667728 21.3166932,7.52667728" id="Circle" stroke="#F6A623" sketch:type="MSShapeGroup"></path>
+																		<text id="3.5" sketch:type="MSTextLayer" font-family=".Helvetica Neue DeskInterface" font-size="20.7692308" font-weight="normal" sketch:alignment="middle" fill="#4A4A4A">
+																			<tspan x="6.79940827" y="37.965575">3.5</tspan>
+																		</text>
+																		<path d="M17.5663656,7.72120932 L13.711915,11.4798422 L14.6252404,16.788546 C14.632489,16.8379271 14.6361133,16.9088276 14.6361133,17.0012475 C14.6361133,17.1498441 14.5989642,17.2755622 14.5246659,17.3784019 C14.4503676,17.4812416 14.3423179,17.5326615 14.2005169,17.5326615 C14.0659645,17.5326615 13.92439,17.4903024 13.7757934,17.4055842 L9.00801754,14.9000555 L4.24024164,17.4055842 C4.08439643,17.4903024 3.94282194,17.5326615 3.81551816,17.5326615 C3.66692157,17.5326615 3.55547413,17.4812416 3.48117583,17.3784019 C3.40687754,17.2755622 3.36972839,17.1498441 3.36972839,17.0012475 C3.36972839,16.9586619 3.37675049,16.8877614 3.39079468,16.788546 L4.30412005,11.4798422 L0.438796598,7.72120932 C0.261658592,7.53002712 0.173089589,7.36013773 0.173089589,7.21154114 C0.173089589,6.94968496 0.371293879,6.78681766 0.767702461,6.72293925 L6.09815203,5.94756406 L8.48747644,1.11658931 C8.62202884,0.826191706 8.79554254,0.680992905 9.00801754,0.680992905 C9.22049254,0.680992905 9.39400624,0.826191706 9.52855864,1.11658931 L11.917883,5.94756406 L17.2483326,6.72293925 C17.6447412,6.78681766 17.8429455,6.94968496 17.8429455,7.21154114 C17.8429455,7.21154114 17.7502991,7.53727573 17.5663656,7.72120932 Z" id="Star" stroke="#F6A623" sketch:type="MSShapeGroup"></path>
+																	</g>
+																</g>
+															</g>
+														</svg>
+													{% endif %}
+													{% if popIndex.value == "4" %}
+														<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+														<svg width="31px" height="36px" viewBox="0 0 48 55" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+															<title>Star Circle - 4</title>
+															<desc>Created with Sketch.</desc>
+															<defs></defs>
+															<g id="Explorations" stroke="none" stroke-width="2" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+																<g id="Star-Ratings" sketch:type="MSArtboardGroup" transform="translate(-726.000000, -606.000000)">
+																	<g id="Star-Circle---4" sketch:type="MSLayerGroup" transform="translate(726.716852, 606.652316)">
+																		<path d="M0.383638334,29.083962 C0.362049293,29.4921372 0.351118187,29.9031386 0.351118187,30.3166932 C0.351118187,43.0002301 10.6331564,53.2822682 23.3166932,53.2822682 L23.3166932,53.2822682 C23.689519,53.2822682 24.0602698,53.2733842 24.4287454,53.2558163 C36.595816,52.6757232 46.2822682,42.6274043 46.2822682,30.3166932 C46.2822682,17.6331564 36.0002301,7.35111819 23.3166932,7.35111819" id="Circle" stroke="#F6A623" sketch:type="MSShapeGroup"></path>
+																		<text id="4" sketch:type="MSTextLayer" font-family=".Helvetica Neue DeskInterface" font-size="20.7692308" font-weight="normal" sketch:alignment="middle" fill="#4A4A4A">
+																			<tspan x="17.4110405" y="37.7900159">4</tspan>
+																		</text>
+																		<path d="M19.5663656,7.54565022 L15.711915,11.3042831 L16.6252404,16.6129869 C16.632489,16.662368 16.6361133,16.7332686 16.6361133,16.8256884 C16.6361133,16.974285 16.5989642,17.1000031 16.5246659,17.2028428 C16.4503676,17.3056825 16.3423179,17.3571024 16.2005169,17.3571024 C16.0659645,17.3571024 15.92439,17.3147433 15.7757934,17.2300251 L11.0080175,14.7244964 L6.24024164,17.2300251 C6.08439643,17.3147433 5.94282194,17.3571024 5.81551816,17.3571024 C5.66692157,17.3571024 5.55547413,17.3056825 5.48117583,17.2028428 C5.40687754,17.1000031 5.36972839,16.974285 5.36972839,16.8256884 C5.36972839,16.7831028 5.37675049,16.7122023 5.39079468,16.6129869 L6.30412005,11.3042831 L2.4387966,7.54565022 C2.26165859,7.35446803 2.17308959,7.18457863 2.17308959,7.03598205 C2.17308959,6.77412586 2.37129388,6.61125857 2.76770246,6.54738015 L8.09815203,5.77200497 L10.4874764,0.941030213 C10.6220288,0.650632612 10.7955425,0.505433811 11.0080175,0.505433811 C11.2204925,0.505433811 11.3940062,0.650632612 11.5285586,0.941030213 L13.917883,5.77200497 L19.2483326,6.54738015 C19.6447412,6.61125857 19.8429455,6.77412586 19.8429455,7.03598205 C19.8429455,7.03598205 19.7502991,7.36171664 19.5663656,7.54565022 Z" id="Star" stroke="#F6A623" sketch:type="MSShapeGroup"></path>
+																	</g>
+																</g>
+															</g>
+														</svg>
+													{% endif %}
+													{% if popIndex.value == "4.5" %}
+														<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+														<svg width="31px" height="36px" viewBox="0 0 46 54" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+															<title>Star Circle - 4.5</title>
+															<desc>Created with Sketch.</desc>
+															<defs>
+																<linearGradient x1="0.25781251%" y1="49.7500002%" x2="101.257813%" y2="49.7500002%" id="linearGradient-1">
+																	<stop stop-color="#F8E71C" offset="51.1100925%"></stop>
+																	<stop stop-color="#FFFFFF" offset="47.3453444%"></stop>
+																</linearGradient>
+															</defs>
+															<g id="Explorations" stroke="none" stroke-width="2" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+																<g id="Star-Ratings" sketch:type="MSArtboardGroup" transform="translate(-812.000000, -607.000000)">
+																	<g id="Star-Circle---4.5" sketch:type="MSLayerGroup" transform="translate(812.403593, 606.652316)">
+																		<path d="M2.69997882,19.7756955 C1.13570915,22.9325523 0.252132741,26.5168516 0.252132741,30.3166932 C0.252132741,43.0002301 10.0966374,53.2822682 22.2404492,53.2822682 L22.2404492,53.2822682 C22.5974101,53.2822682 22.9523843,53.2733842 23.3051801,53.2558163 C34.954503,52.6757232 44.2287657,42.6274043 44.2287657,30.3166932 C44.2287657,17.6331564 34.3842611,7.35111819 22.2404492,7.35111819" id="Circle" stroke="#F6A623" sketch:type="MSShapeGroup"></path>
+																		<text id="4.5" sketch:type="MSTextLayer" font-family=".Helvetica Neue DeskInterface" font-size="20.7692308" font-weight="normal" sketch:alignment="middle" fill="#4A4A4A">
+																			<tspan x="7.7288198" y="37.7900159">4.5</tspan>
+																		</text>
+																		<path d="M18.64971,7.97856374 L14.9592787,11.7371967 L15.8337391,17.0459004 C15.8406793,17.0952816 15.8441494,17.1661821 15.8441494,17.2586019 C15.8441494,17.4071985 15.808581,17.5329166 15.7374444,17.6357564 C15.6663077,17.7385961 15.5628559,17.7900159 15.427089,17.7900159 C15.2982622,17.7900159 15.1627122,17.7476568 15.0204388,17.6629387 L10.455547,15.1574099 L5.89065519,17.6629387 C5.7414417,17.7476568 5.60589165,17.7900159 5.48400505,17.7900159 C5.34173172,17.7900159 5.23502673,17.7385961 5.16389006,17.6357564 C5.0927534,17.5329166 5.05718506,17.4071985 5.05718506,17.2586019 C5.05718506,17.2160163 5.06390835,17.1451158 5.07735491,17.0459004 L5.95181537,11.7371967 L2.25097377,7.97856374 C2.08137355,7.78738155 1.99657344,7.61749216 1.99657344,7.46889557 C1.99657344,7.20703939 2.18634351,7.04417209 2.56588364,6.98029368 L7.66950557,6.20491849 L9.9571566,1.37394374 C10.0859834,1.08354613 10.2521135,0.938347334 10.455547,0.938347334 C10.6589805,0.938347334 10.8251107,1.08354613 10.9539374,1.37394374 L13.2415885,6.20491849 L18.3452104,6.98029368 C18.7247505,7.04417209 18.9145206,7.20703939 18.9145206,7.46889557 C18.9145206,7.46889557 18.8258166,7.79463016 18.64971,7.97856374 Z" id="Star-2" stroke="#F6A623" fill="url(#linearGradient-1)" sketch:type="MSShapeGroup"></path>
+																	</g>
+																</g>
+															</g>
+														</svg>
+													{% endif %}
+													{% if popIndex.value == "5" %}
+														<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+														<svg width="31px" height="36px" viewBox="0 0 46 55" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+															<title>Star Circle - 5</title>
+															<desc>Created with Sketch.</desc>
+															<defs></defs>
+															<g id="Explorations" stroke="none" stroke-width="2" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+																<g id="Star-Ratings" sketch:type="MSArtboardGroup" transform="translate(-893.000000, -606.000000)">
+																	<g id="Star-Circle---5" sketch:type="MSLayerGroup" transform="translate(893.826996, 606.652316)">
+																		<path d="M2.74023579,19.5461272 C1.0969686,22.7666985 0.16564241,26.443596 0.16564241,30.347684 C0.16564241,43.0502333 10.0249038,53.347684 22.186919,53.347684 C22.5444149,53.347684 22.8999212,53.3387867 23.2532459,53.3211924 C34.9200309,52.7402298 44.2081956,42.6768486 44.2081956,30.347684 C44.2081956,17.6451348 34.3489342,7.34768402 22.186919,7.34768402" id="Circle" stroke="#F6A623" sketch:type="MSShapeGroup"></path>
+																		<text id="5" sketch:type="MSTextLayer" font-family=".Helvetica Neue DeskInterface" font-size="20.7692308" font-weight="normal" sketch:alignment="middle" fill="#4A4A4A">
+																			<tspan x="16.3404521" y="37.7900159">5</tspan>
+																		</text>
+																		<path d="M18.64971,7.54565022 L14.9592787,11.3042831 L15.8337391,16.6129869 C15.8406793,16.662368 15.8441494,16.7332686 15.8441494,16.8256884 C15.8441494,16.974285 15.808581,17.1000031 15.7374444,17.2028428 C15.6663077,17.3056825 15.5628559,17.3571024 15.427089,17.3571024 C15.2982622,17.3571024 15.1627122,17.3147433 15.0204388,17.2300251 L10.455547,14.7244964 L5.89065519,17.2300251 C5.7414417,17.3147433 5.60589165,17.3571024 5.48400505,17.3571024 C5.34173172,17.3571024 5.23502673,17.3056825 5.16389006,17.2028428 C5.0927534,17.1000031 5.05718506,16.974285 5.05718506,16.8256884 C5.05718506,16.7831028 5.06390835,16.7122023 5.07735491,16.6129869 L5.95181537,11.3042831 L2.25097377,7.54565022 C2.08137355,7.35446803 1.99657344,7.18457863 1.99657344,7.03598205 C1.99657344,6.77412586 2.18634351,6.61125857 2.56588364,6.54738015 L7.66950557,5.77200497 L9.9571566,0.941030213 C10.0859834,0.650632612 10.2521135,0.505433811 10.455547,0.505433811 C10.6589805,0.505433811 10.8251107,0.650632612 10.9539374,0.941030213 L13.2415885,5.77200497 L18.3452104,6.54738015 C18.7247505,6.61125857 18.9145206,6.77412586 18.9145206,7.03598205 C18.9145206,7.03598205 18.8258166,7.36171664 18.64971,7.54565022 Z" id="Star" stroke="#F6A623" fill="#F8E81C" sketch:type="MSShapeGroup"></path>
+																	</g>
+																</g>
+															</g>
+														</svg>
+													{% endif %}
+												</span>
+											{% endfor %}
+										{% endif %}
+									{% endfor %}
+									<div class="mz-pricestack">
+										{% include "modules/product/price-stack" with model=prod %}
+									</div>
+								</div>
+								<div class="mz-swatch">
+									{% for property in prod.options %}
+										{% if property.attributeFQN == "Tenant~color" || property.attributeFQN == "tenant~color" %}
+											{% for colorOpt in property.values %}
+												<span class="swatch-element" for="tenantcolor_{{ colorOpt.value }}">
+													<input type="button" data-toolstip="toolstip" data-placement="top" title="{{ colorOpt.value }}" class="swatch {{ colorOpt.value|lower }}" data-mz-swatch value="{{ colorOpt.value }}">
+													<label for="tenantcolor_{{ colorOpt.value }}"></label>
+												</span>
+											{% endfor %}
+										{% endif %}
+									{% endfor %}
+								</div>
+							</div>
+                        </div>
+                    {% endblock product-image %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}

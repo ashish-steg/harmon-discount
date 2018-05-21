@@ -1,0 +1,30 @@
+﻿<!-- Need a better/more consolidated way to reference widget stylesheets -->
+
+<link rel="stylesheet" href="{% make_url "stylesheet" "/stylesheets/widgets/socialcontent/jquery.bxslider.less" %}" title="default" />
+<link rel="stylesheet" href="{% make_url "stylesheet" "/stylesheets/widgets/socialcontent/remodal.less" %}" title="default" />
+<link rel="stylesheet" href="{% make_url "stylesheet" "/stylesheets/widgets/socialcontent/remodal-default-theme.less" %}" title="default" />
+<link rel="stylesheet" href="{% make_url "stylesheet" "/stylesheets/widgets/socialcontent/socialcontent.less" %}" title="default" />
+<link rel="stylesheet" href="{% make_url "stylesheet" "/stylesheets/widgets/socialcontent/socialcontent-theme.less" %}" title="default" />
+<link rel="stylesheet" href="{% make_url "stylesheet" "/stylesheets/modules/common/scrollbar.less" %}" title="default" />
+
+<div class="socialcontent-widget-wrapper {{Model.config.templateType}} ">
+    <div id="socialcontent-widget" class="scrollbar" data-mz-socialcontent="{% json_attribute Model.config %}">
+        <div class="feed-intro-text">
+            <p>{{Model.config.introText}}</p>
+        </div>
+        <div class="feed-item-wrapper">
+
+        </div>
+    </div>
+    <div id="loading-block" style="display:none;">
+        Loading...
+    </div>
+    <div id="loading-block-wrapper" style="display:none;"></div>
+</div>
+
+<div class="remodal" data-remodal-id="modal"></div>
+
+{% block trailing-scripts %}
+{% require_script "widgets/SocialContent/socialcontent" %}
+{% endblock trailing-scripts %}
+

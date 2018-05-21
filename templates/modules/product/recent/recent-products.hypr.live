@@ -1,0 +1,23 @@
+<div class="mz-product-image">
+	<a href='{% make_url "product" model %}'>
+	{% if model.content.productImages %}
+		{% with model.content.productImages|first as prodImage %}
+			{% include "modules/product/product-image" with productImage=prodImage productMaxWidth="160" as_parameter %}
+		{% endwith %}
+	{% else %}
+    	{% include "modules/product/product-image" with productImage=model.mainImage productMaxWidth="160" as_parameter %}
+	{% endif %}
+	</a>
+</div>
+<div class="mz-product-details">
+	<a href="{% make_url "product" model %}" class="mz-productlisting-title">{{ model.content.productName }}</a>
+	<div class="mz-product-rating">
+		<img src="../../resources/images/rating.jpg" alt="">
+	</div>
+	<div class="mz-price-stack">
+		<span class="mz-price {% if model.price.salePrice %} is-crossedout {% endif %}">{{ model.price.price|currency }}</span>
+		{% if model.price.salePrice %}
+			<span>{{ model.price.salePrice|currency }}</span>
+		{% endif %}
+	</div>
+</div>

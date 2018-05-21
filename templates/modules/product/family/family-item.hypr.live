@@ -1,0 +1,70 @@
+{% if model %}
+	<div id="family-item-error-{{model.productCode}}">
+		{% include "modules/common/message-bar" with model=model.messages %}
+	</div>
+	<div class="col-sm-3 item-image"> 
+	<a href='{% make_url "product" model %}'>
+		{% if model.mainImage %} 
+			{% include "modules/product/product-image" with productImage=model.mainImage productMaxWidth=themeSettings.familyProductImageMaxWidth as_parameter %}			
+		{% else %}
+	    	{% with model.content.productImages|first as prodImage %}
+				{% include "modules/product/product-image" with productImage=prodImage productMaxWidth=themeSettings.familyProductImageMaxWidth as_parameter %}
+			{% endwith %}
+		{% endif %}
+	</a>
+	</div>
+	<div class="col-xs-12 col-sm-4 item-desc">
+		<h1 class="mz-pagetitle" itemprop="name">{{ model.content.productName|replace("'","&rsquo;")|safe }}</h1>
+		<h4 class="mz-productcodes-productcode p-3" itemprop="sku">{{ model.itemCode }}</h4>
+		<div class="mz-productdetail-shortdesc mz-l-stack-section">
+		  	<span itemscope itemprop="description">{{ model.content.productShortDescription|safe }}</span>
+		</div>
+	</div>
+	<div class="col-xs-12 col-sm-3 item-options">
+		{% if model.quantityNull === 0 %}
+			<div class="itemOutOfStock">
+		  		{{ labels.itemOutOfStock }}
+			</div>
+		{% endif %}
+			{% if model.stockInfo %}
+				<div class="stock-message">{{ model.stockInfo }}</div>
+			{% endif %}
+			<div class="mz-productdetail-options mz-l-stack-section">
+			  {% include "modules/product/product-options" %}
+			</div> 
+			{% include "modules/product/product-validation" %}
+			<!-- div to display message in case inventory <minimumQuantityForInStockQuantityMessage and > 0 -->
+			{% if model.inventoryInfo.onlineStockAvailable > 0 and model.inventoryInfo.onlineStockAvailable <= model.minimumQuantityForInStockQuantityMessage %}
+				<div class="col-xs-12 col-sm-12">
+				    <div class="mz-validationmessage out-of-stock-message" data-mz-validationmessage-for="quantity">
+				      *Only {{model.inventoryInfo.onlineStockAvailable}} left in stock.
+				    </div>
+				</div>
+			{% endif %}
+	</div>
+	
+	<div class="col-xs-12 col-sm-2 item-price-qty">		
+		<div class="clearfix item-price">			
+			{% include "modules/product/price-stack" %}
+		</div>
+		{% if model.productType != themeSettings.familyProductType and model.quantityNull !== 0 %}
+		 <section class="mz-l-stack-section mz-productdetail-conversion row item-qty">		
+		    <div class="mz-productdetail-conversion-controls col-xs-4 col-sm-4">
+		      <div class="qty-block">
+		        <!-- <div class="qty-counter" id="minus" data-mz-qty-minus role="button"><i class="fa fa-minus"  aria-hidden="true"></i></div> -->
+		        <button aria-label="Minus Quantity" class="qty-counter" type="button" data-mz-qty-minus>
+	        		<i class="fa fa-minus" aria-hidden="true"></i>
+	        	</button>
+		        <input class="mz-productdetail-qty text-center" type="text" value="{{model.quantity}}" readonly onfocus="this.blur()" data-mz-value="quantity" title="Quantity" />
+	        	<button aria-label="Add Quantity" class="qty-counter" type="button" data-mz-qty-plus>
+	        		<i class="fa fa-plus" aria-hidden="true"></i>
+	        	</button>
+		        <!-- <div class="qty-counter" id="plus" data-mz-qty-plus role="button"><i class="fa fa-plus" aria-hidden="true"></i></div> -->
+		      </div>
+		      <span class="mz-validationmessage validation-msg" data-mz-validationmessage-for="quantity"></span>
+		    </div>		
+		</section> 
+		{% endif %}
+	</div>
+	
+{% endif %}

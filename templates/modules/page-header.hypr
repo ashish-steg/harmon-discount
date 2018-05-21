@@ -1,0 +1,34 @@
+﻿<div id="associate-login-container"></div>
+<div class="mz-header-top">
+    <div class="container"> 
+        <div class="col-xs-12 col-md-9">
+            <div class="mz-notification-bar">
+                <p><strong>Save 10%</strong> on select  table &amp; bar sinks Code: SAVEONSTAINLESS</p>      
+            </div>
+        </div>
+        
+        <div class="col-xs-12 col-md-3 pull-right text-right">
+            <div class="live-Chat">
+                <a href="javascript:void(0);" onclick="SnapEngage.startLink();">{{ labels.LiveChat }}<i class="fa fa-comments"></i>
+                   </a>   
+            </div>
+            <div class="phone-no">
+                <a href="tel:+1(888)810-5043">1(888) 810-5043</a>   
+            </div>
+        
+        </div>
+    </div> 
+</div>
+<div id="global-header-wrapper">
+    {% block store-branding %}
+        {% include "modules/page-header/global-header-include" %}
+    {% endblock store-branding %}
+</div>
+<header class="mz-pageheader{% if themeSettings.bannerImageEnabled %} mz-pageheader-hasbanner {% endif %}">
+    <div class="ml-header-links-wrapper"> 
+        {% block utility-nav %}
+            {% include "modules/page-header/utility-nav" %}
+        {% endblock utility-nav %}
+    </div>
+   
+</header>

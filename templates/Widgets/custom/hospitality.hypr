@@ -1,0 +1,15 @@
+<div class="mz-hospitality">
+    <h2 class="heading-2"><span>{{labels.servingTheFinest}}</span></h2>
+    <ul>
+        {% for listvar in model.config %}
+            {% if forloop.counter0|mod(2)==0 and listvar.0 != "" %}
+                <li>
+                    <a class="link" href="{{ listvar.0 }}">
+            {% else %}
+                        <img src="{% make_url "image" listvar.0.imageUrl %}" alt="{{ listvar.0.altText}}">
+                    </a>
+                </li>
+            {% endif%}
+        {% endfor %}
+    </ul>
+</div>

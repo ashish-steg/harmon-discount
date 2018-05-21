@@ -1,0 +1,126 @@
+{% extends "page" %}
+{% block page-header %}{% endblock page-header %}
+
+{% block site-nav %}{% endblock site-nav %}
+
+{% block body-tag-classes %}mz-printorder{% endblock body-tag-classes %}
+
+{% block body-content %}
+{% require_script "pages/print-order" %}
+
+{% block breadcrumbs %} {% endblock breadcrumbs %}
+<input type="hidden" id="companyname" value="{{ model.properties.companyName|safe }}" />
+<input type="hidden" id="companyaddr" value="{{ model.properties.companyAddress }}" /> 
+<input type="hidden" id="company-url" value="{{ model.properties.websiteUrl|safe }}" />
+<div id="print">
+ 
+</div>
+ {% block page-footer %}{% endblock page-footer %}
+<style>
+     @media print {   
+      #page-content{
+        padding: 0 !important;
+      }
+    .shipping-address,
+    .billing-address,.mz-l-stack-section.col-sm-6{
+        width: 50% !important;
+        display: table-cell !important;
+    }
+    .billing-address{
+      padding-right: 30px;
+    }
+    html, body { 
+      height: auto;
+    }
+    .mz-l-stack-section{
+      margin-bottom: 0px !important;
+    }
+    .mz-stack-order-confirmation{
+      margin-bottom: 0;
+    }
+    .site-root-nav,
+    .ml-global-footer,
+    .footer-icons,
+    .mz-checkout-qty-label-mobile,
+    .mz-print-hide,
+    .footer-bottom,
+    footer{
+      display: none !important;
+    }
+    a[href]:after {
+        content: none !important;
+    }
+    #mz-shipping-section,#mz-billing-section{
+      width: 50%; 
+      float: left;
+    }
+    .mz-header-basket-md-sm,
+    .mz-price-each-display,
+    .mz-item-discountname{
+      display: block !important;
+    }
+    .mz-order-content-container{
+      float: left;
+      width: 50%;
+      font-weight: 700!important;
+    }
+    .mz-propertylist dt,
+    strong,
+    .section-payment dt{
+      font-weight: 700!important;
+    }
+    .mz-item-price{
+      float: none !important;
+    }
+    #mz-print-content-confirmation{
+      display: none;
+    }
+    .mz-ordersummary-header-total,
+    .mz-ordersummary-header-each,
+    .mz-price-each-display,
+    .mz-checkout-item-total-container{
+      width: 24%;
+    }
+    .mz-carttable-item{
+        .mz-price-each-display{
+            .mz-item-price{
+              text-align: left !important;
+            }
+        }
+        .mz-checkout-total-row{
+          padding-top: 0px;
+        } 
+        .mz-ordersummary-lineitems{
+          padding-bottom: 0px;
+        }
+    }
+    .mz-logo-confirmation-page{
+        display: block !important;
+    }
+    .mz-checkout-payment{
+        .mz-propertylist{
+            margin-bottom: 0px;
+        }
+    }
+    .mz-printorder{
+    .mz-ordersummary{
+      .mz-ordersummary-item-product{
+          float: none ;
+      }
+      .mz-ordersummary-header-each{
+        padding-right: 0;
+        padding-left: 45px;
+      }
+    }
+    }
+    .company-logo{
+          width: 100%;
+          max-width: 339px;
+          margin: 20px 0;
+      }   
+ }
+    .footer-bottom{
+  		display: none;
+ 	}
+</style>
+{% endblock body-content %}

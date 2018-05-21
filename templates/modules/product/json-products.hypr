@@ -1,0 +1,4 @@
+{
+    "totalCount": {% json model.totalCount %},
+    "items": {% json model.items %}
+}

@@ -1,0 +1,105 @@
+﻿{% extends "page" %}
+
+{% block title-tag-content %}{% firstof pageContext.metaTitle|safe labels.myAccount %} - {% parent %}{% endblock title-tag-content %}
+
+{% block body-tag-classes %}mz-myaccount{% endblock body-tag-classes %}
+{% block secondary-nav %}{% endblock secondary-nav %}
+
+{% block body-content %}
+
+{% require_script "pages/myaccount" %}
+
+{% preload_json model "customer" %}
+{% block ensighten-data %}
+    <script type="text/javascript">
+        var pageData = {
+            "page": {
+                "serverDate": "{{serverDate}}",
+                "isProduction": "{{isProduction|lower}}",
+                "name":"my account",
+                "siteName": "{{ siteContext.generalSettings.websiteName }}",
+                "page": "",
+                "isMobile": "{{pageContext.isMobile|lower}}",
+                "type": "my account"
+            },
+            "customer": {
+                "loginSuccess":"false",
+                "registrationSuccess":"false",
+                "status":"{{customerType}}"
+            }
+        };
+    </script>
+{% endblock ensighten-data %}
+<div class="mz-l-container">
+    <h1 class="mz-pagetitle">
+        {{ labels.myAccount }}
+    </h1>
+
+    <div class="mz-l-sidebar mz-myaccount-nav col-xs-12 col-sm-3 col-md-2">
+        {% include "modules/my-account/my-account-nav" with navtarget="body" %}
+    </div>
+
+    <ul id="account-panels" class="mz-myaccount-panels mz-l-stack mz-l-stack-large col-xs-12 col-sm-9 col-md-10" style="visibility:hidden;">
+
+		<li>{% dropzone "my-account-top" scope="template" %}</li>
+
+        <li id="account-messages">
+            {% include "modules/common/message-bar" with model=model.messages %}
+        </li>
+
+        <li id="settings" class="account_content">
+            <div class="mz-l-stack-section mz-accountsettings" id="account-settings">
+                {% include "modules/my-account/my-account-settings" %}
+            </div>
+            <div class="mz-l-stack-section mz-passwordsection" id="password-section">
+                {% include "modules/my-account/my-account-password" %}
+            </div>
+        </li>
+        {% comment %}
+        {% if siteContext.generalSettings.isWishlistCreationEnabled %}
+        <li id="wishlist" class="account_content">
+            <div class="mz-l-stack-section mz-accountwishlist" id="account-wishlist">
+                {% include "modules/my-account/my-account-wishlist" with model=model.wishlist %}
+            </div>
+        </li>
+        {% endif %}
+        {% endcomment %}
+
+        <li id="orderhistory" class="account_content">
+            <div class="mz-l-stack-section mz-accountorderhistory" id="account-orderhistory">
+                {% include "modules/my-account/my-account-orderhistory" with model=model.orderHistory showPaging=true %}
+            </div>
+        </li>
+        
+        <li id="returnhistory" class="account_content">
+            <div class="mz-l-stack-section mz-accountreturnhistory" id="account-returnhistory">
+                {% include "modules/my-account/my-account-returnhistory" with model=model.returnHistory %}
+            </div>
+        </li>
+
+        <li id="paymentmethods" class="account_content">
+            <div class="mz-l-stack-section mz-accountpaymentmethods" id="account-paymentmethods">
+                {% include "modules/my-account/my-account-paymentmethods" %}
+            </div>
+        </li>
+
+        <li id="addressbook" class="account_content">
+            <div class="mz-l-stack-section mz-accountaddressbook" id="account-addressbook">
+                {% include "modules/my-account/my-account-addressbook" %}
+            </div>
+        </li>
+
+        <li id="{{ labels.digitalCreditsAnchor }}" class="account_content">
+            <div class="mz-l-stack-section mz-accountstorecredit" id="account-storecredit">
+                {% include "modules/my-account/my-account-storecredit" %}
+            </div>
+        </li>
+        <li>
+		{% dropzone "my-account-bottom" scope="template" %}
+        </li>
+    </ul>
+</div>
+{% endblock body-content %}
+
+{% block body-below-content %}
+{% endblock body-below-content %}

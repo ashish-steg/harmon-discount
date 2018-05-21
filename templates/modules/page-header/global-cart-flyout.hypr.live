@@ -1,0 +1,141 @@
+<div class="arrow-up"></div>
+<script type="text/json" id="data-mz-preload-globalcart">
+	{
+		"items": [
+			{% for item in model.items %}
+				{"productCode": "{{item.product.productCode}}",
+				"mfg": "{{item.product.mfgPartNumber}}"
+				}{% if not forloop.last %},{% endif %}
+			{% endfor %}
+		]
+	}
+</script>
+
+{% if model.items.length>0 %}
+	<div class="media-list">	
+		<div class="row heading">
+			<div class="col-xs-6 text-left">
+				<p>SHOPPING CART</p>
+			</div>
+			<div class="col-xs-2">
+				<p>QTY</p>
+			</div>
+			<div class="col-xs-2">
+				<p>PRICE EACH</p>
+			</div>
+			<div class="col-xs-2">
+				<p>PRICE</p>
+			</div>
+		</div>
+		{% for items in model.cartItems  %}
+			<div class="row listing">
+				<div class="col-xs-3 item-image">
+					<a href="/p/{{items.product.productCode}}/">
+						{% with items.product|get_product_attribute("tenant~color") as colorAttr %}  
+						  {% if colorAttr %}
+						    {% with colorAttr.value|replace(" ","_") as colorValue %}
+						      {% with "/cms/files/{0}_{1}_v1.jpg"|string_format(items.product.productCode, colorValue) as fileName %}
+						            <img class="mz-itemlisting-thumb-img mz-carttable-item-image" src="https:{% make_url "cdn" fileName with maxWidth=105 as_parameter %}" {% if items.product.imageAlternateText %}alt="{{ items.product.imageAlternateText }}" {%else%}alt='{{ items.product.name|safe }}' {% endif %} />   
+						      {% endwith %}     
+						    {% endwith %}
+						  {% else %}
+						    {% if items.product.imageUrl %}
+						          <img class="mz-itemlisting-thumb-img mz-carttable-item-image" src="{% make_url "image" items.product with maxWidth=105 as_parameters %}" {% if items.product.imageAlternateText %}alt="{{ items.product.imageAlternateText }}" {%else%}alt='{{ items.product.name|safe }}' {% endif %} />
+						    {% else %}
+						      	{% include "modules/product/product-no-image" %}
+						    {% endif %}    
+						  {% endif %}  
+						{% endwith %}
+					</a>
+					MPN:{{items.product.VariationProductCode|default(items.product.productCode)}}
+				</div>
+				<div class="col-xs-3 title-box">
+					<h5 class="media-heading">
+						<a href="/p/{{ items.product.productCode }}">
+							{{ items.product.name|safe }}
+						</a>
+					</h5>
+					
+					{% if items.product.options and items.product.productType != themeSettings.oneSizeProductType %}
+						{% for option in items.product.options %}
+						<p>{% if option.name == "OTHER" %}
+                    			OPTION
+                    		{% else %}
+                    			{{ option.name }}
+                    		{% endif %}: {% if option.stringValue %}
+								{% if option.stringValue == 'CHR(38)' %}
+									&amp;
+								{% else %}
+									{% if option.stringValue == 'CHR(64)' %}
+									@
+									{% else %}
+										{{ option.stringValue }}
+									{% endif %}
+								{% endif %}
+							{% else %}
+								{{ option.value }}
+							{% endif %}</p>
+						{% endfor %}
+					{% endif %}
+					
+				</div>
+			   <div class="col-xs-2 cart-item-qty hidden-xs">  
+					<div class="mz-carttable-item-qty mz-cart-qty-box">            
+					  <input aria-label="{{labels.itemQuantity}}" id="qty" class="mz-carttable-qty-field text-center" type="number" {% if model.isLoading %}disabled="disabled"{% endif %} data-mz-cart-item="{{ items.id }}" data-mz-value="quantity" value="{{ items.quantity }}" min="1"/>
+					</div>
+					 <div class="mz-carttable-item-remove">
+					  <a href="javascript:void(0);" data-mz-action="removeItem" data-mz-cart-item="{{ items.id }}" class="btn-link"><i class="fa fa-times"></i>{{ labels.remove }}</a>
+					</div>
+					<div class="mz-carttable-validation-msg mz-desktop-align"><span class="mz-validationmessage" data-mz-validationmessage-for="quantity" id="{{ items.id }}"></span></div>
+				</div>
+				<div class="col-xs-2 price-each text-center">
+					 {% include "modules/common/item-price" with item=items %}
+				</div>
+				<div class="col-xs-2 text-center">
+					<span>{% include "modules/common/item-total" with item=items isGlobalCart="true" %}
+					</span>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+	<div class="row total">
+		<div class="col-xs-5">
+	    	{% if model.items.length > themeSettings.globalCartMaxItemCount %}
+				<a href="/cart/"> {{model.items.length-themeSettings.globalCartMaxItemCount}} {{ labels.moreItems }} </a>
+			{% endif%}
+	    </div>
+		<div class="col-xs-7 text-right price-details">
+            {%if model.discountedSubtotal > 0 %}
+            <span>{{ labels.merchandiseSubtotal }}: {{ model.discountedSubtotal|currency }}</span>
+            {%else%}
+            <span>{{ labels.merchandiseSubtotal }}: {{ model.subtotal|currency }}</span>
+            {%endif%}
+			{% if model.orderDiscounts %}
+				{% for orderDiscount in model.orderDiscounts  %}
+					<span class="discount">
+						<div><p>: - {{ orderDiscount.impact |currency }}</p>{{ orderDiscount.discount.name }}</div>
+					</span>
+				{% endfor %}
+			{% endif %}
+			{% if themeSettings.globalCartShowSubtotal %}
+			<span> {{ labels.subtotal }}: {{ model.total|currency }}</span>
+			{% endif %}
+	    </div>
+	</div>
+	<div class="row checkout">
+	
+		<div class="col-xs-5">
+				{% if not user.isAnonymous && user.isAuthenticated %}
+				<button data-mz-action="openLiteRegistration" class="mz-button btn btn-default">Save Cart</button>	
+				{% endif%}
+		
+		</div>
+		<div class="col-xs-7">
+				<a href="/cart" class="mz-button btn link-green text-uppercase">{{ labels.openCart }}</a>
+		</div>
+	</div>
+{% else %}
+	<div class="text-center">
+		<button class="global-cart-empty-text">Your Shopping cart is empty</button>
+	</div>
+{% endif %}

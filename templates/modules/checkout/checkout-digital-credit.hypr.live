@@ -1,0 +1,94 @@
+﻿        <div class="mz-checkout-digitalcredit mz-l-stack-section">
+          <h4 class="mz-checkoutform-title">{{ labels.digitalCredits }}</h4>
+          <div class="mz-l-formfieldgroup-cell">
+           <input aria-label="{{labels.digitalCreditCode}}" type="text" name="digital-credit-code" class="mz-checkout-digitalcredit-enter-code" value="{{ model.digitalCreditCode }}" data-mz-value="digitalCreditCode" />
+            <button class="mz-button" data-mz-action="getDigitalCredit">{{ labels.apply }}</button>
+             <span class="mz-validationmessage" data-mz-validationmessage-for="giftcard"></span>
+          </div>
+          {% if model.availableDigitalCredits %}
+          <div class="mz-checkout-digitalcredit-table">
+          <h3 class="mz-formstep-header mz-checkoutform-header">Gift Card Summary</h3>
+            <div class="mz-table mz-gift-card-container">
+                {% for credit in model.availableDigitalCredits.models %}
+                <div class="mz-checkout-digitalcredit-row">
+                <div class="row">
+                <div class="col-sm-4 col-xs-6">  <strong>Coupon Type:</strong></div>
+                  <div class="mz-checkout-digitalcredit-cell-enable col-sm-8 col-xs-6">
+                      {% if credit.attributes.creditType == "GiftCard" %}
+                        Gift Card
+                      {% else %}
+                        Store Credit
+                      {% endif %}
+                  </div>
+                  </div>
+                <div class="row">
+                <div class="col-sm-4 col-xs-6">  <strong>Apply Coupon:</strong></div>
+                  <div class="mz-checkout-digitalcredit-cell-enable col-sm-8 col-xs-6">
+                      <input class="mz-gift-card-input" type="checkbox" data-mz-digital-credit-enable {% if credit.attributes.isEnabled %}checked="checked"{% endif %} 
+                             class="data-mz-credit-enabled"
+                             data-mz-credit-code-source="{{ credit.attributes.code }}" 
+                             data-mz-credit-balance="{{ credit.attributes.currentBalance }}" 
+                             name="gift-card"/>
+                  </div>
+                  </div>
+                  <div class="row">
+                     <div class="mz-checkout-digitalcredit-header-code col-sm-4 col-xs-6" >
+                     <strong>{{ labels.digitalCreditCode }}:</strong></div>
+                    <div class="mz-checkout-digitalcredit-cell-code col-sm-8 col-xs-6">
+                    <label class="mz-checkout-digitalcredit-code" for="enable{{ credit.attributes.code }}">
+                      <span class="mz-checkout-digitalcredit-code" data-mz-value="credit.attributes.code">{{ credit.attributes.code }}</span>
+                    </label>
+                  </div>
+                  </div>
+                  <div class="row">
+                   <div class="mz-checkout-digitalcredit-header-code col-sm-4 col-xs-6" >
+                     <strong>{{ labels.digitalCreditBalance }}:</strong></div>
+                      <div class="mz-checkout-digitalcredit-cell-balance col-sm-8 col-xs-6">{{ credit.attributes.currentBalance|currency }}
+                      </div>
+                  </div>
+                  <div class="row mz-checkout-balance-amt">
+                     <div class="mz-checkout-digitalcredit-header-amt-to-apply col-sm-4 col-xs-6">
+                     <strong style="line-height:52px;">{{ labels.digitalCreditAmtToUse }}:</strong></div>
+                  <div class="mz-checkout-digitalcredit-cell-amt-to-apply col-sm-8 col-xs-6">
+                    <input class="data-mz-credit-amt-to-apply input" data-mz-credit-code-target="{{ credit.attributes.code }}" readonly="true" 
+                           min="1" step="0.01" data-mz-digital-credit-amount
+                           data-mz-value="creditAmountApplied"
+                           {% if credit.attributes.creditAmountApplied %}value="{{ credit.attributes.creditAmountApplied|currency }}"{% endif %}
+                              {% if not credit.attributes.isEnabled %}disabled="true"{% endif %} 
+                           />
+                  </div>
+                  </div>
+                {% if credit.attributes.isEnabled and credit.attributes.remainingBalance > 0 %}
+                  <div class="row mz-checkout-balance-amt">
+                    <div class="mz-checkout-digitalcredit-header-remainder col-sm-4 col-xs-6">
+                    <strong>{{ labels.digitalCreditRemainder }}</strong></div>
+                    <div class="mz-checkout-digitalcredit-cell-remainder col-sm-8 col-xs-6">
+                      <span class="mz-checkout-digitalcredit-remainder" data-mz-value="credit.attributes.remainingBalance">{{ credit.attributes.remainingBalance|currency }}</span>
+                    {% endif %}
+                  </div>
+                  </div>
+               {% if not model.isAnonymousShopper and not credit.attributes.isTiedToCustomer and credit.attributes.isEnabled and credit.attributes.remainingBalance > 0 %}
+                <div class="row mz-ordersummary-shippingtotal">
+                 <div class="mz-checkout-digitalcredit-cell-savetoaccount-label col-sm-4 col-xs-6">
+                    <label class="mz-paymenttype mz-paymenttype-paypal" for="addCust{{ credit.attributes.code }}">
+                      <span class="mz-checkout-digitalcredit-remainder">{{ labels.digitalCreditAddToAccount }}</span>
+                    </label>
+                </div>
+                {% endif %}
+                {% if not model.isAnonymousShopper and not credit.attributes.isTiedToCustomer and credit.attributes.isEnabled and credit.attributes.remainingBalance > 0 %}
+                <div class="mz-checkout-digitalcredit-cell-savetoaccount col-sm-8 col-xs-6">
+                    <input type="checkbox" data-mz-value="credit.attributes.addRemainderToCustomer"
+                            data-mz-digital-add-remainder-to-customer
+                            data-mz-credit-code-to-tie-to-customer="{{ credit.attributes.code }}"
+                            id="addCust{{ credit.attributes.code }}"
+                            value="true" {% if credit.attributes.isTiedToCustomer %}disabled="true" checked="true"{% else %} {% if credit.attributes.addRemainderToCustomer %}checked="true"{% endif %} {% endif %}>
+
+                </div>
+                </div>
+                 {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+          </div>
+          {% endif %}
+        </div>

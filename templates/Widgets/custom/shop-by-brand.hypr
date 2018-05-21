@@ -1,0 +1,27 @@
+<div class="mz-shop-by-brand">
+	<h2 class="heading-2"><span>{{labels.shopByBrandHeading}}</span></h2>   
+	<ul class="mz-shop-by-brand-list">
+		{% for getBrandCategoryId in model.config.shopByBrand %}
+			{% for categoryObject in categories.all %}
+				{% if categoryObject.content.name == "Brands" %} 
+					{% for brandSubCat in categoryObject.childrenCategories %}
+						{% if brandSubCat.categoryId == getBrandCategoryId %}
+							<li class="col-xs-6 col-sm-3 col-md-2"> 
+								<div class="mz-brand-logo">
+									{% for brandLogoImage in brandSubCat.content.categoryImages %}
+						   			    <a href="{{ brandSubCat.url }}">
+									    	<img src="{{ brandLogoImage.imageUrl }}" alt="{{ brandLogoImage.altText }}">  
+										</a>
+						   			{% endfor %}	
+								</div>
+							</li>
+						{% endif %}
+					{% endfor %}
+				{% endif %}
+			{% endfor %}
+		{% endfor %}
+	</ul>
+	<div class="mz-shop-all-brands">
+		<a href="#">{{labels.shopAllBrands}}</a>	
+	</div>
+</div>

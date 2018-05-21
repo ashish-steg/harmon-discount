@@ -1,0 +1,17 @@
+{% if model|get_product_attribute_value("tenant~Promo") %}
+  <div class="promo" role="button" data-toggle="modal" data-target="#promo-detail" style="display: none;">{{ model|get_product_attribute_value("tenant~Promo") }}</div>
+  <!-- Modal -->
+  <div class="modal fade mz-promo promo-modal" id="promo-detail">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" data-dismiss="modal" class="close promo-modal-close" aria-hidden="true">×</button>
+              <h4 class="modal-title">{{ labels.promotionDetails }}</h4>
+            </div>
+            <div class="modal-body">
+              <p>{{ model|get_product_attribute_value("tenant~Promo_Detail") }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}

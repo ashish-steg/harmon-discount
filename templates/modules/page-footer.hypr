@@ -1,0 +1,53 @@
+﻿<footer class="mz-pagefooter">  
+    <div class="mz-footer-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-4 col-xs-12">
+                       {% block footer-logo %}
+                            {% include "modules/page-footer/footer-logo" %}
+                        {% endblock footer-logo %}
+                    </div>
+                    <div class="col-md-2 col-xs-12">
+                        {% dropzone "footer-dropzone-2" scope="site" %}
+                    </div>
+                    <div class="col-md-2 col-xs-12">
+                        {% dropzone "footer-dropzone-3" scope="site" %}
+                        {% block payment-options %}
+                            {% include "modules/page-footer/payment-options" %}
+                        {% endblock payment-options %}
+                    </div>
+                    <div class="col-md-4 col-xs-12"> 
+                        {% block newsletter %}
+                            {% include "modules/page-footer/newsletter" %}
+                        {% endblock newsletter %}
+                        {% block social-bar %}
+                            {% include "modules/page-footer/social-bar" %}
+                        {% endblock social-bar %}
+                        <div class="clearfix">
+                            <div class="pull-left mz-policy">
+                                {% dropzone "footer-dropzone-4" scope="site" %}
+                            </div>
+                            <div class="pull-right mz-pagefooter-copyright" id="copyright">
+                                <span class="mz-pagefooter-copyrighttext">
+                                    {{ labels.copyRight }} {% now Y %} {{ siteContext.generalSettings.websiteName }}.
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mz-footer-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                  <div class="pull-right">
+                      <img src="/../resources/images/footer-images/chat.png" alt="chat-icon">
+                  </div>  
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>

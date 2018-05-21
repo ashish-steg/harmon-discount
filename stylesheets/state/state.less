@@ -1,0 +1,50 @@
+html.js .fades-in {
+    visibility: hidden;
+    opacity: 0;
+    .transition(~"opacity ease 0.3s");
+}
+.is-crossedout {
+    text-decoration: line-through;
+}
+.is-disabled {
+    background: @colorLightGray;
+    color: @colorGray;
+    text-decoration: none;
+    &:hover,&:visited {
+        cursor: default;
+        color: @colorGray;
+        text-decoration: none;
+    }
+    &.mz-button {
+        &:hover, &:active {
+            background: @colorLightGray;
+            border-color: @colorLightGray;
+            .box-shadow('none');
+        }
+    }
+}
+.is-loading {
+    input {
+        .opacity(.6);
+    }
+}
+.is-required {
+    font-weight: bold;
+    color: #900;
+}
+.notice(@textColor, @backgroundColor, @borderColor) {
+    color: @textColor;
+    padding: 2px 5px;
+    background-color: @backgroundColor;
+    border: 1px solid @borderColor;
+}
+
+.is-error {
+    .notice(@errorText, @errorBackground, @errorBorder);
+}
+.is-warning {
+    .notice(@warningText, @warningBackground, @warningBorder);
+}
+.is-success {
+    .notice(@successText, @successBackground, @successBorder);
+}

@@ -1,0 +1,12 @@
+<div id="wrapper" >
+	This is Best Season Picker
+	<select id="best-season-picker">
+	{% for season in model.config.seasons %}
+		<option>{{season}}</option>
+	{% endfor %}
+	</select>
+
+
+	{% include_products "modules/product/product-list" with filter='properties.best-season eq Winter' as_parameter %}
+	
+</div>

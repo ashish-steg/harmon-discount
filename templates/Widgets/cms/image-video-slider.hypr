@@ -1,0 +1,524 @@
+<div class="video-control hidden">
+{% if pageContext.isDesktop %}<a id="home-play-video3" href="javascript:;">play video</a>{% endif %}<br />
+<div class="escolta">play</div> 
+<div class="pausa">pause</div>
+</div>
+
+<div data-image-video-config="{% json_attribute model.config %}">
+<span class="slider-duration hidden">{{ model.config.sliderDuration }}000</span>
+{% if pageContext.isMobile %}
+<div class="mz-image-video bxslider">
+{% else %}
+<div  class="mz-image-video-container bxslider">
+{% endif %}
+    <div class="slider-items">
+        {% if model.config.firstslider == "2" %}
+            <div class="owl-navigation-video">
+                <div class="next">
+                    <span> 
+                        <svg width="20px" height="30px" viewBox="0 0 36 65" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+                            <!-- Generator: Sketch Beta 3.3.2 (12041) - http://www.bohemiancoding.com/sketch -->
+                            <title>chevron right product detail page photo</title>
+                            <desc>Created with Sketch Beta.</desc>
+                            <defs></defs>
+                            <g id="PDP" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+                                <g id="PDP:-Desktop-HD" sketch:type="MSArtboardGroup" transform="translate(-696.000000, -389.000000)" fill="#fff">
+                                    <g id="Photo-Slider-Controls" sketch:type="MSLayerGroup" transform="translate(203.000000, 389.000000)">
+                                        <path d="M494.4199,64.5140182 C493.735545,63.8467115 493.735545,62.7619103 494.4199,62.0946035 L524.763142,32.5072491 L494.4199,2.91989476 C493.735545,2.25258802 493.735545,1.1677868 494.4199,0.500480058 C495.104255,-0.166826686 496.21677,-0.166826686 496.901125,0.500480058 L528.486734,31.2992528 C529.171089,31.9665596 529.171089,33.0513608 528.486734,33.7186675 L496.901125,64.5174403 C496.557193,64.8528047 496.107975,65.0170648 495.658758,65.0170648 C495.21305,65.0136428 494.763832,64.8459606 494.4199,64.5140182 Z" id="chevron-right-product-detail-page-photo" sketch:type="MSShapeGroup"></path>
+                                    </g>
+                                </g>
+                            </g>
+                        </svg>
+                    </span> 
+                </div>
+            
+                <div class="prev">
+                    <span> 
+                        <svg width="20px" height="30px" viewBox="0 0 36 65" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+                            <!-- Generator: Sketch Beta 3.3.2 (12041) - http://www.bohemiancoding.com/sketch -->
+                            <title>chevron left product detail page photo</title>
+                            <desc>Created with Sketch Beta.</desc>
+                            <defs></defs>
+                            <g id="PDP" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+                                <g id="PDP:-Desktop-HD" sketch:type="MSArtboardGroup" transform="translate(-203.000000, -389.000000)" fill="#fff">
+                                    <g id="Photo-Slider-Controls" sketch:type="MSLayerGroup" transform="translate(203.000000, 389.000000)">
+                                        <path d="M33.3383826,65.0136428 C33.7876001,65.0136428 34.2368176,64.8459606 34.5807498,64.5140182 C35.2651047,63.8467115 35.2651047,62.7619103 34.5807498,62.0946035 L4.23750834,32.5072491 L34.5807498,2.91989476 C35.2651047,2.25258802 35.2651047,1.1677868 34.5807498,0.500480058 C33.896395,-0.166826686 32.7838796,-0.166826686 32.0995248,0.500480058 L0.51391602,31.2992528 C-0.170438837,31.9665596 -0.170438837,33.0513608 0.51391602,33.7186675 L32.0995248,64.5174403 C32.443457,64.8528047 32.8926745,65.0170648 33.3418921,65.0170648 L33.3383826,65.0136428 Z" id="chevron-left-product-detail-page-photo" sketch:type="MSShapeGroup"></path>
+                                    </g>
+                                </g>
+                            </g>
+                        </svg>
+                    </span>
+                </div>
+            </div>
+            <div class="row image-over-containt">
+                <div class="col-xs-23 col-sm-22 col-md-22 col-lg-23 item-title">
+                    <span class="browse">{{ labels.BrowsOur }}</span>
+                    <p class="border-bottm"></p> 
+                    <div class="row">
+                        <div class="col-xs-24 col-sm-18 col-md-13 col-lg-24 item-title">
+                            <span class="item-link"> {{ model.config.labelfirst }}  </span>
+                        </div>
+                    </div>
+                    
+                    {% if model.config.firstcategoryUrl %}
+                	    {% with navigation|find:model.config.firstcategoryUrl as cat %}
+                            <a href="{{ cat.url }}">
+                	    {% endwith %}
+                	{% else %}
+                	        <a href="{{ model.config.linkfirst }}">
+            	    {% endif %}
+                        <button class="shop-now">
+                            <span>{{ labels.ShopNow }}</span>
+                            <svg width="11px" height="10px" viewBox="0 0 23 58" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+                                <title>chevron right for subcategory tiles</title>
+                                <desc>Created with Sketch Beta.</desc>
+                                <defs></defs>
+                                <g id="Category" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+                                    <g id="Category:-Desktop-HD" stroke-width="10" sketch:type="MSArtboardGroup" transform="translate(-436.000000, -315.000000)" stroke-linecap="square" stroke-width="2" stroke="#D7D7D7">
+                                        <g id="Subs:-Photo-next-to-names" sketch:type="MSLayerGroup" transform="translate(0.000000, 280.000000)">
+                                            <g id="Tents" sketch:type="MSShapeGroup">
+                                                <path d="M438,37 L457.5,63.8300839 L438.133573,91.2595215" id="chevron-right-for-subcategory-tiles"></path>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </g>
+                            </svg>
+                        </button>
+                    </a>
+                </div>
+            </div>
+            <div class="video-control hidden">
+                {% if pageContext.isDesktop %}<a id="home-play-video1" href="javascript:;">play video</a>{% endif %}<br />
+                <div id="escolta1">play</div> 
+                <div id="pausa1">pause</div>
+            </div>
+            <div class="image-height" style="{% if pageContext.isDesktop or pageContext.isTablet %}height:{{ model.config.sliderHeight }};{% endif %} {% if pageContext.isMobile %}height: 22.67rem;{% endif %}">
+                <iframe id="video" type="text/html" width="640" height="360" src="{{ model.config.viderourlfirst }}?rel=0&start={{ model.config.videroStartTimefirst }}&end={{ model.config.videroEndTimefirst }}&enablejsapi=1&showinfo=0&controls=0&loop=1&iv_load_policy=3" frameborder="0" allowfullscreen></iframe>
+            </div> 
+        {% endif %}
+        
+        {% if model.config.firstslider == "1" %}
+            <div class="owl-navigation-video">
+                <div class="next"> 
+                    <span> 
+                        <svg width="20px" height="30px" viewBox="0 0 36 65" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+                            <!-- Generator: Sketch Beta 3.3.2 (12041) - http://www.bohemiancoding.com/sketch -->
+                            <title>chevron right product detail page photo</title>
+                            <desc>Created with Sketch Beta.</desc>
+                            <defs></defs>
+                            <g id="PDP" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+                                <g id="PDP:-Desktop-HD" sketch:type="MSArtboardGroup" transform="translate(-696.000000, -389.000000)" fill="#fff">
+                                    <g id="Photo-Slider-Controls" sketch:type="MSLayerGroup" transform="translate(203.000000, 389.000000)">
+                                        <path d="M494.4199,64.5140182 C493.735545,63.8467115 493.735545,62.7619103 494.4199,62.0946035 L524.763142,32.5072491 L494.4199,2.91989476 C493.735545,2.25258802 493.735545,1.1677868 494.4199,0.500480058 C495.104255,-0.166826686 496.21677,-0.166826686 496.901125,0.500480058 L528.486734,31.2992528 C529.171089,31.9665596 529.171089,33.0513608 528.486734,33.7186675 L496.901125,64.5174403 C496.557193,64.8528047 496.107975,65.0170648 495.658758,65.0170648 C495.21305,65.0136428 494.763832,64.8459606 494.4199,64.5140182 Z" id="chevron-right-product-detail-page-photo" sketch:type="MSShapeGroup"></path>
+                                    </g>
+                                </g>
+                            </g>
+                        </svg>
+                    </span> 
+                </div>
+            
+                <div class="prev">
+                    <span> 
+                        <svg width="20px" height="30px" viewBox="0 0 36 65" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+                            <!-- Generator: Sketch Beta 3.3.2 (12041) - http://www.bohemiancoding.com/sketch -->
+                            <title>chevron left product detail page photo</title>
+                            <desc>Created with Sketch Beta.</desc>
+                            <defs></defs>
+                            <g id="PDP" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+                                <g id="PDP:-Desktop-HD" sketch:type="MSArtboardGroup" transform="translate(-203.000000, -389.000000)" fill="#fff">
+                                    <g id="Photo-Slider-Controls" sketch:type="MSLayerGroup" transform="translate(203.000000, 389.000000)">
+                                        <path d="M33.3383826,65.0136428 C33.7876001,65.0136428 34.2368176,64.8459606 34.5807498,64.5140182 C35.2651047,63.8467115 35.2651047,62.7619103 34.5807498,62.0946035 L4.23750834,32.5072491 L34.5807498,2.91989476 C35.2651047,2.25258802 35.2651047,1.1677868 34.5807498,0.500480058 C33.896395,-0.166826686 32.7838796,-0.166826686 32.0995248,0.500480058 L0.51391602,31.2992528 C-0.170438837,31.9665596 -0.170438837,33.0513608 0.51391602,33.7186675 L32.0995248,64.5174403 C32.443457,64.8528047 32.8926745,65.0170648 33.3418921,65.0170648 L33.3383826,65.0136428 Z" id="chevron-left-product-detail-page-photo" sketch:type="MSShapeGroup"></path>
+                                    </g>
+                                </g>
+                            </g>
+                        </svg>
+                    </span>
+                </div>
+            </div>
+            <div class="row image-over-containt">
+                <div class="col-xs-23 col-sm-22 col-md-22 col-lg-23 item-title"> 
+                    <span class="browse"> {{ labels.BrowsOur }}</span>
+                    <p class="border-bottm"></p> 
+                    
+                    <div class="row">
+                        <div class="col-xs-24 col-sm-18 col-md-13 col-lg-24 item-title">
+                            <span class="item-link"> {{ model.config.labelfirst }} </span>
+                        </div>
+                    </div>
+                    {% if model.config.firstcategoryUrl %}
+                	    {% with navigation|find:model.config.firstcategoryUrl as cat %}
+                            <a href="{{ cat.url }}">
+                	    {% endwith %}
+                	{% else %}
+                	    <a href="{{ model.config.linkirst }}">
+            	    {% endif %}
+                        <button class="shop-now">
+                            <span>{{ labels.ShopNow }}</span>
+                            <svg width="11px" height="10px" viewBox="0 0 23 58" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+                                <title>chevron right for subcategory tiles</title>
+                                <desc>Created with Sketch Beta.</desc>
+                                <defs></defs>
+                                <g id="Category" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+                                    <g id="Category:-Desktop-HD" stroke-width="10" sketch:type="MSArtboardGroup" transform="translate(-436.000000, -315.000000)" stroke-linecap="square" stroke-width="2" stroke="#D7D7D7">
+                                        <g id="Subs:-Photo-next-to-names" sketch:type="MSLayerGroup" transform="translate(0.000000, 280.000000)">
+                                            <g id="Tents" sketch:type="MSShapeGroup">
+                                                <path d="M438,37 L457.5,63.8300839 L438.133573,91.2595215" id="chevron-right-for-subcategory-tiles"></path>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </g>
+                            </svg>
+                        </button>
+                    </a>
+                </div>
+            </div>
+            <div class="image-height" style="{% if pageContext.isDesktop or pageContext.isTablet %}height:{{ model.config.sliderHeight }};{% endif %} {% if pageContext.isMobile %}height: 22.67rem;{% endif %}">
+                <div class="bg-image lazyload"
+                style="{% if pageContext.isDesktop %}background:{{ model.config.firstSliderImageSizePositionForDesktop }};height:{{model.config.sliderImageHeight}};{% endif %} {% if pageContext.isTablet %} background:{{ model.config.firstSliderImageSizePositionForTablet }};height:{{model.config.sliderImageHeight}};{% endif %} {% if pageContext.isMobile %}background:{{ model.config.firstSliderImageSizePositionForMobile }};height: 100%;{% endif %}"
+                data-bgset="{{ model.config.images.0.url }}?max=400 [(max-width: 320px)] | {{ model.config.images.0.url }}?max=375 [(max-width: 375px)] | {{ model.config.images.0.url }}?max=480 [(max-width: 480px)] | {{ model.config.images.0.url }}?max=700 [(max-width: 767px)] | {{ model.config.images.0.url }}?max=1024 [(max-width: 1024px)] | {{ model.config.images.0.url }}?max=1280 [(max-width: 1280px)] | {{ model.config.images.0.url }}?max=1349 [(max-width: 1350px)] | {{ model.config.images.0.url }}?max=1440 [(max-width: 1440px)] | {{ model.config.images.0.url }}?max=1440 [(max-width: 5500px)]"
+                data-sizes="auto"
+                ></div>
+            </div>
+        {% endif %}
+    </div>
+    
+    <div class="slider-items">
+        {% if model.config.secondslider == "2" %}
+            <div class="owl-navigation-video">
+                <div class="next"> 
+                    <span> 
+                        <svg width="20px" height="30px" viewBox="0 0 36 65" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+                            <!-- Generator: Sketch Beta 3.3.2 (12041) - http://www.bohemiancoding.com/sketch -->
+                            <title>chevron right product detail page photo</title>
+                            <desc>Created with Sketch Beta.</desc>
+                            <defs></defs>
+                            <g id="PDP" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+                                <g id="PDP:-Desktop-HD" sketch:type="MSArtboardGroup" transform="translate(-696.000000, -389.000000)" fill="#fff">
+                                    <g id="Photo-Slider-Controls" sketch:type="MSLayerGroup" transform="translate(203.000000, 389.000000)">
+                                        <path d="M494.4199,64.5140182 C493.735545,63.8467115 493.735545,62.7619103 494.4199,62.0946035 L524.763142,32.5072491 L494.4199,2.91989476 C493.735545,2.25258802 493.735545,1.1677868 494.4199,0.500480058 C495.104255,-0.166826686 496.21677,-0.166826686 496.901125,0.500480058 L528.486734,31.2992528 C529.171089,31.9665596 529.171089,33.0513608 528.486734,33.7186675 L496.901125,64.5174403 C496.557193,64.8528047 496.107975,65.0170648 495.658758,65.0170648 C495.21305,65.0136428 494.763832,64.8459606 494.4199,64.5140182 Z" id="chevron-right-product-detail-page-photo" sketch:type="MSShapeGroup"></path>
+                                    </g>
+                                </g>
+                            </g>
+                        </svg>
+                    </span> 
+                </div>
+            
+                <div class="prev">
+                    <span> 
+                        <svg width="20px" height="30px" viewBox="0 0 36 65" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+                            <!-- Generator: Sketch Beta 3.3.2 (12041) - http://www.bohemiancoding.com/sketch -->
+                            <title>chevron left product detail page photo</title>
+                            <desc>Created with Sketch Beta.</desc>
+                            <defs></defs>
+                            <g id="PDP" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+                                <g id="PDP:-Desktop-HD" sketch:type="MSArtboardGroup" transform="translate(-203.000000, -389.000000)" fill="#fff">
+                                    <g id="Photo-Slider-Controls" sketch:type="MSLayerGroup" transform="translate(203.000000, 389.000000)">
+                                        <path d="M33.3383826,65.0136428 C33.7876001,65.0136428 34.2368176,64.8459606 34.5807498,64.5140182 C35.2651047,63.8467115 35.2651047,62.7619103 34.5807498,62.0946035 L4.23750834,32.5072491 L34.5807498,2.91989476 C35.2651047,2.25258802 35.2651047,1.1677868 34.5807498,0.500480058 C33.896395,-0.166826686 32.7838796,-0.166826686 32.0995248,0.500480058 L0.51391602,31.2992528 C-0.170438837,31.9665596 -0.170438837,33.0513608 0.51391602,33.7186675 L32.0995248,64.5174403 C32.443457,64.8528047 32.8926745,65.0170648 33.3418921,65.0170648 L33.3383826,65.0136428 Z" id="chevron-left-product-detail-page-photo" sketch:type="MSShapeGroup"></path>
+                                    </g>
+                                </g>
+                            </g>
+                        </svg>
+                    </span>
+                </div>
+            </div>
+            <div class="row image-over-containt">
+                <div class="col-xs-23 col-sm-22 col-md-22 col-lg-23 item-title">
+                    <span class="browse">{{ labels.BrowsOur }}</span>
+                    <p class="border-bottm"></p> 
+                    <div class="row">
+                        <div class="col-xs-24 col-sm-18 col-md-13 col-lg-24 item-title">
+                            <span class="item-link"> {{ model.config.labelsecond }}  </span>
+                        </div>
+                    </div>
+                    
+                    {% if model.config.secondcategoryUrl %}
+                	    {% with navigation|find:model.config.secondcategoryUrl as cat %}
+                            <a href="{{ cat.url }}">
+                	    {% endwith %}
+                	{% else %}
+                	        <a href="{{ model.config.linksecond }}">
+            	    {% endif %}
+                        <button class="shop-now">
+                            <span>{{ labels.ShopNow }}</span>
+                            <svg width="11px" height="10px" viewBox="0 0 23 58" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+                                <title>chevron right for subcategory tiles</title>
+                                <desc>Created with Sketch Beta.</desc>
+                                <defs></defs>
+                                <g id="Category" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+                                    <g id="Category:-Desktop-HD" stroke-width="10" sketch:type="MSArtboardGroup" transform="translate(-436.000000, -315.000000)" stroke-linecap="square" stroke-width="2" stroke="#D7D7D7">
+                                        <g id="Subs:-Photo-next-to-names" sketch:type="MSLayerGroup" transform="translate(0.000000, 280.000000)">
+                                            <g id="Tents" sketch:type="MSShapeGroup">
+                                                <path d="M438,37 L457.5,63.8300839 L438.133573,91.2595215" id="chevron-right-for-subcategory-tiles"></path>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </g>
+                            </svg>
+                        </button>
+                    </a>
+                </div>
+            </div>
+            <div class="video-control hidden">
+                {% if pageContext.isDesktop %}<a id="home-play-video2" href="javascript:;">play video</a>{% endif %}<br />
+                <div id="escolta2">play</div> 
+                <div id="pausa2">pause</div>
+            </div>
+            <div class="image-height" style="{% if pageContext.isDesktop or pageContext.isTablet %}height:{{ model.config.sliderHeight }};{% endif %} {% if pageContext.isMobile %}height: 22.67rem;{% endif %}">
+                <iframe id="video2" class="video2 video" type="text/html" width="640" height="360" src="{{ model.config.viderourlsecond }}?rel=0&start={{ model.config.videroStartTimesecond }}&end={{ model.config.videroEndTimesecond }}&enablejsapi=1&showinfo=0&controls=0&loop=1&iv_load_policy=3" frameborder="0" allowfullscreen></iframe>
+            </div> 
+        {% endif %}
+        
+        {% if model.config.secondslider == "1" %}
+            <div class="owl-navigation-video">
+                <div class="next"> 
+                    <span> 
+                        <svg width="20px" height="30px" viewBox="0 0 36 65" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+                            <!-- Generator: Sketch Beta 3.3.2 (12041) - http://www.bohemiancoding.com/sketch -->
+                            <title>chevron right product detail page photo</title>
+                            <desc>Created with Sketch Beta.</desc>
+                            <defs></defs>
+                            <g id="PDP" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+                                <g id="PDP:-Desktop-HD" sketch:type="MSArtboardGroup" transform="translate(-696.000000, -389.000000)" fill="#fff">
+                                    <g id="Photo-Slider-Controls" sketch:type="MSLayerGroup" transform="translate(203.000000, 389.000000)">
+                                        <path d="M494.4199,64.5140182 C493.735545,63.8467115 493.735545,62.7619103 494.4199,62.0946035 L524.763142,32.5072491 L494.4199,2.91989476 C493.735545,2.25258802 493.735545,1.1677868 494.4199,0.500480058 C495.104255,-0.166826686 496.21677,-0.166826686 496.901125,0.500480058 L528.486734,31.2992528 C529.171089,31.9665596 529.171089,33.0513608 528.486734,33.7186675 L496.901125,64.5174403 C496.557193,64.8528047 496.107975,65.0170648 495.658758,65.0170648 C495.21305,65.0136428 494.763832,64.8459606 494.4199,64.5140182 Z" id="chevron-right-product-detail-page-photo" sketch:type="MSShapeGroup"></path>
+                                    </g>
+                                </g>
+                            </g>
+                        </svg>
+                    </span> 
+                </div>
+            
+                <div class="prev">
+                    <span> 
+                        <svg width="20px" height="30px" viewBox="0 0 36 65" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+                            <!-- Generator: Sketch Beta 3.3.2 (12041) - http://www.bohemiancoding.com/sketch -->
+                            <title>chevron left product detail page photo</title>
+                            <desc>Created with Sketch Beta.</desc>
+                            <defs></defs>
+                            <g id="PDP" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+                                <g id="PDP:-Desktop-HD" sketch:type="MSArtboardGroup" transform="translate(-203.000000, -389.000000)" fill="#fff">
+                                    <g id="Photo-Slider-Controls" sketch:type="MSLayerGroup" transform="translate(203.000000, 389.000000)">
+                                        <path d="M33.3383826,65.0136428 C33.7876001,65.0136428 34.2368176,64.8459606 34.5807498,64.5140182 C35.2651047,63.8467115 35.2651047,62.7619103 34.5807498,62.0946035 L4.23750834,32.5072491 L34.5807498,2.91989476 C35.2651047,2.25258802 35.2651047,1.1677868 34.5807498,0.500480058 C33.896395,-0.166826686 32.7838796,-0.166826686 32.0995248,0.500480058 L0.51391602,31.2992528 C-0.170438837,31.9665596 -0.170438837,33.0513608 0.51391602,33.7186675 L32.0995248,64.5174403 C32.443457,64.8528047 32.8926745,65.0170648 33.3418921,65.0170648 L33.3383826,65.0136428 Z" id="chevron-left-product-detail-page-photo" sketch:type="MSShapeGroup"></path>
+                                    </g>
+                                </g>
+                            </g>
+                        </svg>
+                    </span>
+                </div>
+            </div>
+            <div class="row image-over-containt">
+                <div class="col-xs-23 col-sm-22 col-md-22 col-lg-23 item-title">
+                    <span class="browse">{{ labels.BrowsOur }}</span>
+                    <p class="border-bottm"></p> 
+                    
+                    <div class="row">
+                        <div class="col-xs-24 col-sm-18 col-md-13 col-lg-24 item-title">
+                            <span class="item-link"> {{ model.config.labelsecond }}  </span>
+                        </div>
+                    </div>
+                    
+                    {% if model.config.secondcategoryUrl %}
+                	    {% with navigation|find:model.config.secondcategoryUrl as cat %}
+                            <a href="{{ cat.url }}">
+                	    {% endwith %}
+                	{% else %}
+                	        <a href="{{ model.config.linksecond }}">
+            	    {% endif %}
+                        <button class="shop-now">
+                            <span>{{ labels.ShopNow }}</span>
+                            <svg width="11px" height="10px" viewBox="0 0 23 58" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+                                <title>chevron right for subcategory tiles</title>
+                                <desc>Created with Sketch Beta.</desc>
+                                <defs></defs>
+                                <g id="Category" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+                                    <g id="Category:-Desktop-HD" stroke-width="10" sketch:type="MSArtboardGroup" transform="translate(-436.000000, -315.000000)" stroke-linecap="square" stroke-width="2" stroke="#D7D7D7">
+                                        <g id="Subs:-Photo-next-to-names" sketch:type="MSLayerGroup" transform="translate(0.000000, 280.000000)">
+                                            <g id="Tents" sketch:type="MSShapeGroup">
+                                                <path d="M438,37 L457.5,63.8300839 L438.133573,91.2595215" id="chevron-right-for-subcategory-tiles"></path>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </g>
+                            </svg>
+                        </button>
+                    </a>
+                </div>
+            </div>
+            <div class="image-height" style="{% if pageContext.isDesktop or pageContext.isTablet %}height:{{ model.config.sliderHeight }};{% endif %} {% if pageContext.isMobile %}height: 22.67rem;{% endif %}">
+                <div class="bg-image lazyload" 
+                style="{% if pageContext.isDesktop %}background:{{ model.config.secondSliderImageSizePositionForDesktop }};height:{{model.config.sliderImageHeight}};{% endif %} {% if pageContext.isTablet %}background: {{ model.config.secondSliderImageSizePositionForTablet }};height:{{model.config.sliderImageHeight}};{% endif %} {% if pageContext.isMobile %}background: {{ model.config.secondSliderImageSizePositionForMobile }};height: 100%;{% endif %}"
+                data-bgset="{{ model.config.images.1.url }}?max=420 [(max-width: 320px)] | {{ model.config.images.1.url }}?max=480 [(max-width: 375px)] | {{ model.config.images.1.url }}?max=580 [(max-width: 480px)] | {{ model.config.images.1.url }}?max=800 [(max-width: 767px)] | {{ model.config.images.1.url }}?max=1100 [(max-width: 1024px)] | {{ model.config.images.1.url }}?max=1280 [(max-width: 1280px)] | {{ model.config.images.1.url }}?max=1440 [(max-width: 1920px)] | {{ model.config.images.1.url }}?max=1440 [(max-width: 5500px)]"
+                data-sizes="auto"
+                ></div>
+            </div>
+        {% endif %}
+    </div>
+    
+    <div class="slider-items">
+        {% if model.config.thirdslider == "2" %}
+            <div class="owl-navigation-video">
+                <div class="next">
+                    <span> 
+                        <svg width="20px" height="30px" viewBox="0 0 36 65" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+                            <!-- Generator: Sketch Beta 3.3.2 (12041) - http://www.bohemiancoding.com/sketch -->
+                            <title>chevron right product detail page photo</title>
+                            <desc>Created with Sketch Beta.</desc>
+                            <defs></defs>
+                            <g id="PDP" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+                                <g id="PDP:-Desktop-HD" sketch:type="MSArtboardGroup" transform="translate(-696.000000, -389.000000)" fill="#fff">
+                                    <g id="Photo-Slider-Controls" sketch:type="MSLayerGroup" transform="translate(203.000000, 389.000000)">
+                                        <path d="M494.4199,64.5140182 C493.735545,63.8467115 493.735545,62.7619103 494.4199,62.0946035 L524.763142,32.5072491 L494.4199,2.91989476 C493.735545,2.25258802 493.735545,1.1677868 494.4199,0.500480058 C495.104255,-0.166826686 496.21677,-0.166826686 496.901125,0.500480058 L528.486734,31.2992528 C529.171089,31.9665596 529.171089,33.0513608 528.486734,33.7186675 L496.901125,64.5174403 C496.557193,64.8528047 496.107975,65.0170648 495.658758,65.0170648 C495.21305,65.0136428 494.763832,64.8459606 494.4199,64.5140182 Z" id="chevron-right-product-detail-page-photo" sketch:type="MSShapeGroup"></path>
+                                    </g>
+                                </g>
+                            </g>
+                        </svg>
+                    </span> 
+                </div>
+            
+                <div class="prev">
+                    <span> 
+                        <svg width="20px" height="30px" viewBox="0 0 36 65" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+                            <!-- Generator: Sketch Beta 3.3.2 (12041) - http://www.bohemiancoding.com/sketch -->
+                            <title>chevron left product detail page photo</title>
+                            <desc>Created with Sketch Beta.</desc>
+                            <defs></defs>
+                            <g id="PDP" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+                                <g id="PDP:-Desktop-HD" sketch:type="MSArtboardGroup" transform="translate(-203.000000, -389.000000)" fill="#fff">
+                                    <g id="Photo-Slider-Controls" sketch:type="MSLayerGroup" transform="translate(203.000000, 389.000000)">
+                                        <path d="M33.3383826,65.0136428 C33.7876001,65.0136428 34.2368176,64.8459606 34.5807498,64.5140182 C35.2651047,63.8467115 35.2651047,62.7619103 34.5807498,62.0946035 L4.23750834,32.5072491 L34.5807498,2.91989476 C35.2651047,2.25258802 35.2651047,1.1677868 34.5807498,0.500480058 C33.896395,-0.166826686 32.7838796,-0.166826686 32.0995248,0.500480058 L0.51391602,31.2992528 C-0.170438837,31.9665596 -0.170438837,33.0513608 0.51391602,33.7186675 L32.0995248,64.5174403 C32.443457,64.8528047 32.8926745,65.0170648 33.3418921,65.0170648 L33.3383826,65.0136428 Z" id="chevron-left-product-detail-page-photo" sketch:type="MSShapeGroup"></path>
+                                    </g>
+                                </g>
+                            </g>
+                        </svg>
+                    </span>
+                </div>
+            </div>
+            <div class="row image-over-containt">
+                <div class="col-xs-23 col-sm-22 col-md-22 col-lg-23 item-title">
+                    <span class="browse">{{ labels.BrowsOur }}</span>
+                    <p class="border-bottm"></p> 
+                    <div class="row">
+                        <div class="col-xs-24 col-sm-18 col-md-13 col-lg-24 item-title">
+                            <span class="item-link"> {{ model.config.labelthird }}  </span>
+                        </div>
+                    </div>
+                    
+                    {% if model.config.thirdcategoryUrl %}
+                	    {% with navigation|find:model.config.thirdcategoryUrl as cat %}
+                            <a href="{{ cat.url }}">
+                	    {% endwith %}
+                	{% else %}
+                	        <a href="{{ model.config.linkthird }}">
+            	    {% endif %}
+                        <button class="shop-now">
+                            <span>{{ labels.ShopNow }}</span>
+                            <svg width="11px" height="10px" viewBox="0 0 23 58" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+                                <title>chevron right for subcategory tiles</title>
+                                <desc>Created with Sketch Beta.</desc>
+                                <defs></defs>
+                                <g id="Category" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+                                    <g id="Category:-Desktop-HD" stroke-width="10" sketch:type="MSArtboardGroup" transform="translate(-436.000000, -315.000000)" stroke-linecap="square" stroke-width="2" stroke="#D7D7D7">
+                                        <g id="Subs:-Photo-next-to-names" sketch:type="MSLayerGroup" transform="translate(0.000000, 280.000000)">
+                                            <g id="Tents" sketch:type="MSShapeGroup">
+                                                <path d="M438,37 L457.5,63.8300839 L438.133573,91.2595215" id="chevron-right-for-subcategory-tiles"></path>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </g>
+                            </svg>
+                        </button>
+                    </a>
+                </div>
+            </div>
+            <div class="image-height" style="{% if pageContext.isDesktop or pageContext.isTablet %}height:{{ model.config.sliderHeight }};{% endif %} {% if pageContext.isMobile %}height: 22.67rem;{% endif %}">
+                <iframe id="video3" class="video3 video" type="text/html" width="640" height="360" src="{{ model.config.viderourlthird }}?rel=0&start={{ model.config.videroStartTimethird }}&end={{ model.config.videroEndTimethird }}&enablejsapi=1&showinfo=0&controls=0&loop=1&iv_load_policy=3" frameborder="0" allowfullscreen></iframe>
+            </div> 
+        {% endif %}
+        
+        {% if model.config.thirdslider == "1" %}
+            <div class="owl-navigation-video">
+                <div class="next"> 
+                    <span> 
+                        <svg width="20px" height="30px" viewBox="0 0 36 65" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+                            <!-- Generator: Sketch Beta 3.3.2 (12041) - http://www.bohemiancoding.com/sketch -->
+                            <title>chevron right product detail page photo</title>
+                            <desc>Created with Sketch Beta.</desc>
+                            <defs></defs>
+                            <g id="PDP" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+                                <g id="PDP:-Desktop-HD" sketch:type="MSArtboardGroup" transform="translate(-696.000000, -389.000000)" fill="#fff">
+                                    <g id="Photo-Slider-Controls" sketch:type="MSLayerGroup" transform="translate(203.000000, 389.000000)">
+                                        <path d="M494.4199,64.5140182 C493.735545,63.8467115 493.735545,62.7619103 494.4199,62.0946035 L524.763142,32.5072491 L494.4199,2.91989476 C493.735545,2.25258802 493.735545,1.1677868 494.4199,0.500480058 C495.104255,-0.166826686 496.21677,-0.166826686 496.901125,0.500480058 L528.486734,31.2992528 C529.171089,31.9665596 529.171089,33.0513608 528.486734,33.7186675 L496.901125,64.5174403 C496.557193,64.8528047 496.107975,65.0170648 495.658758,65.0170648 C495.21305,65.0136428 494.763832,64.8459606 494.4199,64.5140182 Z" id="chevron-right-product-detail-page-photo" sketch:type="MSShapeGroup"></path>
+                                    </g>
+                                </g>
+                            </g>
+                        </svg>
+                    </span> 
+                </div>
+            
+                <div class="prev">
+                    <span> 
+                        <svg width="20px" height="30px" viewBox="0 0 36 65" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+                            <!-- Generator: Sketch Beta 3.3.2 (12041) - http://www.bohemiancoding.com/sketch -->
+                            <title>chevron left product detail page photo</title>
+                            <desc>Created with Sketch Beta.</desc>
+                            <defs></defs>
+                            <g id="PDP" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+                                <g id="PDP:-Desktop-HD" sketch:type="MSArtboardGroup" transform="translate(-203.000000, -389.000000)" fill="#fff">
+                                    <g id="Photo-Slider-Controls" sketch:type="MSLayerGroup" transform="translate(203.000000, 389.000000)">
+                                        <path d="M33.3383826,65.0136428 C33.7876001,65.0136428 34.2368176,64.8459606 34.5807498,64.5140182 C35.2651047,63.8467115 35.2651047,62.7619103 34.5807498,62.0946035 L4.23750834,32.5072491 L34.5807498,2.91989476 C35.2651047,2.25258802 35.2651047,1.1677868 34.5807498,0.500480058 C33.896395,-0.166826686 32.7838796,-0.166826686 32.0995248,0.500480058 L0.51391602,31.2992528 C-0.170438837,31.9665596 -0.170438837,33.0513608 0.51391602,33.7186675 L32.0995248,64.5174403 C32.443457,64.8528047 32.8926745,65.0170648 33.3418921,65.0170648 L33.3383826,65.0136428 Z" id="chevron-left-product-detail-page-photo" sketch:type="MSShapeGroup"></path>
+                                    </g>
+                                </g>
+                            </g>
+                        </svg>
+                    </span>
+                </div>
+            </div>
+            <div class="row image-over-containt">
+                <div class="col-xs-23 col-sm-22 col-md-22 col-lg-23 item-title">
+                    <span class="browse">{{ labels.BrowsOur }}</span>
+                    <p class="border-bottm"></p> 
+                    
+                    <div class="row">
+                        <div class="col-xs-24 col-sm-18 col-md-13 col-lg-24 item-title">
+                            <span class="item-link"> {{ model.config.labelthird }} </span>
+                        </div>
+                    </div>
+                    {% if model.config.thirdcategoryUrl %}
+                	    {% with navigation|find:model.config.thirdcategoryUrl as cat %}
+                            <a href="{{ cat.url }}">
+                	    {% endwith %}
+                	{% else %}
+                	        <a href="{{ model.config.linkthird }}">
+            	    {% endif %}
+                        <button class="shop-now">
+                            <span>{{ labels.ShopNow }}</span>
+                            <svg width="11px" height="10px" viewBox="0 0 23 58" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+                                <title>chevron right for subcategory tiles</title>
+                                <desc>Created with Sketch Beta.</desc>
+                                <defs></defs>
+                                <g id="Category" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+                                    <g id="Category:-Desktop-HD" stroke-width="10" sketch:type="MSArtboardGroup" transform="translate(-436.000000, -315.000000)" stroke-linecap="square" stroke-width="2" stroke="#D7D7D7">
+                                        <g id="Subs:-Photo-next-to-names" sketch:type="MSLayerGroup" transform="translate(0.000000, 280.000000)">
+                                            <g id="Tents" sketch:type="MSShapeGroup">
+                                                <path d="M438,37 L457.5,63.8300839 L438.133573,91.2595215" id="chevron-right-for-subcategory-tiles"></path>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </g>
+                            </svg>
+                        </button>
+                    </a>
+                </div>
+            </div>
+            <div class="image-height" style="{% if pageContext.isDesktop or pageContext.isTablet %}height:{{ model.config.sliderHeight }};{% endif %} {% if pageContext.isMobile %}height: 22.67rem;{% endif %}">
+                <div class="bg-image lazyload"
+                style="{% if pageContext.isDesktop %}background:{{ model.config.thirdSliderImageSizePositionForDesktop }};height:{{model.config.sliderImageHeight}};{% endif %} {% if pageContext.isTablet %}background: {{ model.config.thirdSliderImageSizePositionForTablet }};height: {{model.config.sliderImageHeight}};{% endif %} {% if pageContext.isMobile %}background: {{ model.config.thirdSliderImageSizePositionForMobile }};height: 100%;{% endif %}"
+                data-bgset="{{ model.config.images.2.url }}?max=400 [(max-width: 320px)] | {{ model.config.images.2.url }}?max=375 [(max-width: 375px)] | {{ model.config.images.2.url }}?max=480 [(max-width: 480px)] | {{ model.config.images.2.url }}?max=700 [(max-width: 767px)] | {{ model.config.images.2.url }}?max=1024 [(max-width: 1024px)] | {{ model.config.images.2.url }}?max=1280 [(max-width: 1280px)] | {{ model.config.images.2.url }}?max=1349 [(max-width: 1350px)] | {{ model.config.images.2.url }}?max=1440 [(max-width: 1440px)] | {{ model.config.images.2.url }}?max=1440 [(max-width: 5500px)]"
+                data-sizes="auto"
+                ></div>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% require_script "widgets/cms/image-video-slider" %}
+</div>

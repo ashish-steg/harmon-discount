@@ -1,0 +1,60 @@
+﻿{% extends "page" %}
+{% block main-container-class %}container{% endblock main-container-class %}
+
+{% block title-tag-content %}{{ labels.noResultsTitle|string_format(pageContext.search.query) }}  - {% parent %}{% endblock title-tag-content %}
+
+{% block body-tag-classes %}mz-searchresults mz-noresults{% endblock body-tag-classes %}
+
+{% block body-content %}
+
+{% block breadcrumbs %}{% endblock breadcrumbs %}
+
+<div class="mz-l-container">
+    <div class="col-xs-12">
+        <div class="row">
+            <div class="col-xs-12 col-sm-4">
+                <h1 class="mz-pagetitle">{{ labels.sorryLabel }} </h1>
+                
+                {% if pageContext.search.query %}
+                    <p class="mz-searchresults-noresultstext">
+                        {{ labels.noResultsText }}
+                        <span class="mz-searchresults-query">"{{ pageContext.search.query }}"</span>.
+                    </p>
+                {% endif %}
+            </div>
+            <div class="col-xs-12 col-sm-8">
+                <form id="search-again-box" class="mz-searchbox" action="/search">
+                    <span class="mz-searchbox-field">
+                        {% with navigation.tree|findwhere('name', 'Searchable Products') as link %}
+                            {% if link %}
+                                <input type="hidden" name="categoryId" value="{{link.categoryCode}}" />
+                            {% else %}
+                                <input type="hidden" name="categoryId" value="" />
+                            {% endif %}
+                        {% endwith%}
+                        <div class="search-field-label">
+                            <span>{{ labels.anotherSearchText }}</span>
+                        </div>
+                        <input id="search-again" type="search" class="mz-searchbox-input ml-header-search-field form-control" autocomplete="off" name="query">
+                        <button class="mz-searchbox-button" type="submit">
+                            <span class="glyphicon glyphicon-search">
+                            </span>
+                        </button>
+                    </span>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12">
+        <div class="row">
+            <div class="col-xs-12">
+                {% dropzone "no-results" scope="template" %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock body-content %}
+
+{% block body-below-content %}
+{% endblock body-below-content %}

@@ -1,0 +1,15 @@
+﻿<div class="mz-breadcrumbs">
+  {% if navigation.breadcrumbs %}
+    <a href="{{siteContext.siteSubdirectory}}/" class="mz-breadcrumb-link">Home</a> <span class="mz-breadcrumb-separator">&#47;</span>
+  {% endif %}
+  
+  {% for crumb in navigation.breadcrumbs %}
+    {% if not crumb.isHidden %}
+      {% if not forloop.last %}
+        <a href="{{crumb.url}}" class="mz-breadcrumb-link{% if forloop.first %} is-first{% endif %}">{{crumb.name|replace(themeSettings.columnBreaker, "")|safe|lower }}</a> <span class="mz-breadcrumb-separator">&#47;</span>
+      {% else %}
+        <span class="mz-breadcrumb-current">{{ crumb.name|replace(themeSettings.columnBreaker, "")|safe|lower }}</span>
+      {% endif %}
+    {% endif %}
+  {% endfor %}
+</div>

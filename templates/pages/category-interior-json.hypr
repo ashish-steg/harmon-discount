@@ -1,0 +1,9 @@
+{% if pageContext.search.query %}
+	{% partial_cache model.categoryId pageContext.Sorting pageContext.Pagination pageContext.query.sortBy pageContext.search.query %}
+		{% include_products "modules/product/json-products" with includeFacets=themeSettings.showCategoryFacets and pageWithUrl=true and sortWithUrl=true and pageSize=themeSettings.defaultPageSize searchQuery=pageContext.search.query as_parameter %}
+	{% endpartial_cache %}
+{% else %}
+	{% partial_cache model.categoryId pageContext.Sorting pageContext.Pagination pageContext.query.sortBy %}
+		{% include_products "modules/product/json-products" with includeFacets=themeSettings.showCategoryFacets and pageWithUrl=true and sortWithUrl=true and pageSize=themeSettings.defaultPageSize as_parameter %}
+	{% endpartial_cache %}
+{% endif %}

@@ -1,0 +1,19 @@
+{% if pageContext.isEditMode == 'true' %}
+	<div class="clearfix"></div>
+	<div class="category-container" data-category="{{model.config.category}}" data-totalcount="{{model.config.totalCount}}" data-child="{{model.config.isChildCategory}}">
+		<p>Category Code: {{model.config.category}}</p>
+		<p>Category title: {{model.config.title}}</p>
+		<p>Total Count: {{model.config.totalCount|default('10')}}</p>
+		<p>Category isChildCategory: {{model.config.isChildCategory}}</p>
+	</div>
+{% else %}
+	{% if model.config.category %}
+		<div class="clearfix"></div>
+		<div class="category-container" data-category="{{model.config.category}}" data-totalcount="{{model.config.totalCount}}" data-child="{{model.config.isChildCategory}}">
+			{% if model.config.title != "" %}<div class="category-carousel-heading"><span>{{model.config.title}}</span></div>{% endif %}
+			<div class="cc-loading"></div>
+			<div class="slick-cont"></div>
+		</div>
+	    {% require_script "widgets/category-carousel" %}
+	{% endif %}
+{% endif %}

@@ -1,0 +1,97 @@
+<div class="mz-productoptions">
+    {% for option in model.options %}    
+    <div class="mz-productoptions-optioncontainer clearfix">
+        {% if model.productType != themeSettings.oneSizeProductType %}
+            {% with option.values|findwhere("isSelected", true) as selectedColor %}
+                {% if selectedColor and selectedColor.value %}
+                    <div class="mz-productoptions-optionlabel option-label mz-productoptions-div-label">
+                        <span class="text-uppercase">
+                            {% if option.attributeDetail.name == "OTHER" %}
+                                OPTION:
+                            {% else %}
+                                {{ option.attributeDetail.name }}:
+                            {% endif %}
+                        </span>
+                        <span>
+                            {% if selectedColor.stringValue == 'CHR(38)' %}
+                            &amp;
+                            {% else %}
+                                {% if selectedColor.stringValue == 'CHR(64)' %}
+                                @
+                                {% else %}
+                                    {{ selectedColor.stringValue }}
+                                {% endif %}
+                            {% endif %}
+                        </span>
+                    </div>
+                {% else %}
+                    <div class="mz-productoptions-optionlabel option-label text-uppercase mz-productoptions-div-label top-pad" data-option="{{ option.attributeDetail.name }}">
+                    {% if option.attributeDetail.name == "OTHER" %}
+                        Select Option
+                    {% else %}
+                        Select a {{ option.attributeDetail.name }}
+                    {% endif %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+        {% endif %}
+        <div class="mz-productoptions-valuecontainer">
+            {% if option.attributeDetail.inputType == "List" %}
+                <select {% if option.isMultiValue %}multiple{% endif %} class="mz-productoptions-option hide" data-mz-product-option="{{ option.attributeFQN }}" title="{{ option.attributeDetail.name }}">
+                    {% if not option.isMultiValue %}<option></option>{% endif %}
+                    {% for value in option.values %}
+                    <option {% if not value.isEnabled %} class="is-disabled" {% endif %} {% if value.isSelected %}selected="true"{% endif %} value="{{value.value}}">{{value.stringValue|default(value.value)}}{% if value.deltaPrice and value.deltaPrice > 0 %} ( {{ value.deltaPrice|currency }} {{ labels.more }} ){% endif %}</option>
+                    {% endfor %}
+                </select>
+                {% if option.attributeFQN == 'tenant~COLOR' %}
+                    <ul class="product-color-swatches">
+                        {% include "modules/facets/facet-color" with allfacets=option.values isPDP="true" as_parameter %}
+                    </ul>
+                {% else %}
+                    <ul class="product-swatches" {% if model.productType == themeSettings.oneSizeProductType %} style="display:none;" {% endif %}> 
+                    {% for value in option.values %}
+                        <li data-mz-product-option-attribute="{{ option.attributeFQN }}" {% if option.attributeFQN == 'tenant~color' %}style="background-color: {{value.value}};"{% endif %} {% if not value.isEnabled %}  class="disabled" disabled {% endif %} {% if value.isSelected %}class="active" {% endif %} data-value="{{value.value}}"><span class="size-swatches-container">
+                            <a href="javascript:void(0);">
+                                {% if value.stringValue == "CHR(38)" %}
+                                    &amp;
+                                {% else %}
+                                    {% if value.stringValue == "CHR(64)" %}
+                                    @
+                                    {% else %}
+                                        {{value.stringValue}}
+                                    {% endif %}
+                                {% endif %}
+                            </a>
+                        </span></li> 
+                    {% endfor %}
+                    </ul>
+                {% endif %}
+            {% else %}
+                {% if option.attributeDetail.inputType == "YesNo" %}
+                    <input class="mz-productoptions-option hidden" type="checkbox" {% if option.shopperEnteredValue %}checked="checked"{% endif %} data-mz-product-option="{{ option.attributeFQN }}" />
+                {% endif %}
+                {% if option.attributeDetail.inputType == "TextBox" %}
+                    {% if option.attributeDetail.dataType == "Number" %}
+                    <input class="mz-productoptions-option hidden" type="number" min="{{ option.attributeDetail.validation.minNumericValue }}" max="{{ option.attributeDetail.validation.maxNumericValue }}" value="{{ option.shopperEnteredValue }}" data-mz-product-option="{{ option.attributeFQN }}" data-mz-focus-bookmark="{{ option.attributeFQN }}">
+                        {% else %}
+                    <input class="mz-productoptions-option hidden" type="text" value="{{ option.shopperEnteredValue }}" data-mz-product-option="{{ option.attributeFQN }}" data-mz-focus-bookmark="{{ option.attributeFQN }}">
+                        {% endif %}
+                {% endif %}
+                {% if option.attributeDetail.inputType == "TextArea" %}
+                    <textarea class="mz-productoptions-option hidden" data-mz-product-option="{{ option.attributeFQN }}" data-mz-focus-bookmark="{{ option.attributeFQN }}">{{ option.shopperEnteredValue }}</textarea>
+                {% endif %}
+                {% if option.attributeDetail.inputType == "Date" %}
+                    <input type="text" data-mz-is-datepicker data-mz-focus-bookmark="{{ option.attributeFQN }}" data-mz-product-option="{{ option.attributeFQN }}" class="mz-productoptions-option hidden" style="color:transparent" value="{{ option.shopperEnteredValue }}" data-format="mm/dd/yy" data-max="{{option.maxValue}}" data-min="{{ option.minValue }}">
+                {% endif %}
+                {% if option.values %}
+                    {% for value in option.values %}
+                        {% if forloop.counter0 == 0 and value.deltaPrice > 0 %}
+                        ({{ value.deltaPrice|currency }} {{ labels.more }})
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            {% endif %}       
+        </div>
+    </div>
+    {% endfor %}
+</div>

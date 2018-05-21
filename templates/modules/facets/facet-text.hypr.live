@@ -1,0 +1,9 @@
+{% for fval in texts %}
+    <li class="{%if showMore and showMore > 0 and forloop.counter0 >= showMore %}mz-hide-text hide {% endif %}mz-facetingform-value{% if fval.isApplied %} active{% endif %}" data-mz-facet="{{ facet.field }}" data-filter-name='{{ fval.stringValue|default(fval.value) }}' data-mz-facet-value="tenant~SIZE:{{ fval.value }}" data-mz-url="{% make_url "facet" fval %}">
+        <input type="checkbox" id="{{facet.field|slugify }}_{{ fval.value|slugify }}" class="mz-facetingform-value" {% if fval.isApplied %}checked="checked"{% endif %} data-mz-facet="{{ facet.field }}" data-mz-facet-value="tenant~SIZE:{{ fval.value }}" data-filter-name='{{ fval.stringValue|default(fval.value) }}' data-mz-url="{% make_url "facet" fval %}">
+        <label class="mz-facetingform-valuelabel" for="{{facet.field|slugify }}_{{ fval.value|slugify }}" data-mz-facet-value="tenant~SIZE:{{ fval.value }}" data-filter-name='{{ fval.stringValue|default(fval.value) }}' data-mz-url="{% make_url "facet" fval %}" >{{ fval.stringValue|default(fval.label) }}{% if showCount %} ({{fval.count}}){% endif %}</label>
+    </li>
+{% endfor %}
+{% if isDirectory=="true" and showMore and showMore > 0 and texts.length > showMore %}
+    <li class="show-more-li"><a href="javascript:void(0);" class="show-more">{{labels.navMore}}</a></li>
+{% endif %}

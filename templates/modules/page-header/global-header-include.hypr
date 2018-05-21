@@ -1,0 +1,13 @@
+<div class="container">
+	<div class="row" id="global-header-container">
+		<div class="col-xs-12">
+			<div class="ml-header-global-include-close">
+				<button type="button" id="globalHeaderIncludeCloseBtn" class="glyphicon glyphicon-remove ml-icon-close no-print" data-toggle="collapse" data-target="#global-header-wrapper">
+					<span class="hide">Close Global Header</span>
+				</button>
+			</div>
+			{% dropzone "global-header-message-include" scope="site" %}
+		</div>
+	</div>
+	{% require_script "modules/global-header-include" %}
+</div>

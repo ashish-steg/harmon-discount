@@ -1,0 +1,22 @@
+<a class="mz-utilitynav-link mz-utilitynav-link-cart" href="{% make_url "cart" %}">
+    <span class="ml-header-global-cart-count mz-cartmonitor hidden-xs pull-right" data-mz-role="cartcount">0</span>
+	<div class="ml-icon ml-icon-global-cart pull-right">
+        <i class="fa fa-shopping-cart"></i>
+    </div>
+    {{ labels.Cart }}
+</a>
+<div id="global-cart"{% if pageContext.isEditMode and pageContext.cmsContext.template.path=="" %} style="display:block;"{% endif %}>
+    <div id="global-cart-listing"></div>
+    <div id="global-cart-rti">
+        {% dropzone "global-cart-rti" scope="site" %}
+    </div>
+    {% if themeSettings.globalCartEmptyBasketFooter %} 
+        <div class="text-center margin-top-15">
+              <a {% if themeSettings.globalCartEmptyBasketKickerLink %} href="{{ themeSettings.globalCartEmptyBasketKickerLink }}"{% else %} href="/home" {% endif %}>
+                <img src="{% make_url "image" themeSettings.globalCartEmptyBasketFooter.imageUrl with width=370 as_parameters %}" alt="Basket Kicker">
+              </a>
+        </div>
+    {% endif %}
+</div>
+{% require_script "modules/page-header/global-cart" %}
+{% require_script "modules/cart-monitor" %}

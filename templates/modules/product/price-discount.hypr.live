@@ -1,0 +1,5 @@
+﻿{% if model.onSale and model.discount.discount.name %}
+    <div class="clearfix">
+        <span class="mz-price-discountname">{{model.discount.discount.name}}</span>
+    </div>
+{% endif %}
