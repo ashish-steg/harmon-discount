@@ -31,5 +31,4 @@
     </div>
     {% require_script "pages/yotpo_review" %}
 {% endblock body-content %}
-{% block body-below-content %}
-{% endblock body-below-content %} 
+{% block body-below-content %}{% endblock body-below-content %} 
