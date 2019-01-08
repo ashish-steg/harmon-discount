@@ -26,7 +26,6 @@
 		{% dropzone "featured-products" scope="page" %}   
 		{% dropzone "customer-logos" scope="page" %}
 		{% dropzone "shop-now-widget" scope="page" %}
-
 		{% dropzone "my-test-widget" scope="page" %}    
     </div>
     {% require_script "pages/yotpo_review" %}
