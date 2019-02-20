@@ -1,17 +1,13 @@
 {
   "about": {
-    "author": "Happy Masih",
+     "author": "Mozu",
     "defaultLanguage": "en-US",
     "extends": null,
     "isDesktop": true,
-    "isMobile": true,
-    "isTablet": true,
-    "name": "Prima Supply Theme",
-    "allowProduction": true,
-    "baseTheme": "https://github.com/happys-88/Prima-Supply",
-    "baseThemeVersion": {
-      "commit": "d9b9c02958ec4cada81ac974c800d194a2b5b73b"
-    }
+    "isMobile": false,
+    "isTablet": false,
+    "name": "Mozu.CoreTheme",
+    "allowProduction": true
   },
   "editors": [
     {
